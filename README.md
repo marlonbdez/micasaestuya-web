@@ -42,9 +42,9 @@ npm run dev
 
 ## Dev Container
 
-> Requires all three repos (`micasaestuya-backend`, `micasaestuya-frontend`, `micasaestuya-infra`) cloned as siblings in the same parent directory. See the [infra README](../micasaestuya-infra/README.md) for the required folder layout.
+> Requires all three repos (`micasaestuya-api`, `micasaestuya-web`, `micasaestuya-infra`) cloned as siblings in the same parent directory. See the [infra README](../micasaestuya-infra/README.md) for the required folder layout.
 
-1. Open the `micasaestuya-frontend/` folder in VS Code.
+1. Open the `micasaestuya-web/` folder in VS Code.
 2. When prompted, click **Reopen in Container** (or run `Dev Containers: Reopen in Container` from the command palette).
 3. VS Code will start the full Docker Compose stack (including the backend, MongoDB, and Redis) and attach to the `nuxt` container.
 4. `NUXT_PUBLIC_API_BASE` is automatically set to `http://localhost:3001/api` by the Docker Compose configuration — no `.env` file needed when using Dev Containers.

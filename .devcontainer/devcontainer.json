@@ -1,6 +1,6 @@
 {
   "name": "micasaestuya — web",
-  "dockerComposeFile": "../../infra/docker-compose.yml",
+  "dockerComposeFile": "../../micasaestuya-infra/docker-compose.yml",
   "service": "nuxt",
   "workspaceFolder": "/usr/src/app",
   "shutdownAction": "none",
