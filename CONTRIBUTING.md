@@ -18,11 +18,13 @@ Thank you for your interest in contributing! 🎉
 ## Development Setup
 
 ### Prerequisites
+
 - Node.js 18+
 - npm 8+
 - API running (see `micasaestuya-api` repo)
 
 ### Quick Start
+
 ```bash
 # Install dependencies
 npm install
@@ -48,6 +50,7 @@ npm run test:e2e
 ```
 
 ### Building for Production
+
 ```bash
 npm run build
 npm run preview
@@ -71,6 +74,7 @@ npm run preview
 - **Docs**: Comment complex logic
 
 Example:
+
 ```vue
 <script setup lang="ts">
 interface Props {
@@ -88,6 +92,7 @@ const emit = defineEmits<{
 ## Commit Messages
 
 Use clear, descriptive commit messages:
+
 ```
 feat: Add property filter sidebar
 fix: Resolve search input styling bug
