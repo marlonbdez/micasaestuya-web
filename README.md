@@ -85,6 +85,13 @@ npm run test:e2e:ci
 
 ### Node.js server
 
+> **Note:** `nuxt.config.ts` currently sets `nitro.preset` to `"static"`,
+> which does not emit `.output/server` — so this path does not work as
+> described below until that preset is changed or overridden. In practice
+> this project is deployed as a static site (see "Static hosting"), which is
+> also what `Dockerfile.prod` and Netlify actually build. See
+> `docs/tooling.md` #4 for how this was found.
+
 Build the application for production on a Node.js server
 
 ```bash

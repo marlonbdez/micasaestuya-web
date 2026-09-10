@@ -48,16 +48,18 @@ jobs:
           node-version: '20'
           cache: 'npm'
       - run: npm ci
-      - run: npm run build
+      # nuxt.config.ts sets nitro.preset to "static", so "nuxt build" does not
+      # emit a usable .output (see docs/tooling.md #4). "generate" is what
+      # Dockerfile.prod and Netlify actually run, and what gets deployed.
+      - run: npm run generate
         env:
           NUXT_PUBLIC_API_BASE: https://micasaestuya-api.onrender.com/api
       - uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: |
-            .output
-            .nuxt
+          path: .output/public
           retention-days: 1
+          if-no-files-found: error
 
   e2e:
     name: E2E tests (shard ${{ matrix.shard }}/2)
@@ -77,13 +79,21 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-output
+          path: .output/public
+      # No server output exists for a static preset, so we serve the static
+      # build the same way Netlify does, instead of "nuxt start" (which
+      # needs .output/server and never gets built here - see docs/tooling.md #4).
+      - name: Serve static build
+        run: npx --yes serve -s .output/public -l 3000 &
+      - name: Wait for server
+        run: npx --yes wait-on http://localhost:3000
       - name: Run Cypress shard
         env:
           CI_NODE_INDEX: ${{ matrix.shard }}
           CI_NODE_TOTAL: 2
         run: |
           SPEC_FILES=$(node cypress/cypress-parallel.mjs)
-          npm run test:e2e:parallel $SPEC_FILES
+          npx cypress run --browser chrome --spec "$SPEC_FILES"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

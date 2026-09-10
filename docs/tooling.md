@@ -107,4 +107,39 @@ composable entero**. Medido antes de fijar el umbral, lo más complejo del repo
 marcaba 5. Es exactamente la confirmación de que Code Climate estaba contando
 la unidad equivocada.
 
+## 4. `nuxt build` no sirve para desplegar con `nitro.preset: 'static'`
+
+Migrando el pipeline de GitLab a GitHub Actions montamos un job `build` que
+corría `npm run build` (igual que el `build-app` original en GitLab) y subía
+`.output` como artefacto para los tests e2e. El job "pasaba", pero
+`actions/upload-artifact` avisaba: `No files were found with the provided
+path: .output .nuxt`. El e2e fallaba después con "Artifact not found".
+
+`nuxt build` sí generó archivos — se ven pasar por `.nuxt/dist/client/` en el
+log — pero con `nitro: { preset: 'static' }` en `nuxt.config.ts`, ese preset
+está pensado para `nuxt generate`, no para `build`: no llega a materializar
+un `.output` final utilizable. Iba a "compilar" en CI sin producir nada.
+
+Nadie lo había notado porque el job de e2e en GitLab tenía
+`allow_failure: true` — un fallo silencioso desde siempre, probablemente. Lo
+delató migrar a GitHub Actions y mirar los logs, no un cambio de código.
+
+**La pista ya estaba delante:** tanto `Dockerfile.prod` como `.netlify.toml`
+usan `npm run generate`, nunca `build`. Ese es el comando que de verdad se
+despliega.
+
+Arreglo en el CI:
+
+- El job `build` ahora corre `npm run generate` y sube solo `.output/public`.
+- El job `e2e` ya no usa `npm run serve` (`nuxt start`, que necesita
+  `.output/server` — tampoco existe con preset `static`). En su lugar sirve
+  `.output/public` con `npx serve`, igual que lo sirve Netlify en producción,
+  y corre Cypress contra eso directamente.
+
+**Lo que enseña:** un job verde no es lo mismo que un job que produjo algo.
+`if-no-files-found: warn` (el default de `upload-artifact`) deja pasar un
+build vacío sin fallar nada — vale la pena poner `if-no-files-found: error`
+en artefactos que otro job necesita de verdad, para no volver a depender de
+mirar el log a mano.
+
 ---
