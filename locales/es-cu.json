@@ -1,0 +1,46 @@
+{
+  "home": {
+    "hero": {
+      "eyebrow": "Casas particulares cubanas",
+      "title": "Tu casa particular te espera.",
+      "subtitle": "Reserva casas particulares en Cuba directamente con el dueño. Sin tarjetas internacionales. Paga en crypto."
+    },
+    "cuba_banner": {
+      "tag": "Ya abierto",
+      "title": "Cuba. El mercado que nosotros hemos abierto.",
+      "subtitle": "Somos la única plataforma con casas particulares legales en Cuba. Las mejores casas de La Habana, Trinidad y Varadero, con pagos en crypto y sin restricciones bancarias.",
+      "features": {
+        "crypto": "Pagos sin intermediarios"
+      }
+    },
+    "how_it_works": {
+      "step2": {
+        "title": "Contacta con el anfitrión",
+        "description": "Paga en USDT o USDC sin necesidad de tarjeta de crédito internacional ni transferencias bancarias."
+      }
+    }
+  },
+  "region": {
+    "level1": "Provincia",
+    "level2": "Municipio",
+    "level3": "Localidad"
+  },
+  "search": {
+    "vacation": {
+      "destination": {
+        "label": "¿A qué casa vas?",
+        "placeholder": "La Habana, Trinidad, Varadero..."
+      },
+      "button": "Buscar casas particulares"
+    }
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Casas particulares cubanas",
+      "subtitle": "Reserva casas particulares en Cuba directamente con el dueño. Sin tarjetas internacionales. Paga en crypto."
+    },
+    "cuba_banner": {
+      "badge": "Ya abierto"
+    }
+  }
+}

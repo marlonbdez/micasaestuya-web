@@ -1,0 +1,17 @@
+// ---------------------------------------------------------------------------
+// Breakpoints
+// ---------------------------------------------------------------------------
+// Uso: @include media-breakpoint-up(sm) / media-breakpoint-down(xs) / etc.
+// Enfoque mobile-first: usar -up() por defecto, -down() solo para exceptions.
+//
+// xs: 40rem  (640px)  — teléfonos grandes
+// sm: 48rem  (768px)  — tablet portrait
+// md: 62rem  (992px)  — tablet landscape
+// lg: 75rem (1200px)  — desktop
+
+$breakpoints: (
+  xs: 40rem,
+  sm: 48rem,
+  md: 62rem,
+  lg: 75rem
+);

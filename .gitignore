@@ -1,0 +1,21 @@
+node_modules
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
+coverage
+config
+builds
+cache
+cache/Cypress
+cypress/videos
+cypress/screenshots
+cypress/downloads
+.DS_Store
+.claude
+
+# Informe de Code Quality generado por ESLint en CI
+gl-code-quality-report.json

@@ -1,0 +1,283 @@
+{
+  "home": {
+    "title": "Find your space",
+    "hero": {
+      "eyebrow": "Caribbean private homes",
+      "title": "The perfect place already exists.",
+      "subtitle": "Find and book private homes in Cuba, the Caribbean and Latin America. Without excessive commissions."
+    },
+    "destinations": {
+      "title": "Where do you want to go?",
+      "subtitle": "Authentic destinations, local hosts"
+    },
+    "featured_properties": {
+      "label": "Featured homes",
+      "title": "Most booked now"
+    },
+    "cuba_banner": {
+      "tag": "Opening 2025",
+      "title": "Cuba. The market no one has digitized.",
+      "subtitle": "Airbnb left. Booking has no private homes. We do. The best homes in Havana, Trinidad and Varadero, with crypto payments and no banking restrictions.",
+      "features": {
+        "crypto": "USDT / USDC payments",
+        "verified": "Verified homes",
+        "commission": "Only 8% commission",
+        "spanish": "100% in Spanish"
+      },
+      "button": "Explore Cuba →"
+    },
+    "how_it_works": {
+      "label": "The process",
+      "title": "How it works",
+      "step1": {
+        "title": "Search and filter",
+        "description": "Choose destination, dates and number of guests. Filter by price, accommodation type or amenities."
+      },
+      "step2": {
+        "title": "Talk to the host",
+        "description": "Contact directly with the person who will host you. No bots. No scripts. Real people."
+      },
+      "step3": {
+        "title": "Pay securely",
+        "description": "With crypto (USDT/USDC) or card. Your money is in escrow until check-in."
+      },
+      "step4": {
+        "title": "Enjoy the Caribbean",
+        "description": "Arrive, meet your host and live an experience no hotel can offer."
+      }
+    },
+    "payments": {
+      "label": "Payments",
+      "title": "No banking borders",
+      "subtitle": "Sanctions are not your problem. We accept major stablecoins so your reservation reaches where no bank goes.",
+      "commission": {
+        "value": "8%",
+        "title": "Total commission — the lowest in the Caribbean",
+        "description": "Airbnb charges hosts between 14 and 16%. We charge half. And it goes directly to the host."
+      },
+      "methods": {
+        "header": "Accepted payment methods",
+        "usdt": {
+          "name": "Tether USDT",
+          "description": "Stablecoin · 1 USDT = 1 USD",
+          "status": "Active"
+        },
+        "usdc": {
+          "name": "USD Coin USDC",
+          "description": "Stablecoin · 1 USDC = 1 USD",
+          "status": "Active"
+        },
+        "btc": {
+          "name": "Bitcoin — Lightning",
+          "description": "Lightning Network for fast payments",
+          "status": "Coming soon"
+        },
+        "card": {
+          "name": "Credit card",
+          "description": "Visa · Mastercard",
+          "status": "Active"
+        }
+      }
+    },
+    "host_cta": {
+      "title": "Do you have a home in the Caribbean?",
+      "subtitle": "List for free. No listing fees, no contract. Start receiving bookings in less than 24 hours.",
+      "button": "List my home →"
+    },
+    "stats": {
+      "properties": "Verified homes",
+      "destinations": "Destinations",
+      "commission": "Total commission",
+      "rating": "Average rating"
+    }
+  },
+  "header": {
+    "advertise_property": "Advertise your property for free",
+    "login": "Login"
+  },
+  "regions": {
+    "cu": "Cuba",
+    "do": "Dominican Republic",
+    "pr": "Puerto Rico"
+  },
+  "search": {
+    "placeholder": "Search by province, municipality...",
+    "error": "Write a location where to search",
+    "property_type": "Property type",
+    "button": "Search homes",
+    "popular": "Popular",
+    "destination": {
+      "label": "Where are you going?",
+      "placeholder": "Destination, city or accommodation"
+    },
+    "check_in": {
+      "label": "Check-in",
+      "placeholder": "Add date"
+    },
+    "check_out": {
+      "label": "Check-out",
+      "placeholder": "Add date"
+    },
+    "guests": {
+      "label": "Guests",
+      "placeholder": "Add guests",
+      "one": "1 person",
+      "two": "2 people",
+      "three_four": "3–4 people",
+      "five_plus": "5+ people"
+    },
+    "operation_type": {
+      "sale": "Buy",
+      "rent": "Rent",
+      "share": "Share"
+    },
+    "vacation": {
+      "destination": {
+        "label": "Where are you going?",
+        "placeholder": "Destination, city or country"
+      },
+      "check_in": {
+        "label": "Check-in"
+      },
+      "check_out": {
+        "label": "Check-out"
+      },
+      "guests": {
+        "label": "Guests",
+        "placeholder": "1 guest",
+        "one": "1 guest",
+        "two": "2 guests",
+        "three_four": "3–4 guests",
+        "five_plus": "5+ guests"
+      },
+      "button": "Find homes",
+      "popular": "Popular"
+    }
+  },
+  "property_types": {
+    "landscape": "Landscape",
+    "office": "Office",
+    "garage": "Garage",
+    "house": "House",
+    "apartment": "Apartment"
+  },
+  "post_ad": {
+    "next": "Next",
+    "back": "Back",
+    "publish": "Publish",
+    "steps": {
+      "basic_info": "Basic information",
+      "address": "Location",
+      "details": "Details",
+      "photos": "Photos",
+      "description": "Description and extras"
+    },
+    "basic_info": {
+      "title": "What do you want to publish?",
+      "type_label": "Property type",
+      "operation_label": "Operation",
+      "operation": {
+        "sale": "Sell",
+        "rent": "Rent out",
+        "share": "Share"
+      },
+      "price_label": {
+        "sale": "Sale price (USD)",
+        "rent": "Rent price (USD/month)",
+        "share": "Room price (USD/month)"
+      },
+      "price_placeholder": {
+        "sale": "E.g. 150000",
+        "rent": "E.g. 500",
+        "share": "E.g. 200"
+      }
+    },
+    "address": {
+      "title": "Where is the property?",
+      "street_label": "Street",
+      "street_placeholder": "E.g. Calle 23",
+      "number_label": "Number (optional)",
+      "number_placeholder": "E.g. 154",
+      "select_placeholder": "Select",
+      "errors": {
+        "street_required": "Enter the street"
+      }
+    },
+    "details": {
+      "title": "What is the property like?",
+      "surface_label": "Surface (m²)",
+      "surface_placeholder": "E.g. 80",
+      "bedrooms_label": "Bedrooms (optional)",
+      "bedrooms_placeholder": "E.g. 3",
+      "bathrooms_label": "Bathrooms (optional)",
+      "bathrooms_placeholder": "E.g. 2",
+      "errors": {
+        "number": "Must be a number",
+        "price_required": "Enter the price",
+        "price_positive": "The price must be greater than zero",
+        "surface_required": "Enter the surface",
+        "surface_positive": "The surface must be greater than zero",
+        "rooms_integer": "Must be a whole number",
+        "rooms_positive": "Must be greater than zero"
+      }
+    },
+    "photos": {
+      "title": "Show the property",
+      "add_label": "Choose your photos",
+      "hint": "Up to {max} photos · they stay in your browser",
+      "saving": "Preparing the photos…",
+      "empty": "You have not added any photos yet",
+      "main": "Main",
+      "remove": "Remove the photo",
+      "alt": "Photo {position} of the property",
+      "errors": {
+        "too_many": "You can only add {max} photos",
+        "not_an_image": "Files that were not images have been discarded",
+        "unreadable": "We could not save one of the photos. Please try again",
+        "storage": "Your browser will not let us store the photos. Try leaving private mode"
+      }
+    }
+  },
+  "modals": {
+    "auth": {
+      "sign_in": {
+        "title": "Login or register",
+        "error": "Invalid username or password",
+        "suggestion": "Don't have an account? Create a new one",
+        "remember_me": "Remember me",
+        "login": "Login"
+      },
+      "sign_up": {
+        "title": "Create account",
+        "error": "Error creating account",
+        "first_name": "Name",
+        "first_name_required": "Name is required",
+        "first_name_invalid": "Name is invalid",
+        "last_name": "Last name",
+        "last_name_required": "Last name is required",
+        "last_name_invalid": "Last name is invalid",
+        "password_confirmation": "Confirm password",
+        "password_confirmation_required": "Password confirmation is required",
+        "passwords_mismatch": "Passwords do not match",
+        "terms_accept": "I accept the terms and conditions",
+        "terms_not_accepted": "You must accept the terms and conditions",
+        "suggestion": "I already have an account and I want to access",
+        "continue": "Continue"
+      },
+      "common": {
+        "email": "Email",
+        "email_required": "Email is required",
+        "email_invalid": "Email is invalid",
+        "password": "Password",
+        "password_required": "Password is required",
+        "password_min_length": "Password must be at least 6 characters long"
+      }
+    },
+    "locale": {
+      "title": "Select your region and language",
+      "region_label": "Region",
+      "language_label": "Language",
+      "save_button": "Save"
+    }
+  }
+}

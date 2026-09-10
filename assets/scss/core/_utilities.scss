@@ -1,0 +1,14 @@
+// Como este archivo NO se inyecta globalmente, necesita importar los mixins
+@use '../abstract/_mixins.scss' as *;
+
+.visible-sm {
+  @include media-breakpoint-down(sm) {
+    display: none !important;
+  }
+}
+
+.visible-lg {
+  @include media-breakpoint-down(lg) {
+    display: none !important;
+  }
+}

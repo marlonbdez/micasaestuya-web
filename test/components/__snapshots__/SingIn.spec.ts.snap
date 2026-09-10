@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SignIn > should match the snapshot 1`] = `
+"<div data-v-037d13aa="" class="signin">
+  <!--v-if-->
+  <form data-v-037d13aa="" data-cy="signin-form">
+    <div data-v-6617418f="" data-v-037d13aa="" class="form-group" data-cy="signin-email-input"><label data-v-6617418f="" for="signin-email" class="form-group__label">Email</label><input data-v-6617418f="" id="signin-email" placeholder="" class="form-group__input" type="text" autocomplete="off" value="">
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-6617418f="" data-v-037d13aa="" class="form-group form-group--icon" data-cy="signin-password-input"><label data-v-6617418f="" for="signin-password" class="form-group__label">Password</label><input data-v-6617418f="" id="signin-password" placeholder="" class="form-group__input" type="password" autocomplete="off" value="">
+      <!---->
+      <!--v-if-->
+    </div>
+    <div data-v-b19008a3="" data-v-037d13aa="" class="form-group" data-cy="signin-remember-checkbox"><label data-v-b19008a3="" for="signin-remember" class="label"><input data-v-b19008a3="" id="signin-remember" type="checkbox" class="input">Remember me</label>
+      <!--v-if-->
+    </div><button data-v-de71286e="" data-v-037d13aa="" to="" class="btn primary md signin__button" aria-label="button" id="signin-submit" data-cy="signin-submit-button" type="submit">
+      <!--v-if--> Login
+    </button><button data-v-de71286e="" data-v-037d13aa="" to="" class="btn flat md signin__button" aria-label="button" data-cy="signin-show-signup-button" type="button">Don't have an account? Create a new one</button>
+  </form>
+</div>"
+`;

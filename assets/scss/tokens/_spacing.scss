@@ -1,0 +1,42 @@
+// ---------------------------------------------------------------------------
+// Spacing tokens — escala de espaciado del diseño
+// ---------------------------------------------------------------------------
+// Uso: padding, margin, gap en componentes
+//
+// $gap-small   →  8px — gaps pequeños, iconos
+// $gap-medium  → 16px — padding estándar de componentes
+// $gap-large   → 32px — separación entre secciones
+@use '../abstract/functions' as *;
+
+// Micro gaps
+$gap-tiny: px-to-rem(2); //  2px
+$gap-extra-tiny: px-to-rem(4); //  4px
+
+// Small gaps
+$gap-small: px-to-rem(8); //  8px
+$gap-extra-small: px-to-rem(12); // 12px
+
+// Base gaps
+$gap-medium: px-to-rem(16); // 16px
+$gap-extra-medium: px-to-rem(24); // 24px
+
+// Large gaps
+$gap-large: px-to-rem(32); // 32px
+$gap-extra-large: px-to-rem(40); // 40px
+
+// Huge gaps
+$gap-huge: px-to-rem(48); // 48px
+$gap-extra-huge: px-to-rem(56); // 56px
+
+// ---------------------------------------------------------------------------
+// Section padding — espaciado estándar de secciones de página
+// ---------------------------------------------------------------------------
+$section-padding-y: px-to-rem(80); // vertical desktop
+$section-padding-y-sm: px-to-rem(48); // vertical mobile
+$section-padding-x: px-to-rem(32); // horizontal desktop
+$section-padding-x-sm: px-to-rem(20); // horizontal mobile
+
+// ---------------------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------------------
+$max-width-content: px-to-rem(1120); // contenedor principal de página

@@ -1,0 +1,159 @@
+// ---------------------------------------------------------------------------
+// Tema: Light (por defecto)
+// Referencia visual: micasaestuya-minimal.html
+// ---------------------------------------------------------------------------
+
+:root {
+  // --- Paleta base (escala de colores) ---
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --red-orange-50: #fff1f1;
+  --red-orange-100: #ffe1e0;
+  --red-orange-200: #ffc7c6;
+  --red-orange-300: #ffa09e;
+  --red-orange-400: #ff6b67;
+  --red-orange-500: #fc3d38;
+  --red-orange-600: #ea1d18;
+  --red-orange-700: #c51510;
+  --red-orange-800: #a31511;
+  --red-orange-900: #861916;
+  --red-orange-950: #490806;
+
+  --zinc-50: #fafafa;
+  --zinc-100: #f4f4f5;
+  --zinc-200: #e4e4e7;
+  --zinc-300: #d4d4d8;
+  --zinc-400: #a1a1aa;
+  --zinc-500: #71717a;
+  --zinc-600: #52525b;
+  --zinc-700: #3f3f46;
+  --zinc-800: #27272a;
+  --zinc-900: #18181b;
+  --zinc-950: #09090b;
+
+  // --- Sistema de diseño (tokens semánticos) ---
+  // Fondo
+  --bg: var(--zinc-50);
+  --bg-2: var(--zinc-100);
+  --bg-3: var(--zinc-200);
+
+  // Texto
+  --text: var(--zinc-700);
+  --text-2: var(--zinc-500);
+  --text-3: var(--zinc-400);
+
+  // Borde
+  --border: var(--zinc-300);
+  --border-subtle: var(--zinc-200);
+  --border-error: var(--red-orange-500);
+
+  // Acento (color de marca)
+  --accent: var(--red-orange-700);
+  --accent-hover: var(--red-orange-600);
+  --accent-active: var(--red-orange-800);
+  --accent-disabled: var(--red-orange-200);
+  --accent-inv: var(--color-white);
+  --warm: #c8956c;
+
+  // Sombras
+  --card-shadow: 0 0.125rem 1rem 0 rgba(0, 0, 0, 0.08);
+  --card-shadow-hover: 0 0.25rem 1.5rem 0 rgba(0, 0, 0, 0.14);
+
+  // Radios (CSS custom props — usar $corner-radius-* SCSS vars en componentes)
+  --radius: 0.875rem;
+  --radius-sm: 0.5rem;
+  --radius-pill: 6.25rem;
+
+  // Transición estándar
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // --- Alias legacy (mantener compat con componentes no migrados) ---
+  --app-background-color: var(--bg);
+  --text-color: var(--text);
+  --text-color-muted: var(--text-3);
+  --text-color-error: var(--red-orange-500);
+  --shadow-color: var(--zinc-400);
+  --border-color: var(--border);
+  --border-color-error: var(--border-error);
+  --subtle-border-color: var(--border-subtle);
+  --background-backdrop: rgba(0, 0, 0, 0.6);
+  --home-search-background: var(--color-white);
+  --search-bg: var(--color-white);
+
+  // --- Botones ---
+  --primary-button-text-color: var(--color-white);
+  --primary-button-text-color-disabled: var(--zinc-700);
+  --primary-button-color: var(--red-orange-700);
+  --primary-button-color-hover: var(--red-orange-600);
+  --primary-button-color-active: var(--red-orange-800);
+  --primary-button-color-disabled: var(--red-orange-200);
+
+  --secondary-button-text-color: var(--color-white);
+  --secondary-button-text-color-disabled: var(--zinc-400);
+  --secondary-button-color: var(--zinc-400);
+  --secondary-button-color-hover: var(--zinc-500);
+  --secondary-button-color-active: var(--zinc-600);
+  --secondary-button-color-disabled: var(--zinc-50);
+
+  --flat-button-text-color: var(--zinc-500);
+  --flat-button-text-color-disabled: var(--zinc-400);
+  --flat-button-color: transparent;
+  --flat-button-color-hover: var(--zinc-200);
+  --flat-button-color-active: var(--zinc-300);
+  --flat-button-color-disabled: transparent;
+
+  --ghost-button-text-color: var(--red-orange-700);
+  --ghost-button-text-color-disabled: var(--red-orange-700);
+  --ghost-button-color: transparent;
+  --ghost-button-color-hover: var(--red-orange-50);
+  --ghost-button-color-active: var(--red-orange-100);
+  --ghost-button-color-disabled: transparent;
+
+  // --- Inputs ---
+  --input-text-color: var(--zinc-800);
+  --input-background-color: #fff;
+  --input-border-color: var(--zinc-300);
+  --input-focus-border-color: var(--zinc-400);
+
+  --input-radio-text-color: var(--zinc-600);
+  --input-radio-active-background-color: var(--red-orange-100);
+  --input-radio-active-border-color: var(--red-orange-500);
+
+  // --- Switch ---
+  --switch-background-color: var(--zinc-300);
+  --switch-active-border-color: var(--zinc-300);
+  --switch-active-background-color: var(--zinc-700);
+  --switch-icon-background-color: var(--zinc-50);
+
+  // --- Alertas ---
+  --error-message-background-color: #f6c5be;
+  --success-message-background-color: #c5f6d8;
+  --warning-message-background-color: #f6eac5;
+  --info-message-background-color: #c5eaf6;
+
+  // --- Header ---
+  --header-divider: var(--zinc-200);
+  --header-logged-user-color: var(--zinc-700);
+  --header-logged-user-background-color: var(--zinc-200);
+  --header-logged-user-color-hover: var(--zinc-100);
+  --header-logged-user-background-color-hover: var(--zinc-400);
+
+  // --- Footer ---
+  --footer-background-color: var(--zinc-200);
+  --footer-link-color: var(--zinc-600);
+
+  // --- Legacy colors (compat) ---
+  // Usados por componentes base (BaseCheckbox, BaseDropdown, BaseSelect,
+  // BaseInput, BaseRadioButton, BaseCta, RegionLanguageModal, pages/index.vue)
+  // que aún no migraron al nuevo sistema de tokens semánticos.
+  --color-black-transparent: #00000013;
+  --color-red-dark: #ab0f16;
+  --color-red: #fc3d38;
+  --color-red-light: #991214;
+  --color-gray-dark: #555555;
+  --color-gray: #696969;
+  --color-gray-light: #d0d0d0;
+  --color-gray-lighter: #f1f1f1;
+  --text-color-secondary: #696969;
+}

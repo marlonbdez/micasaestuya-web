@@ -1,0 +1,17 @@
+// ---------------------------------------------------------------------------
+// Typography tokens — escala de tamaños de fuente
+// ---------------------------------------------------------------------------
+// Referencia: micasaestuya-minimal.html
+//
+// Uso: $font-size-xs → labels pequeños, captions
+//      $font-size-sm → body secundario, metadatos
+//      $font-size-md → body base
+//      $font-size-lg → subtítulos, texto destacado
+@use '../abstract/functions' as *;
+
+$font-size-2xs: px-to-rem(10); // 10px — etiquetas muy pequeñas, eyebrow pills
+$font-size-xs: px-to-rem(12); // 12px — captions, stat labels
+$font-size-sm: px-to-rem(14); // 14px — body secundario, metadatos de propiedad
+$font-size-base: px-to-rem(16); // 16px — cuerpo base (alias de md)
+$font-size-md: px-to-rem(16); // 16px — body base
+$font-size-lg: px-to-rem(18); // 18px — subtítulos, hero sub

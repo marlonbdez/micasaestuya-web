@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BaseAlert.vue > should match the snapshot 1`] = `
+"<div data-v-33539578="" class="alert-box info">
+  <p data-v-33539578="">Lorem ipsum dolor sit amet</p>
+</div>"
+`;

@@ -1,0 +1,19 @@
+// ---------------------------------------------------------------------------
+// Border-radius tokens
+// ---------------------------------------------------------------------------
+// Referencia: micasaestuya-minimal.html
+//
+// $corner-radius-sm   →   8px — inputs, chips, badges pequeños
+// $corner-radius-md   →  14px — cards, modales, dialogs
+// $corner-radius-large → 20px — cards grandes, secciones destacadas
+// $corner-radius-pill → 100px — botones, tags, buscador
+@use '../abstract/functions' as *;
+
+$corner-radius-sm: px-to-rem(8);
+$corner-radius-md: px-to-rem(14);
+$corner-radius-large: px-to-rem(20);
+$corner-radius-pill: px-to-rem(100);
+
+// Aliases legacy — DEPRECATED, usar $corner-radius-sm / $corner-radius-md
+$corner-radius-small: $corner-radius-sm;
+$corner-radius-medium: $corner-radius-md;

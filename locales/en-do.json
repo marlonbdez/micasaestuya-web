@@ -1,0 +1,7 @@
+{
+  "region": {
+    "level1": "Province",
+    "level2": "Municipality",
+    "level3": "Sector"
+  }
+}

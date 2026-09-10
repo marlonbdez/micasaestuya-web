@@ -1,0 +1,14 @@
+// 1. Normalización y Fuentes (Primero siempre)
+@use 'core/normalize';
+@use 'core/typography';
+
+// 2. Temas (Variables CSS Nativas --var)
+@use 'themes/light';
+@use 'themes/dark';
+
+// 3. Estilos Base y Movimiento
+@use 'core/base'; // Tu core.scss (html, body, container)
+@use 'tokens/motion'; // Tus animaciones y clases .fade, .bounce
+
+// 4. Utilidades (clases .visible-sm / .visible-lg usadas por TheHeader)
+@use 'core/utilities';

@@ -1,0 +1,12 @@
+{
+  "valid": {
+    "firstName": "Marlon",
+    "lastName": "Bdez",
+    "email": "marlonbdez@gmail.com",
+    "password": "micasaestuya"
+  },
+  "invalid": {
+    "email": "wrong@test.com",
+    "password": "wrongpassword"
+  }
+}

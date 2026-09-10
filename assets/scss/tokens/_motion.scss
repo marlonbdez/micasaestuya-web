@@ -1,0 +1,114 @@
+// ---------------------------------------------------------------------------
+// Motion tokens — duraciones, easings y animaciones de transición
+// ---------------------------------------------------------------------------
+@use '../abstract/functions' as *;
+
+$motion-duration-fast: 0.15s; // fade sutil
+$motion-duration-base: 0.25s; // transiciones estándar
+$motion-easing-base: ease;
+
+// ---------------------------------------------------------------------------
+// Bounce
+// ---------------------------------------------------------------------------
+
+.bounce-enter-active {
+  animation: bounce-in $motion-duration-base;
+}
+
+.bounce-leave-active {
+  animation: bounce-in $motion-duration-base reverse;
+}
+
+// ---------------------------------------------------------------------------
+// Fade
+// ---------------------------------------------------------------------------
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $motion-duration-fast $motion-easing-base;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Modal
+// ---------------------------------------------------------------------------
+
+.modal-enter-active.modal,
+.modal-leave-active.modal {
+  transition: opacity $motion-duration-base $motion-easing-base;
+}
+
+.modal-enter-from.modal,
+.modal-leave-to.modal {
+  opacity: 0;
+}
+
+.modal-enter-to.modal,
+.modal-leave-from.modal {
+  opacity: 1;
+}
+
+.modal-enter-active .modal__dialog,
+.modal-leave-active .modal__dialog {
+  transition-delay: $motion-duration-base;
+  transition: all $motion-duration-base $motion-easing-base;
+}
+
+.modal-enter-from .modal__dialog,
+.modal-leave-to .modal__dialog {
+  transform: translateY(px-to-rem(-32));
+}
+
+.modal-enter-to .modal__dialog,
+.modal-leave-from .modal__dialog {
+  transform: translateY(0);
+}
+
+// ---------------------------------------------------------------------------
+// Modal In (enter only)
+// ---------------------------------------------------------------------------
+
+.modal-in-enter-active.modal {
+  transition: opacity $motion-duration-base $motion-easing-base;
+}
+
+.modal-in-enter-from.modal {
+  opacity: 0;
+}
+
+.modal-in-enter-to.modal {
+  opacity: 1;
+}
+
+.modal-in-enter-active .modal__dialog {
+  transition-delay: $motion-duration-base;
+  transition: all $motion-duration-base $motion-easing-base;
+}
+
+.modal-in-enter-from .modal__dialog {
+  transform: translateY(px-to-rem(-32));
+}
+
+.modal-in-enter-to .modal__dialog {
+  transform: translateY(0);
+}
+
+// ---------------------------------------------------------------------------
+// Keyframes
+// ---------------------------------------------------------------------------
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
