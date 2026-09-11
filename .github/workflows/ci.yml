@@ -91,6 +91,11 @@ jobs:
         env:
           CI_NODE_INDEX: ${{ matrix.shard }}
           CI_NODE_TOTAL: 2
+          # cypress/support/e2e.ts pings NUXT_PUBLIC_API_BASE/health in a
+          # global "before all" hook to wake the Render API from sleep. If
+          # this isn't set, it falls back to http://localhost:3001/api,
+          # which nothing serves here - see docs/tooling.md #5.
+          NUXT_PUBLIC_API_BASE: https://micasaestuya-api.onrender.com/api
         run: |
           SPEC_FILES=$(node cypress/cypress-parallel.mjs)
           npx cypress run --browser chrome --spec "$SPEC_FILES"

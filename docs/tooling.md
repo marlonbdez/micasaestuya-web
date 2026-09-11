@@ -142,4 +142,41 @@ build vacío sin fallar nada — vale la pena poner `if-no-files-found: error`
 en artefactos que otro job necesita de verdad, para no volver a depender de
 mirar el log a mano.
 
+## 5. El e2e necesita `NUXT_PUBLIC_API_BASE` también en el job de tests
+
+Con el fix del punto 4, `build` y `e2e` ya funcionaban por separado, pero
+Cypress seguía fallando: los 5 tests de `auth.cy.ts` se saltaban con "1
+failing" en el hook `before all`, con este error:
+
+```
+CypressError: `cy.request()` failed trying to load:
+http://localhost:3001/api/health
+Error: connect ECONNREFUSED 127.0.0.1:3001
+```
+
+`cypress/support/e2e.ts` tiene un `before()` global que hace un `HEAD` a
+`${API_BASE}/health` para despertar la API de Render antes de correr
+cualquier test (el plan free de Render duerme el servicio). `API_BASE` sale
+de `cypress.config.ts`:
+
+```ts
+const apiBase = process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:3001/api'
+```
+
+En GitLab esto funcionaba porque `NUXT_PUBLIC_API_BASE` estaba en las
+`variables:` globales del pipeline, así que llegaba a todos los jobs,
+incluido `test:e2e`. Al migrar, ese env solo se puso en el paso `npm run
+generate` del job `build` - el job `e2e` corre en un job (y hasta un
+`container:`) distinto y no lo heredaba, así que caía al default
+`localhost:3001`, donde no hay nada escuchando en CI.
+
+Arreglo: el paso "Run Cypress shard" del job `e2e` ahora también fija
+`NUXT_PUBLIC_API_BASE: https://micasaestuya-api.onrender.com/api`.
+
+**Lo que enseña:** en GitLab CI, las `variables:` de nivel de pipeline se
+comparten entre jobs por defecto. En GitHub Actions no hay equivalente
+automático - cada `env:` es local al job o al step donde se declara, así que
+cualquier variable que el código realmente necesite en tiempo de ejecución
+(no solo en build) hay que repetirla explícitamente en cada job que la usa.
+
 ---
