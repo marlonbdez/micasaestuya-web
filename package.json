@@ -37,7 +37,7 @@
     "cypress": "^13.4.0",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-formatter-gitlab": "^5.1.0",
+    "eslint-formatter-gitlab": "^7.2.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vitest": "^0.3.26",
     "husky": "^8.0.3",
