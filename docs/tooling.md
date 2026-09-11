@@ -179,4 +179,45 @@ automático - cada `env:` es local al job o al step donde se declara, así que
 cualquier variable que el código realmente necesite en tiempo de ejecución
 (no solo en build) hay que repetirla explícitamente en cada job que la usa.
 
+## 6. En un job con `container:`, un proceso en segundo plano no sobrevive al siguiente step
+
+Con el fix del punto 5, el hook `before all` ya no fallaba, pero el primer
+test seguía cayendo, esta vez en `before each`:
+
+```
+CypressError: `cy.visit()` failed trying to load:
+http://localhost:3000/
+Error: connect ECONNREFUSED 127.0.0.1:3000
+```
+
+Lo raro es que los steps previos, "Serve static build" y "Wait for
+server", habían terminado en verde - `wait-on` había confirmado que el
+puerto 3000 respondía. Pero para cuando corría Cypress, ya no había nada
+escuchando ahí.
+
+El job `e2e` corre dentro de un `container:` (la imagen de Cypress). En un
+job así, GitHub Actions ejecuta cada step como un `docker exec` separado.
+Un proceso lanzado en segundo plano con `&` en un step vive dentro de esa
+sesión de `exec` - cuando el step termina, la sesión se cierra y el
+proceso se mata con ella, aunque el step "haya terminado bien". `serve`
+arrancaba, `wait-on` alcanzaba a verlo vivo en esa misma ventana, y se
+moría antes de que arrancara el step de Cypress.
+
+(El job `accessibility` usa el mismo patrón de tres steps separados y
+nunca dio este problema, porque ese job corre directo en el runner -`runs-on: ubuntu-latest` sin `container:`- donde sí sobreviven los
+procesos en segundo plano entre steps.)
+
+Arreglo: en el job `e2e`, los tres steps -arrancar `serve`, esperar con
+`wait-on` y correr Cypress- se unieron en uno solo, así el proceso en
+segundo plano y todo lo que depende de él viven en la misma sesión de
+`docker exec` de principio a fin.
+
+**Lo que enseña:** un step en verde no garantiza que lo que dejó corriendo
+en segundo plano siga vivo en el siguiente. Es justo el mismo patrón que
+el punto 4 (`if-no-files-found: warn`) y el punto 5 (env no heredado):
+GitHub Actions no comparte tanto estado entre steps como parece a primera
+vista, sobre todo dentro de un `container:`. La forma más simple de
+evitarlo es no depender de que algo backgrounded cruce el límite entre
+steps.
+
 ---

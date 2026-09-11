@@ -83,11 +83,14 @@ jobs:
       # No server output exists for a static preset, so we serve the static
       # build the same way Netlify does, instead of "nuxt start" (which
       # needs .output/server and never gets built here - see docs/tooling.md #4).
-      - name: Serve static build
-        run: npx --yes serve -s .output/public -l 3000 &
-      - name: Wait for server
-        run: npx --yes wait-on http://localhost:3000
-      - name: Run Cypress shard
+      #
+      # This job runs in a `container:`, where each step is its own
+      # `docker exec` - a process backgrounded with "&" in one step does not
+      # survive into the next one, so "serve" got killed before Cypress ever
+      # ran. Starting the server, waiting for it, and running Cypress all in
+      # one step keeps it alive for the step's whole duration - see
+      # docs/tooling.md #6.
+      - name: Serve static build and run Cypress shard
         env:
           CI_NODE_INDEX: ${{ matrix.shard }}
           CI_NODE_TOTAL: 2
@@ -97,6 +100,8 @@ jobs:
           # which nothing serves here - see docs/tooling.md #5.
           NUXT_PUBLIC_API_BASE: https://micasaestuya-api.onrender.com/api
         run: |
+          npx --yes serve -s .output/public -l 3000 &
+          npx --yes wait-on http://localhost:3000
           SPEC_FILES=$(node cypress/cypress-parallel.mjs)
           npx cypress run --browser chrome --spec "$SPEC_FILES"
       - uses: actions/upload-artifact@v4
