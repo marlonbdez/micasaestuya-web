@@ -21,6 +21,16 @@ const localePath = useLocalePath()
             <li class="footer__group-list-item">
               <BaseCta is-link to="/sitemap">Mapa web</BaseCta>
             </li>
+            <li class="footer__group-list-item">
+              <BaseCta
+                is-external-url
+                to="https://github.com/marlonbdez/micasaestuya-web"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Código fuente
+              </BaseCta>
+            </li>
           </ul>
         </div>
         <div class="footer__group">
@@ -78,17 +88,28 @@ const localePath = useLocalePath()
         <p class="footer__copyright">
           &copy; {{ new Date().getFullYear() }} mi casa es tuya.
         </p>
-        <BaseCta
-          data-cy="footer-i18n-button"
-          variant="flat"
-          aria-label="Change country and language"
-          @click="authStore.showLocaleModal"
-        >
-          <BaseIcon icon="globe" size="sm" />
-          {{ getLocale(locale).language }}
-          ({{ getLocale(locale).countryCode.toLocaleUpperCase() }})
-          <span class="sr-only">Change country and language</span>
-        </BaseCta>
+        <div class="footer__actions">
+          <BaseCta
+            data-cy="footer-i18n-button"
+            variant="flat"
+            aria-label="Change country and language"
+            @click="authStore.showLocaleModal"
+          >
+            <BaseIcon icon="globe" size="sm" />
+            {{ getLocale(locale).language }}
+            ({{ getLocale(locale).countryCode.toLocaleUpperCase() }})
+            <span class="sr-only">Change country and language</span>
+          </BaseCta>
+          <a
+            class="footer__github-mark"
+            href="https://github.com/marlonbdez/micasaestuya-web"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver el código fuente en GitHub"
+          >
+            <BaseIcon icon="github" size="sm" />
+          </a>
+        </div>
       </div>
     </div>
   </footer>
@@ -156,6 +177,23 @@ const localePath = useLocalePath()
   &__copyright {
     @include font-roboto-condensed-light;
     margin: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $gap-medium;
+  }
+
+  &__github-mark {
+    display: flex;
+    color: var(--footer-link-color);
+    opacity: 0.7;
+
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
   }
 }
 </style>
