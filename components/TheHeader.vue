@@ -36,14 +36,16 @@ const userOptions = computed(() => [
       </div>
       <nav v-if="!minimal" class="nav">
         <ul class="menu">
-          <li class="menu-item visible-sm">
+          <li class="menu-item">
             <BaseCta
               variant="ghost"
               :to="localePath('post-ad-basic-info')"
               :aria-label="$t('header.advertise_property')"
             >
               <BaseIcon icon="megaphone" size="sm" />
-              {{ $t('header.advertise_property') }}
+              <span class="menu-item__label">{{
+                $t('header.advertise_property')
+              }}</span>
             </BaseCta>
           </li>
           <li v-if="!isLogged" class="menu-item">
@@ -54,7 +56,7 @@ const userOptions = computed(() => [
               @click="authStore.showAuthModal"
             >
               <BaseIcon icon="person" size="sm" />
-              {{ $t('header.login') }}
+              <span class="menu-item__label">{{ $t('header.login') }}</span>
             </BaseCta>
           </li>
           <li class="menu-item menu-item--separator-left">
@@ -143,6 +145,14 @@ const userOptions = computed(() => [
       width: 0.0625rem;
       height: 1.5rem;
       background-color: var(--header-divider);
+    }
+  }
+
+  // En móvil los botones del header son solo icono; el texto aparece a
+  // partir de `sm` (tablet en adelante).
+  .menu-item__label {
+    @include media-breakpoint-down(sm) {
+      display: none;
     }
   }
 

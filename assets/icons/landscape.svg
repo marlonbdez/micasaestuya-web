@@ -5,7 +5,7 @@
 // stroke:
 <defs>
 
-<style>.cls-1{fill:none;stroke:#000000;stroke-linejoin:round;stroke-width:2px;}</style>
+<style>.cls-1{fill:none;stroke:currentColor;stroke-linejoin:round;stroke-width:2px;}</style>
 
 </defs>
 
