@@ -136,4 +136,5 @@ export interface IAdDraft {
   details: IAdDetails
   // Solo ids: los ficheros viven en IndexedDB, no en el borrador.
   photos: string[]
+  description: string
 }
