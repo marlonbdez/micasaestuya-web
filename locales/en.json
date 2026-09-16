@@ -236,6 +236,14 @@
         "unreadable": "We could not save one of the photos. Please try again",
         "storage": "Your browser will not let us store the photos. Try leaving private mode"
       }
+    },
+    "description": {
+      "title": "Tell us more about the property",
+      "label": "Description",
+      "placeholder": "Describe the property: layout, condition, natural light, what makes it special…",
+      "errors": {
+        "description_required": "Add a description"
+      }
     }
   },
   "modals": {

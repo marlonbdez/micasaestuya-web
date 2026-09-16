@@ -10,7 +10,8 @@ const emptyDraft = (): IAdDraft => ({
   operation: null,
   address: { region: null, street: '', streetNumber: '' },
   details: { price: null, surface: null, bedrooms: null, bathrooms: null },
-  photos: []
+  photos: [],
+  description: ''
 })
 
 const isPositive = (value: number | null) =>
@@ -35,6 +36,8 @@ export const useAdFlowStore = defineStore('adFlow', {
           )
         case 'photos':
           return draft.photos.length > 0
+        case 'description':
+          return !!draft.description.trim()
         default:
           return false
       }
