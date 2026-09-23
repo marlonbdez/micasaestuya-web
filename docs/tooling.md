@@ -1,50 +1,10 @@
-# Herramientas: CI, lint y entorno
+# Herramientas: CI, lint y entorno (web)
 
-Trampas del toolchain, que son distintas de los errores de código porque no las
-detecta ejecutar la aplicación: todo funciona en local y falla en el CI.
+Trampas del toolchain específicas de `web`. Las de `api` están en
+`micasaestuya-api/docs/gotchas.md`; la decisión de retirar Code Climate de
+todo el proyecto está en `micasaestuya-docs/CI-CD.md`.
 
-## 1. Que Node lo ejecute no significa que el linter lo entienda
-
-`models/region.js` cargaba el árbol así:
-
-```js
-import regionsCU from '../data/regions_cu.json' with { type: 'json' }
-```
-
-Funcionaba perfectamente en local y el endpoint respondía. Pero el CI falló con
-`Parsing error: Unexpected token with`. Los _import attributes_ son ES2025:
-Node los ejecuta, **ESLint 8 no los parsea**, y no hay `ecmaVersion` que lo
-arregle — probamos 2023, 2024, 2025 y `latest`. El soporte llega en ESLint 9,
-que obliga a migrar a flat config, y `eslint-config-standard@17` aún no lo
-soporta.
-
-Se resolvió sin tocar la versión de ESLint:
-
-```js
-const readTree = (file) =>
-  JSON.parse(readFileSync(new URL(`../data/${file}`, import.meta.url), 'utf8'))
-```
-
-Corre una sola vez al arrancar, igual que el import.
-
-**Lo que enseña:** "funciona en mi máquina" y "pasa el lint" son dos preguntas
-distintas, y el toolchain puede ir por detrás del runtime. Además, esto se nos
-escapó porque `api/node_modules` está **vacío en el host** — las dependencias
-viven en el volumen de Docker — así que el lint de `api` no se puede ejecutar
-desde fuera del contenedor. Para correrlo:
-`docker compose exec express npm run lint`.
-
-De paso, `utils/redisSeed.js` salió de `.eslintignore` (que quedó vacío y se
-borró) y pasó a estilo `standard`. Ojo con un detalle al hacerlo: el parámetro
-`country_code` tuvo que pasar a `countryCode` por la regla `camelcase`, pero el
-campo que se guarda en Redis **sigue siendo `country_code`**, porque es el
-contrato que leen el modelo y el frontend:
-
-```js
-const hashValue = { term, country_code: countryCode, ..., level_type: levelType }
-```
-
-## 2. Cuando la métrica mide la unidad equivocada
+## 1. Cuando la métrica mide la unidad equivocada
 
 El job de Code Quality reportó `useRegionSuggest` con 73 líneas (máximo 25) y
 complejidad cognitiva 16 (máximo 5), y `useRegionCascade` con 49 y 11.
@@ -72,42 +32,7 @@ eso marca 16 y la cascada, que solo tiene funciones puras encadenadas, marca 11.
 Eso es deuda de verdad y está anotada en `status.md`. La cascada, en cambio,
 se queda como está: partirla solo repartiría el mismo problema en dos ficheros.
 
-## 3. Y por qué al final quitamos Code Climate del todo
-
-GitLab **deprecó** el escaneo basado en Code Climate en la 17.3 y lo elimina en
-la 19.0. Así que subir umbrales habría sido afinar una herramienta con fecha de
-caducidad. En su lugar, el informe lo genera ahora **nuestro propio ESLint**:
-
-- Fuera el `template: Code-Quality.gitlab-ci.yml` del `include`.
-- El job `lint` corre `npm run lint:js -- --format gitlab` y publica
-  `gl-code-quality-report.json` como artefacto `codequality`, con
-  `when: always` para que el informe suba también cuando el lint falla.
-- `.codeclimate.yml` borrado.
-
-Lo importante no es quitarse la deprecación, es que **ahora hay una sola fuente
-de verdad**. Antes había dos herramientas opinando sobre el mismo código con
-criterios distintos, y la que mandaba en el merge no era la misma que la que
-mandaba en tu editor.
-
-**Dos trampas al hacerlo:**
-
-`eslint-formatter-gitlab@6` en adelante exige **ESLint 9**, y el repo va por el 8. La última compatible es la **5.1.0** (`peerDependencies: eslint >=5`). Si se
-instala a ciegas con `@latest`, npm falla con `ERESOLVE`, y forzarlo con
-`--legacy-peer-deps` instalaría un paquete que usa APIs que tu ESLint no tiene.
-
-Y se pierde la métrica de complejidad, que era lo único que Code Climate
-aportaba de más. Se recupera con la regla propia de ESLint, en `.eslintrc.cjs`:
-
-```js
-complexity: ['error', 10]
-```
-
-Con una diferencia que importa: **ESLint mide por función real, no por
-composable entero**. Medido antes de fijar el umbral, lo más complejo del repo
-marcaba 5. Es exactamente la confirmación de que Code Climate estaba contando
-la unidad equivocada.
-
-## 4. `nuxt build` no sirve para desplegar con `nitro.preset: 'static'`
+## 2. `nuxt build` no sirve para desplegar con `nitro.preset: 'static'`
 
 Migrando el pipeline de GitLab a GitHub Actions montamos un job `build` que
 corría `npm run build` (igual que el `build-app` original en GitLab) y subía
@@ -142,9 +67,9 @@ build vacío sin fallar nada — vale la pena poner `if-no-files-found: error`
 en artefactos que otro job necesita de verdad, para no volver a depender de
 mirar el log a mano.
 
-## 5. El e2e necesita `NUXT_PUBLIC_API_BASE` también en el job de tests
+## 3. El e2e necesita `NUXT_PUBLIC_API_BASE` también en el job de tests
 
-Con el fix del punto 4, `build` y `e2e` ya funcionaban por separado, pero
+Con el fix del punto 2, `build` y `e2e` ya funcionaban por separado, pero
 Cypress seguía fallando: los 5 tests de `auth.cy.ts` se saltaban con "1
 failing" en el hook `before all`, con este error:
 
@@ -179,9 +104,9 @@ automático - cada `env:` es local al job o al step donde se declara, así que
 cualquier variable que el código realmente necesite en tiempo de ejecución
 (no solo en build) hay que repetirla explícitamente en cada job que la usa.
 
-## 6. En un job con `container:`, un proceso en segundo plano no sobrevive al siguiente step
+## 4. En un job con `container:`, un proceso en segundo plano no sobrevive al siguiente step
 
-Con el fix del punto 5, el hook `before all` ya no fallaba, pero el primer
+Con el fix del punto 3, el hook `before all` ya no fallaba, pero el primer
 test seguía cayendo, esta vez en `before each`:
 
 ```
@@ -214,10 +139,8 @@ segundo plano y todo lo que depende de él viven en la misma sesión de
 
 **Lo que enseña:** un step en verde no garantiza que lo que dejó corriendo
 en segundo plano siga vivo en el siguiente. Es justo el mismo patrón que
-el punto 4 (`if-no-files-found: warn`) y el punto 5 (env no heredado):
+el punto 2 (`if-no-files-found: warn`) y el punto 3 (env no heredado):
 GitHub Actions no comparte tanto estado entre steps como parece a primera
 vista, sobre todo dentro de un `container:`. La forma más simple de
 evitarlo es no depender de que algo backgrounded cruce el límite entre
 steps.
-
----

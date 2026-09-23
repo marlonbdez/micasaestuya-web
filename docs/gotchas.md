@@ -130,8 +130,7 @@ parser solo contemplaba `<mark>`, así que se veía `La <b>Haba</b>na` literal; 
 | `address.vue` · `update`                       | El parche se arma sobre la dirección actual: sin el spread, la calle borraría la región.     |
 | `core/types.ts` · `IAdAddress`                 | Región y calle anidadas: cada parte tiene su dueño y no se pisan.                            |
 | `flow.vue` · `LocaleModal`                     | Parece no usarse; lo dispara el selector de idioma del footer.                               |
-| `api/models/region.js` · `readIds`             | Filtrar por nivel es filtrar por puntuación de Redis.                                        |
-| `api/models/region.js` · `AGGREGATE MIN`       | Sin esto, el filtro falla en búsquedas de varias palabras.                                   |
-| `api/models/region.js` · `TREES`               | La jerarquía se lee del fichero, no de Redis, y por qué.                                     |
 
 ---
+
+Las trampas equivalentes de `api` están en `micasaestuya-api/docs/gotchas.md`.

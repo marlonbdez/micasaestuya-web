@@ -1,42 +1,14 @@
-# Regiones, direcciones y locales
+# Regiones — implementación en el frontend
 
-Cómo se nombra y se modela **dónde está un inmueble**. Es la parte del proyecto
-donde más fácil es liarla, porque hubo un tiempo en que dos palabras
-significaban lo mismo y ninguna significaba una tercera cosa.
+Cómo se implementa en `web` la elección de región: autocompletado en la home,
+desplegables encadenados en el flow de publicar.
 
-## 1. Las tres palabras, y por qué son tres
+> El vocabulario compartido (`locale` / `region` / `address`) vive en
+> `micasaestuya-docs/Domain-Vocabulary.md` — esto es solo la implementación en
+> `web`. La parte de `api` (índice de Redis, filtro por nivel) está en
+> `micasaestuya-api/docs/gotchas.md`.
 
-Es la convención más importante del proyecto en esta zona, porque durante un
-tiempo tuvimos dos palabras para lo mismo y ninguna para una tercera cosa.
-
-| palabra   | qué es                                 | dónde vive                                                    |
-| --------- | -------------------------------------- | ------------------------------------------------------------- |
-| `locale`  | país + idioma (`es-CU`, `en-DO`)       | `Locales.ts`, `localeUtils.ts`, `LocaleModal.vue`             |
-| `region`  | un nodo del árbol administrativo       | `regions_*.json`, claves de Redis, `/api/regions`, la cascada |
-| `address` | la región **más** la calle y el número | `IAdAddress` en el borrador, `pages/post-ad/address.vue`      |
-
-Viene de schema.org, que es el vocabulario que Google lee: `PostalAddress`
-tiene `addressRegion` para la división administrativa y `streetAddress` para la
-calle, ambas dentro de la dirección. Cuando toque emitir el JSON-LD de la
-ficha, el modelo interno ya habla ese idioma y es copiar campos.
-
-**La regla que no hay que romper:** una región nunca lleva calle ni
-coordenadas. Si algún día hay coordenadas, van en `address`, al lado de
-`region`, nunca dentro. La estructura anidada de `IAdAddress` lo hace difícil
-de romper por accidente, que es mejor que confiar en que alguien recuerde esto.
-
-Ojo con un falso amigo: en `Locales.ts` el campo se llama `country`, no
-`region`, precisamente para que "region" signifique una sola cosa. Y el texto
-que ve el usuario en `LocaleModal` sí dice "Región" — eso es copy, no código, y
-no se cruza con nada porque está en otra pantalla.
-
-**Única excepción viva:** las claves de Redis siguen siendo `regions-index:`,
-`regions-data`, etc. Eso ya era correcto antes del renombrado, y por eso el
-cambio no obligó a resembrar nada, ni en local ni en staging.
-
----
-
-## 2. Dos componentes distintos, y por qué
+## Dos componentes distintos, y por qué
 
 La home usa **autocompletado** (`RegionSuggest`) y el paso 2 usa
 **desplegables encadenados** (`RegionCascade`). No es incoherencia: quien busca
@@ -85,50 +57,7 @@ pidiendo cada lista.
 Sirve la jerarquía leyendo `data/regions_*.json`, no Redis: el índice de Redis
 está construido por prefijo para el autocompletado y no sabe responder "dame los
 hijos de X". Son datos estáticos, así que en memoria basta, y además evita tener
-que resembrar.
+que resembrar. Detalle de la implementación en `micasaestuya-api/docs/gotchas.md`.
 
 Acepta la cadena completa (`level1`, `level2`, `level3`) y devuelve lista vacía
-al llegar al fondo. Eso importa: ver 8.7.
-
----
-
-## 3. El filtro por nivel en el autocompletado
-
-El paso 2 no lo usa, pero el endpoint quedó preparado y la home podría
-aprovecharlo.
-
-`suggest` devolvía los diez primeros resultados sin poder filtrar, y buscar
-"Haba" daba una provincia y nueve municipios: cero localidades. La clave estaba
-en el sembrado (`redisSeed.js`): cada entrada se indexa con
-`zadd(clave, prioridad, id)` donde la prioridad es **1 para provincias, 2 para
-municipios y 3 para localidades**. La puntuación de Redis ya _es_ el nivel, y
-`zrange(clave, 0, 9)` ordena por puntuación, así que las localidades nunca
-entraban en el corte.
-
-```js
-const readIds = (key) =>
-  levelType
-    ? redisClient.zrangebyscore(
-        key,
-        levelType,
-        levelType,
-        'LIMIT',
-        0,
-        RESULT_LIMIT
-      )
-    : redisClient.zrange(key, 0, RESULT_LIMIT - 1)
-```
-
-Con dos detalles que no son opcionales:
-
-**`AGGREGATE MIN` en el `zinterstore`.** Las búsquedas de varias palabras cruzan
-una lista por prefijo, y Redis **suma** las puntuaciones por defecto: "La Habana"
-convertiría una localidad de nivel 3 en un 6. `MIN` conserva la puntuación y no
-altera el orden.
-
-**El filtro se aplica al leer, no al guardar.** Por eso la clave de caché no
-lleva el nivel: la caché almacena el cruce completo y cada petición se queda con
-lo suyo. De paso arregla una incoherencia previa, en la que la primera llamada
-devolvía diez y las cacheadas devolvían el cruce entero.
-
----
+al llegar al fondo.
