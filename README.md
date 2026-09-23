@@ -1,6 +1,13 @@
 # mi casa es tuya
 
-Website made with [Nuxt.js](https://nuxt.com/).
+Frontend of **micasaestuya**, a free platform that connects hosts offering
+accommodation and meals with travellers who help out a few hours a day in
+exchange. Built with [Nuxt 3](https://nuxt.com/).
+
+The project's source of truth (product vision, architecture, decisions and
+current status) is the
+[`micasaestuya-docs`](https://github.com/marlonbdez/micasaestuya-docs) repo.
+Coding conventions for this repo are in `CLAUDE.md` and `docs/`.
 
 ## Install
 
@@ -42,7 +49,7 @@ npm run dev
 
 ## Dev Container
 
-> Requires all three repos (`micasaestuya-api`, `micasaestuya-web`, `micasaestuya-infra`) cloned as siblings in the same parent directory. See the [infra README](../micasaestuya-infra/README.md) for the required folder layout.
+> Requires the repos (`micasaestuya-api`, `micasaestuya-web`, `micasaestuya-infra`, and `micasaestuya-docs` for the documentation) cloned as siblings in the same parent directory. See the [infra README](../micasaestuya-infra/README.md) for the required folder layout.
 
 1. Open the `micasaestuya-web/` folder in VS Code.
 2. When prompted, click **Reopen in Container** (or run `Dev Containers: Reopen in Container` from the command palette).
@@ -75,10 +82,12 @@ Run e2e tests
 npm run test:e2e
 ```
 
-Run e2e tests headless for CI
+Run e2e tests headless, the way CI does it: serve the static build and run Cypress against it (`npm run test:e2e:headless` uses `nuxt start`, which does not work with the static preset — see `docs/tooling.md` § 2)
 
 ```bash
-npm run test:e2e:ci
+npm run generate
+npx serve -s .output/public -l 3000 &
+npm run test:e2e:run
 ```
 
 ## Production
@@ -90,7 +99,7 @@ npm run test:e2e:ci
 > described below until that preset is changed or overridden. In practice
 > this project is deployed as a static site (see "Static hosting"), which is
 > also what `Dockerfile.prod` and Netlify actually build. See
-> `docs/tooling.md` #4 for how this was found.
+> `docs/tooling.md` § 2 for how this was found.
 
 Build the application for production on a Node.js server
 

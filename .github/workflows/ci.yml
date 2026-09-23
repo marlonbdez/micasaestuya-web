@@ -49,7 +49,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       # nuxt.config.ts sets nitro.preset to "static", so "nuxt build" does not
-      # emit a usable .output (see docs/tooling.md #4). "generate" is what
+      # emit a usable .output (see docs/tooling.md § 2). "generate" is what
       # Dockerfile.prod and Netlify actually run, and what gets deployed.
       - run: npm run generate
         env:
@@ -82,14 +82,14 @@ jobs:
           path: .output/public
       # No server output exists for a static preset, so we serve the static
       # build the same way Netlify does, instead of "nuxt start" (which
-      # needs .output/server and never gets built here - see docs/tooling.md #4).
+      # needs .output/server and never gets built here - see docs/tooling.md § 2).
       #
       # This job runs in a `container:`, where each step is its own
       # `docker exec` - a process backgrounded with "&" in one step does not
       # survive into the next one, so "serve" got killed before Cypress ever
       # ran. Starting the server, waiting for it, and running Cypress all in
       # one step keeps it alive for the step's whole duration - see
-      # docs/tooling.md #6.
+      # docs/tooling.md § 4.
       - name: Serve static build and run Cypress shard
         env:
           CI_NODE_INDEX: ${{ matrix.shard }}
@@ -97,7 +97,7 @@ jobs:
           # cypress/support/e2e.ts pings NUXT_PUBLIC_API_BASE/health in a
           # global "before all" hook to wake the Render API from sleep. If
           # this isn't set, it falls back to http://localhost:3001/api,
-          # which nothing serves here - see docs/tooling.md #5.
+          # which nothing serves here - see docs/tooling.md § 3.
           NUXT_PUBLIC_API_BASE: https://micasaestuya-api.onrender.com/api
         run: |
           npx --yes serve -s .output/public -l 3000 &
