@@ -1,5 +1,16 @@
 # El flow de publicar anuncio
 
+> ⚠️ **Documento del modelo anterior (portal inmobiliario), pendiente de
+> reescritura.** El proyecto pivotó a una plataforma de intercambio de
+> alojamiento por colaboración — ver
+> `../micasaestuya-docs/product-vision.md` (ADR 006). El dominio de este
+> documento (`PropertyType`, `OperationType`, "publicar anuncio") ya no
+> aplica. Lo que sigue vale como referencia técnica de patrones que
+> probablemente se reaprovechen (routing anidado de Nuxt, URLs traducidas,
+> el store versionado en `localStorage`, IndexedDB para las fotos) — pero no
+> como descripción del producto. Se decide qué se reaprovecha y qué se
+> reescribe cuando toque el paso 3 del plan (prototipo antes de implementar).
+
 Guía de `/post-ad`: qué construimos y **por qué está así**. Los conceptos de
 Nuxt que hay detrás —routing anidado, URLs traducidas, layouts— y las decisiones
 de producto que condicionan el resto.
