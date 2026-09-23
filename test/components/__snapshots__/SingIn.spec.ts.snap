@@ -14,9 +14,9 @@ exports[`SignIn > should match the snapshot 1`] = `
     </div>
     <div data-v-b19008a3="" data-v-037d13aa="" class="form-group" data-cy="signin-remember-checkbox"><label data-v-b19008a3="" for="signin-remember" class="label"><input data-v-b19008a3="" id="signin-remember" type="checkbox" class="input">Remember me</label>
       <!--v-if-->
-    </div><button data-v-de71286e="" data-v-037d13aa="" to="" class="btn primary md signin__button" aria-label="button" id="signin-submit" data-cy="signin-submit-button" type="submit">
+    </div><button data-v-de71286e="" data-v-037d13aa="" to="" class="btn primary md signin__button" id="signin-submit" data-cy="signin-submit-button" type="submit">
       <!--v-if--> Login
-    </button><button data-v-de71286e="" data-v-037d13aa="" to="" class="btn flat md signin__button" aria-label="button" data-cy="signin-show-signup-button" type="button">Don't have an account? Create a new one</button>
+    </button><button data-v-de71286e="" data-v-037d13aa="" to="" class="btn flat md signin__button" data-cy="signin-show-signup-button" type="button">Don't have an account? Create a new one</button>
   </form>
 </div>"
 `;

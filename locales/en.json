@@ -93,7 +93,10 @@
   },
   "header": {
     "advertise_property": "Advertise your property for free",
-    "login": "Login"
+    "login": "Login",
+    "explore": "Explore",
+    "publish": "List my place",
+    "change_locale": "Change country and language"
   },
   "regions": {
     "cu": "Cuba",
@@ -286,6 +289,90 @@
       "region_label": "Region",
       "language_label": "Language",
       "save_button": "Save"
+    },
+    "close": "Close",
+    "back": "Back"
+  },
+  "publish_listing": {
+    "title": "List your place",
+    "intro": "It's free and takes a few minutes. Then, anyone who wants to help out will message you directly on WhatsApp.",
+    "fields": {
+      "title": "Title of your place",
+      "title_placeholder": "E.g. House with a garden in Playa Girón",
+      "region": "Region",
+      "photos": "Photos",
+      "photos_add": "Add photos of your home",
+      "photos_hint": "Up to {max} photos. For now they're only visible in this browser.",
+      "photos_main": "Main",
+      "photos_remove": "Remove photo",
+      "photos_alt": "Photo {position} of the place",
+      "photos_saving": "Saving photos…",
+      "description": "Description",
+      "description_placeholder": "Tell them what your home is like, the atmosphere, and what kind of help you're looking for.",
+      "tasks": "Tasks to help with",
+      "capacity": "How many people can stay at the same time?",
+      "whatsapp": "Your WhatsApp contact",
+      "whatsapp_placeholder": "E.g. +53 5123 4567"
+    },
+    "tasks": {
+      "cooking": "Cooking",
+      "gardening": "Gardening",
+      "cleaning": "Cleaning",
+      "childcare": "Childcare",
+      "pet_care": "Pet care",
+      "maintenance": "Maintenance",
+      "other": "Other"
+    },
+    "errors": {
+      "title_required": "Give your place a title",
+      "title_max": "The title can't be longer than {max} characters",
+      "region_required": "Choose the region down to the last level",
+      "description_required": "Tell them what your place is like",
+      "tasks_required": "Choose at least one task",
+      "capacity_required": "Say how many people fit",
+      "capacity_range": "It has to be a whole number between {min} and {max}",
+      "whatsapp_required": "Enter your WhatsApp number",
+      "whatsapp_invalid": "Include the country code, e.g. +53 5123 4567",
+      "photos": {
+        "storage": "The photos saved in this browser couldn't be read",
+        "not_an_image": "Some file wasn't an image and wasn't added",
+        "too_many": "{max} photos at most",
+        "unreadable": "Some photo couldn't be processed"
+      },
+      "publish": "The place couldn't be published. Please try again."
+    },
+    "submit": "Publish my place",
+    "disclaimer": "By publishing, you agree that the final arrangement (dates, conditions, any details) is made directly with whoever contacts you. micasaestuya only puts you in touch, for free.",
+    "published": {
+      "title": "Your place is now visible!",
+      "text": "Travelers looking in {region} can now find your home and message you directly on WhatsApp.",
+      "capacity": "{count} person | {count} people",
+      "explore": "Back to explore"
     }
+  },
+  "footer": {
+    "about": {
+      "title": "About us",
+      "who_we_are": "Who we are",
+      "sitemap": "Sitemap",
+      "source_code": "Source code"
+    },
+    "help": {
+      "title": "Help",
+      "faq": "FAQ",
+      "contact": "Contact micasaestuya"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy policy",
+      "cookies": "Cookie policy",
+      "terms": "Terms and conditions"
+    },
+    "hosts": {
+      "title": "Hosts",
+      "publish": "List your place for free",
+      "share": "Share on social media"
+    },
+    "github_label": "View the source code on GitHub"
   }
 }

@@ -12,6 +12,10 @@ defineProps({
     type: Boolean,
     default: false
   },
+  button: {
+    type: Boolean,
+    default: false
+  },
   errorMessage: {
     type: String,
     default: ''
@@ -32,14 +36,15 @@ const updateModelValue = (event: Event) => {
 </script>
 
 <template>
-  <div class="form-group">
+  <div class="form-group" :class="{ 'form-group--button': button }">
     <label
       :for="id"
       class="label"
       :class="{
         checked: modelValue,
         focused: isFocused,
-        'hide-checkbox': hideCheckbox
+        'hide-checkbox': hideCheckbox,
+        btn: button
       }"
     >
       <input
@@ -64,6 +69,11 @@ const updateModelValue = (event: Event) => {
   position: relative;
   margin: 0 0 1rem;
   display: inline-block;
+
+  // Como botón va en grupos que ya separan con `gap`: el margen se sumaría.
+  &--button {
+    margin: 0;
+  }
 
   &__error-message {
     position: absolute;
@@ -109,7 +119,7 @@ const updateModelValue = (event: Event) => {
     border-bottom: 0.0625em solid var(--color-red-dark);
   }
 
-  &:not(.hide-checkbox) {
+  &:not(.hide-checkbox):not(.btn) {
     @include font-roboto-condensed-light;
     font-size: 1rem;
     line-height: 1.3125em;
@@ -155,6 +165,30 @@ const updateModelValue = (event: Event) => {
       border: 0.0625em solid var(--input-border-color);
       border-radius: 0.25rem;
     }
+  }
+}
+
+// Mismos colores que el modo `button` de BaseRadioButton, para que elegir una
+// opción o varias se vea igual. La forma de pastilla es la de los chips del
+// prototipo.
+.label.btn {
+  @include font-outfit-medium;
+  padding: $gap-small $gap-medium;
+  border: px-to-rem(1) solid var(--input-border-color);
+  border-radius: var(--radius-pill);
+  background-color: var(--input-background-color);
+  transition: all ease-in-out 0.15s;
+
+  &.checked {
+    color: var(--input-radio-text-color);
+    background-color: var(--input-radio-active-background-color);
+    border-color: var(--input-radio-active-border-color);
+  }
+
+  // El input está oculto: sin esto no se ve dónde está el foco del teclado.
+  &.focused {
+    outline: px-to-rem(2) solid var(--input-radio-active-border-color);
+    outline-offset: px-to-rem(1);
   }
 }
 

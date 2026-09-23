@@ -46,6 +46,10 @@ export const useRegionCascade = () => {
     selected.value = [...selected.value.slice(0, index), value].filter(Boolean)
     options.value = options.value.slice(0, index + 1)
 
+    // Volver a "Selecciona" solo recorta: pedir hijos aquí devolvería los del
+    // nivel de arriba y pintaría un desplegable repetido debajo.
+    if (!value) return toRegion()
+
     const children = await fetchChildren(selected.value)
     if (children.length) options.value.push(children)
 
