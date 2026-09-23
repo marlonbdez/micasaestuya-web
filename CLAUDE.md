@@ -1,6 +1,6 @@
 # micasaestuya · web
 
-Portal de clasificados inmobiliarios para Cuba y República Dominicana. Nuxt 3.
+Web de la plataforma de intercambio de alojamiento por colaboración. Nuxt 3.
 
 > **`CLAUDE.md` no se centraliza — se queda en este repo por razones
 > técnicas** (las herramientas de código lo leen automáticamente al trabajar
@@ -14,18 +14,21 @@ está**, específico de `web`, vive en `docs/` y no se carga solo: ábrelo cuand
 la tarea lo pida. El porqué que cruza todo el proyecto vive en
 `../micasaestuya-docs/`.
 
-| Documento                                | Cuándo abrirlo                                         |
-| ------------------------------------------ | ------------------------------------------------------ |
-| `../micasaestuya-docs/status.md`         | **Siempre al empezar.** Estado, siguiente paso y deuda |
-| `../micasaestuya-docs/product-vision.md` | Qué es el proyecto y por qué                           |
-| `docs/regions.md`                        | Componentes de ubicación — implementación en `web`     |
-| `docs/post-ad-flow.md`                   | Cualquier cosa en `/post-ad`                           |
-| `docs/gotchas.md`                        | Algo falla de forma rara, o vas a depurar              |
-| `docs/tooling.md`                        | CI, lint, Docker, Code Quality — específico de `web`   |
-| `docs/design-system.md`                  | Escribes SCSS                                          |
+| Documento                                | Cuándo abrirlo                                                        |
+| ---------------------------------------- | --------------------------------------------------------------------- |
+| `../micasaestuya-docs/product-vision.md` | **Siempre al empezar.** Qué es el proyecto; manda sobre todo lo demás |
+| `../micasaestuya-docs/status.md`         | Justo después: dónde estamos, siguiente paso y deuda                  |
+| `docs/regions.md`                        | Componentes de ubicación — implementación en `web`                    |
+| `docs/post-ad-flow.md`                   | Cualquier cosa en `/post-ad` (modelo anterior al pivote)              |
+| `docs/gotchas.md`                        | Algo falla de forma rara, o vas a depurar                             |
+| `docs/tooling.md`                        | CI, lint y Docker — específico de `web`                               |
+| `docs/design-system.md`                  | Escribes SCSS                                                         |
 
-Hay skills en `.claude/skills/` que se activan solas: verificar cambios, añadir
-un paso al flow, añadir textos y preparar los commits.
+**Ojo con el código del modelo anterior.** micasaestuya ya no es un portal
+inmobiliario (ADR 006 en `micasaestuya-docs`). Parte del código de este repo
+—`/post-ad`, el store `adFlow`, `core/types/property.ts`, `core/models/Property.ts`,
+`PropertyType`, `OperationType`— es de antes del pivote: sirve como referencia
+de patrones técnicos, nunca como descripción del producto.
 
 ---
 
@@ -44,7 +47,7 @@ stores/            estado global de dominio (Pinia)
 core/
   types.ts         re-exporta los tipos · NUNCA .d.ts (gotchas.md § 5)
   types/           interfaces por dominio
-  services/        módulos de API (http, auth, region)
+  services/        FetchFactory y módulos de API (repository/modules: auth, region)
   models/          clases de dominio
   constants/       constantes y enums
 pages/             rutas Nuxt, mínima lógica
@@ -67,18 +70,21 @@ zona, lee los dos.
 
 ## Componentes base — úsalos siempre
 
-| Necesitas       | Usa             | Props clave                                              |
-| --------------- | --------------- | -------------------------------------------------------- |
-| Botón o enlace  | `BaseCta`       | `variant`, `size: sm/md/lg`, `is-link`, `to`, `disabled` |
-| Input de texto  | `BaseInput`     | `id`, `v-model`, `label`, `error-message`                |
-| Elegir ficheros | `BaseFileInput` | `id`, `accept`, `multiple`, `@select` → `File[]`         |
-| Dropdown custom | `BaseDropdown`  | `id`, `options: Option<T>[]`, `selected`                 |
-| Select nativo   | `BaseSelect`    | `id`, `v-model`, `options: [{id, value}]`                |
-| Icono           | `BaseIcon`      | `icon`, `size: xs/sm/md/lg/xl`                           |
-| Checkbox        | `BaseCheckbox`  | `id`, `v-model`, `label`                                 |
-| Alert           | `BaseAlert`     | `variant: error/warning/success/info`                    |
-| Toggle          | `BaseSwitch`    | `v-model`                                                |
-| Spinner         | `BaseSpinner`   | (sin props)                                              |
+| Necesitas       | Usa                 | Props clave                                                   |
+| --------------- | ------------------- | ------------------------------------------------------------- |
+| Botón o enlace  | `BaseCta`           | `variant`, `size: sm/md/lg`, `is-link`, `to`, `disabled`      |
+| Input de texto  | `BaseInput`         | `id`, `v-model`, `label`, `error-message`                     |
+| Texto largo     | `BaseTextarea`      | `id`, `v-model`, `label`, `rows`, `error-message`             |
+| Elegir ficheros | `BaseFileInput`     | `id`, `accept`, `multiple`, `@select` → `File[]`              |
+| Dropdown custom | `BaseDropdown`      | `id`, `options: Option<T>[]`, `selected`                      |
+| Select nativo   | `BaseSelect`        | `id`, `v-model`, `options: [{id, value}]`                     |
+| Icono           | `BaseIcon`          | `icon`, `size: xs/sm/md/lg/xl`                                |
+| Checkbox        | `BaseCheckbox`      | `id`, `v-model`, `label`                                      |
+| Radio           | `BaseRadioButton`   | `id`, `name`, `value`, `v-model:selected`, `button`, `inline` |
+| Paso de un flow | `BaseStepIndicator` | `current`, `total`, `label`                                   |
+| Alert           | `BaseAlert`         | `variant: error/warning/success/info`                         |
+| Toggle          | `BaseSwitch`        | `v-model`                                                     |
+| Spinner         | `BaseSpinner`       | (sin props)                                                   |
 
 Antes de crear un elemento de UI, comprueba si ya existe. **Y pregunta antes de
 modificar uno**: los usa todo el proyecto.
@@ -98,7 +104,6 @@ modificar uno**: los usa todo el proyecto.
 | `!important`                               | arreglar la especificidad              |
 | `$services` en un componente               | solo en stores y composables           |
 | Formulario sin validar                     | vee-validate + yup                     |
-| `OperationType.Buy`                        | `OperationType.Sale`                   |
 
 **Sobre los stores:** `@pinia/nuxt` 0.4.x **no auto-importa los stores**. Cada
 uso necesita su `import` explícito, o revienta en tiempo de ejecución sin que
@@ -130,4 +135,4 @@ npm run build                # lo que corre el hook pre-push
 
 El stack completo se levanta con Docker Compose desde el repo `infra`. El lint
 de `api` **no se puede correr desde el host**: va con
-`docker compose exec express npm run lint` (`docs/tooling.md`).
+`docker compose exec express npm run lint` (`micasaestuya-api/docs/gotchas.md` § 1).

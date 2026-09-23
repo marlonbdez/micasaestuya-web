@@ -15,11 +15,18 @@ Thank you for your interest in contributing! 🎉
 6. **Push** to your fork
 7. **Open a Pull Request** describing your changes
 
+## Before you start
+
+Read the project's source of truth first:
+[`micasaestuya-docs`](https://github.com/marlonbdez/micasaestuya-docs) —
+`product-vision.md`, then `status.md`. This repo's coding rules are in
+`CLAUDE.md` and `docs/`.
+
 ## Development Setup
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20+ (CI runs on 20; the Docker images use 22)
 - npm 8+
 - API running (see `micasaestuya-api` repo)
 
@@ -43,7 +50,7 @@ The app will be available at `http://localhost:3000`
 
 ```bash
 # Unit tests (Vitest)
-npm run test
+npm run test:unit
 
 # E2E tests (Cypress)
 npm run test:e2e
@@ -51,8 +58,11 @@ npm run test:e2e
 
 ### Building for Production
 
+This is a static site (`nitro.preset: 'static'`), so the production build is
+`generate`, not `build`:
+
 ```bash
-npm run build
+npm run generate
 npm run preview
 ```
 
@@ -94,10 +104,10 @@ const emit = defineEmits<{
 Use clear, descriptive commit messages:
 
 ```
-feat: Add property filter sidebar
+feat: Add region filter to the listings page
 fix: Resolve search input styling bug
 docs: Update component documentation
-test: Add tests for property listing
+test: Add tests for the listings page
 refactor: Extract filter logic to composable
 ```
 

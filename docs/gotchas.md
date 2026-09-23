@@ -108,11 +108,16 @@ parser solo contemplaba `<mark>`, así que se veía `La <b>Haba</b>na` literal; 
 
 ## Los guardarraíles que sí están en el código
 
+Las filas de `post-ad.vue`, `basic-info.vue`, `address.vue`, `adFlow.ts` e
+`IAdAddress` son del flow de publicar anuncio, anterior al pivote
+(`post-ad-flow.md`). Siguen siendo ciertas mientras ese código exista; si se
+reescribe o se borra, se quitan de aquí con él.
+
 | Dónde                                          | Qué protege                                                                                  |
 | ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | `post-ad.vue` · `STEPS`                        | Identificarse falta a propósito; parece un paso olvidado.                                    |
 | `post-ad.vue` · `hydrate()`                    | Va en el `setup`, no en `onMounted`, o los hijos leen el borrador vacío.                     |
-| `post-ad.vue` · `currentStepName`              | Por nombre de ruta, no por path (ver 8.4).                                                   |
+| `post-ad.vue` · `currentStepName`              | Por nombre de ruta, no por path (ver § 4).                                                   |
 | `post-ad.vue` · `.post-ad`                     | El `max-width` vive aquí; si cada paso pone el suyo, se desalinean.                          |
 | `post-ad.vue` · `__nav`                        | La navegación vive en el layout para no duplicarla cinco veces.                              |
 | `index.vue` · `middleware`                     | `useLocalePath()` va dentro; `definePageMeta` se extrae fuera del setup.                     |

@@ -7,6 +7,11 @@ desplegables encadenados en el flow de publicar.
 > `micasaestuya-docs/Domain-Vocabulary.md` — esto es solo la implementación en
 > `web`. La parte de `api` (índice de Redis, filtro por nivel) está en
 > `micasaestuya-api/docs/gotchas.md`.
+>
+> El "flow de publicar" y el "paso 2" de este documento son los del flow de
+> anuncios anterior al pivote (`post-ad-flow.md`). Los dos componentes no
+> dependen de él: son de lo que el MVP puede reaprovechar
+> (`micasaestuya-docs/status.md`).
 
 ## Dos componentes distintos, y por qué
 
