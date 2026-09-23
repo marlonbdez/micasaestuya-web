@@ -15,7 +15,7 @@ la tarea lo pida. El porqué que cruza todo el proyecto vive en
 `../micasaestuya-docs/`.
 
 | Documento                                | Cuándo abrirlo                                         |
-| ------------------------------------------ | ------------------------------------------------------ |
+| ---------------------------------------- | ------------------------------------------------------ |
 | `../micasaestuya-docs/status.md`         | **Siempre al empezar.** Estado, siguiente paso y deuda |
 | `../micasaestuya-docs/product-vision.md` | Qué es el proyecto y por qué                           |
 | `docs/regions.md`                        | Componentes de ubicación — implementación en `web`     |
