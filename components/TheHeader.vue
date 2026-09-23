@@ -6,9 +6,15 @@ import { useAuthStore } from '~/stores/auth'
 withDefaults(defineProps<{ minimal?: boolean }>(), { minimal: false })
 
 const authStore = useAuthStore()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { isLogged, name } = storeToRefs(authStore)
 const localePath = useLocalePath()
+
+// "es-CU" → "ES (CU)", como en el prototipo.
+const localeLabel = computed(() => {
+  const [language, country] = locale.value.split('-')
+  return `${language.toUpperCase()} (${country})`
+})
 
 const userOptions = computed(() => [
   {
@@ -30,59 +36,73 @@ const userOptions = computed(() => [
 
 <template>
   <header class="header">
-    <div class="container">
-      <div class="brand">
-        <TheLogo />
-      </div>
-      <nav v-if="!minimal" class="nav">
-        <ul class="menu">
-          <li class="menu-item">
+    <div class="container header__inner">
+      <TheLogo />
+      <nav v-if="!minimal" class="header__nav">
+        <ul class="header__menu">
+          <li class="header__item header__item--wide-only">
             <BaseCta
-              variant="ghost"
-              :to="localePath('post-ad-basic-info')"
-              :aria-label="$t('header.advertise_property')"
+              is-link
+              class="header__link"
+              :to="localePath('index')"
+              :aria-label="t('header.explore')"
             >
-              <BaseIcon icon="megaphone" size="sm" />
-              <span class="menu-item__label">{{
-                $t('header.advertise_property')
-              }}</span>
+              {{ t('header.explore') }}
             </BaseCta>
           </li>
-          <li v-if="!isLogged" class="menu-item">
+          <li class="header__item">
             <BaseCta
-              data-cy="header-login-button"
-              variant="flat"
-              :aria-label="$t('header.login')"
-              @click="authStore.showAuthModal"
+              is-link
+              data-cy="header-publish-link"
+              class="header__publish"
+              :to="localePath('publish-listing')"
+              :aria-label="t('header.publish')"
             >
-              <BaseIcon icon="person" size="sm" />
-              <span class="menu-item__label">{{ $t('header.login') }}</span>
+              {{ t('header.publish') }}
             </BaseCta>
           </li>
-          <li class="menu-item menu-item--separator-left">
+          <li class="header__item header__item--divider" aria-hidden="true" />
+          <li class="header__item">
             <ThemeSwitcher />
           </li>
-          <li class="menu-item menu-item--separator-left">
+          <li class="header__item">
             <BaseCta
               data-cy="header-i18n-button"
               variant="flat"
-              aria-label="Change country and language"
+              :aria-label="t('header.change_locale')"
               @click="authStore.showLocaleModal"
             >
               <BaseIcon icon="globe" size="sm" />
-              <span class="sr-only">Change country and language</span>
+              <span class="header__locale">{{ localeLabel }}</span>
             </BaseCta>
           </li>
-          <li v-if="isLogged" class="menu-item menu-item--separator-left">
+          <!--
+            El prototipo no dibuja login: se pide al publicar. Se queda aquí,
+            discreto, porque es la única forma de entrar sin publicar y de
+            cerrar sesión.
+          -->
+          <li v-if="!isLogged" class="header__item">
+            <BaseCta
+              data-cy="header-login-button"
+              variant="flat"
+              class="header__login"
+              :aria-label="t('header.login')"
+              @click="authStore.showAuthModal"
+            >
+              <BaseIcon icon="person" size="sm" />
+              <span class="header__login-label">{{ t('header.login') }}</span>
+            </BaseCta>
+          </li>
+          <li v-else class="header__item">
             <BaseDropdown id="user-options" :options="userOptions">
               <template #selector>
                 <BaseCta
                   data-cy="header-logged-user-dropdown"
                   variant="flat"
                   aria-label="Logged user options"
-                  class="header-logged-button"
+                  class="header__user"
                 >
-                  {{ name.charAt(0).toUpperCase() }}
+                  {{ name?.charAt(0).toUpperCase() }}
                 </BaseCta>
               </template>
             </BaseDropdown>
@@ -95,84 +115,114 @@ const userOptions = computed(() => [
 
 <style lang="scss" scoped>
 .header {
-  position: relative;
-  border-bottom: 0.0625rem solid var(--border-color);
-  margin: 0;
+  position: sticky;
+  top: 0;
+  z-index: $zindex-sticky;
+  background: var(--bg);
+  border-bottom: px-to-rem(1) solid var(--border);
 
-  .container {
+  &__inner {
     display: flex;
     align-items: center;
-    height: 4.125rem;
+    justify-content: space-between;
+    gap: $gap-extra-medium;
+    min-height: px-to-rem(66);
   }
 
-  .brand {
-    width: 40%;
-  }
-
-  .nav {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    width: 60%;
-  }
-
-  .menu {
+  &__menu {
     display: flex;
     align-items: center;
+    gap: $gap-extra-tiny;
+    list-style: none;
+    margin: 0;
     padding: 0;
   }
 
-  .menu-item {
+  &__item {
     display: flex;
     align-items: center;
-    margin-right: $gap-extra-tiny;
-    line-height: 1.375rem;
 
-    @include media-breakpoint-up(sm) {
-      margin-right: $gap-tiny;
+    // En móvil no cabe todo: "Explorar" es también el logo.
+    &--wide-only {
+      @include media-breakpoint-down(xs) {
+        display: none;
+      }
     }
 
-    &:last-child {
-      margin-right: 0;
-    }
-
-    &--separator-left::before,
-    &--separator-right::after {
-      content: '';
-      display: block;
-      margin-right: $gap-small;
-      margin-left: $gap-small;
-      width: 0.0625rem;
-      height: 1.5rem;
-      background-color: var(--header-divider);
+    &--divider {
+      width: px-to-rem(1);
+      height: px-to-rem(22);
+      margin: 0 $gap-extra-tiny;
+      background: var(--border);
     }
   }
 
-  // En móvil los botones del header son solo icono; el texto aparece a
-  // partir de `sm` (tablet en adelante).
-  .menu-item__label {
-    @include media-breakpoint-down(sm) {
+  // BaseCta en modo enlace es texto subrayado; en el header es navegación.
+  &__link {
+    @include font-outfit-medium;
+    padding: $gap-small $gap-extra-small;
+    color: var(--text-2);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: var(--text);
+      text-decoration: none;
+    }
+  }
+
+  // La acción principal del sitio: pastilla con el color de acento.
+  &__publish {
+    @include font-outfit-semibold;
+    padding: $gap-small $gap-medium;
+    border-radius: var(--radius-pill);
+    background: var(--primary-button-color);
+    color: var(--primary-button-text-color);
+    font-size: $font-size-sm;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      background: var(--primary-button-color-hover);
+      color: var(--primary-button-text-color);
+      text-decoration: none;
+    }
+  }
+
+  &__locale {
+    @include font-outfit-semibold;
+    white-space: nowrap;
+    font-size: $font-size-xs;
+    color: var(--text-2);
+
+    @include media-breakpoint-down(xs) {
       display: none;
     }
   }
 
-  .header-logged-button {
-    width: 2.5rem;
-    height: 2.5rem;
+  &__login-label {
+    font-size: $font-size-sm;
+    white-space: nowrap;
+
+    @include media-breakpoint-down(xs) {
+      display: none;
+    }
+  }
+
+  &__user {
+    width: px-to-rem(40);
+    height: px-to-rem(40);
     min-height: auto;
     border-radius: 50%;
-    font-weight: bold;
-    font-size: 1rem;
-    line-height: 2.5rem;
-    text-align: center;
     padding: 0;
+    @include font-outfit-semibold;
+    font-size: $font-size-md;
     color: var(--header-logged-user-color);
     background-color: var(--header-logged-user-background-color);
 
-    &:hover,
-    &:focus,
-    &:not(:disabled):focus,
-    &:not(:disabled):hover {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
       color: var(--header-logged-user-color-hover);
       background-color: var(--header-logged-user-background-color-hover);
     }

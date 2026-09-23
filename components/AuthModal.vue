@@ -34,6 +34,7 @@ onMounted(() => {
             v-if="showSignUp"
             class="modal__go-back"
             variant="flat"
+            :aria-label="$t('modals.back')"
             @click="showSignUp = false"
           >
             <BaseIcon icon="chevron-left" size="md" />
@@ -44,6 +45,7 @@ onMounted(() => {
           <BaseCta
             class="modal__close"
             variant="flat"
+            :aria-label="$t('modals.close')"
             @click="isVisible = false"
           >
             <BaseIcon icon="close" size="md" />

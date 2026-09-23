@@ -1,4 +1,5 @@
 import type { IRegionModule, IRegion } from './types/region'
+import type { IListingModule } from './types/listing'
 
 export type {
   IProperty,
@@ -18,6 +19,13 @@ export type {
   IBookingStatusUpdate,
   BookingStatus
 } from './types/booking'
+export { CollaborationTask } from './types/listing'
+export type {
+  IListingDraft,
+  IListingCreateInput,
+  IListing,
+  IListingModule
+} from './types/listing'
 
 export interface ICredentials {
   email: string
@@ -70,6 +78,7 @@ export interface IAuthModule {
 export interface IServicesInstance {
   auth: IAuthModule
   region: IRegionModule
+  listing: IListingModule
 }
 
 export type HttpRequestOptions = {

@@ -39,9 +39,11 @@ const props: Props = defineProps({
     default: 'md',
     validator: (value: string) => ['sm', 'md', 'lg'].includes(value)
   },
+  // Vacío por defecto: el texto del botón ya es su nombre accesible. Un
+  // aria-label lo sustituye, así que solo se pone en botones de solo icono.
   ariaLabel: {
     type: String,
-    default: 'button'
+    default: ''
   }
 })
 
@@ -82,7 +84,7 @@ const handleClick = () => {
     :[targetProp]="to"
     :class="cssClass"
     :disabled="disabled"
-    :aria-label="ariaLabel"
+    :aria-label="ariaLabel || undefined"
     @click="handleClick"
   >
     <slot />

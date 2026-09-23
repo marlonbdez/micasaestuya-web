@@ -4,8 +4,10 @@ import { getLocale } from '~/core/localeUtils'
 withDefaults(defineProps<{ minimal?: boolean }>(), { minimal: false })
 
 const authStore = useAuthStore()
-const { locale } = useI18n()
+const { t, locale } = useI18n()
 const localePath = useLocalePath()
+
+const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
 </script>
 
 <template>
@@ -13,72 +15,73 @@ const localePath = useLocalePath()
     <div class="container">
       <nav v-if="!minimal" class="footer__links">
         <div class="footer__group">
-          <h4 class="footer__group-title">Sobre nosotros</h4>
+          <h4 class="footer__group-title">{{ t('footer.about.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/about-us">Quiénes somos</BaseCta>
+              <BaseCta is-link to="/about-us">
+                {{ t('footer.about.who_we_are') }}
+              </BaseCta>
             </li>
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/sitemap">Mapa web</BaseCta>
+              <BaseCta is-link to="/sitemap">
+                {{ t('footer.about.sitemap') }}
+              </BaseCta>
             </li>
             <li class="footer__group-list-item">
               <BaseCta
                 is-external-url
-                to="https://github.com/marlonbdez/micasaestuya-web"
+                :to="SOURCE_CODE_URL"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Código fuente
+                {{ t('footer.about.source_code') }}
               </BaseCta>
             </li>
           </ul>
         </div>
         <div class="footer__group">
-          <h4 class="footer__group-title">Ayuda</h4>
+          <h4 class="footer__group-title">{{ t('footer.help.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/faq">Preguntas frecuentes</BaseCta>
+              <BaseCta is-link to="/faq">{{ t('footer.help.faq') }}</BaseCta>
             </li>
             <li class="footer__group-list-item">
               <BaseCta is-link to="mailto:micasaestuya@gmail.com">
-                Contacta con micasaestuya
+                {{ t('footer.help.contact') }}
               </BaseCta>
             </li>
           </ul>
         </div>
         <div class="footer__group">
-          <h4 class="footer__group-title">Legales</h4>
+          <h4 class="footer__group-title">{{ t('footer.legal.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/ad-quality-policy">
-                Política de calidad del anuncio
+              <BaseCta is-link to="/privacy-policy">
+                {{ t('footer.legal.privacy') }}
               </BaseCta>
             </li>
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/privacy-policy"
-                >Política de privacidad</BaseCta
-              >
-            </li>
-            <li class="footer__group-list-item">
-              <BaseCta is-link to="/cookie-policy">Política de cookies</BaseCta>
+              <BaseCta is-link to="/cookie-policy">
+                {{ t('footer.legal.cookies') }}
+              </BaseCta>
             </li>
             <li class="footer__group-list-item">
               <BaseCta is-link to="/terms-and-conditions">
-                Condiciones generales
+                {{ t('footer.legal.terms') }}
               </BaseCta>
             </li>
           </ul>
         </div>
         <div class="footer__group">
-          <h4 class="footer__group-title">Particulares</h4>
+          <h4 class="footer__group-title">{{ t('footer.hosts.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link :to="localePath('post-ad-basic-info')">
-                Pon tu anuncio gratis
+              <BaseCta is-link :to="localePath('publish-listing')">
+                {{ t('footer.hosts.publish') }}
               </BaseCta>
             </li>
             <li class="footer__group-list-item">
-              <BaseCta is-link to="#">Compartir en redes sociales</BaseCta>
+              <BaseCta is-link to="#">{{ t('footer.hosts.share') }}</BaseCta>
             </li>
           </ul>
         </div>
@@ -86,26 +89,25 @@ const localePath = useLocalePath()
 
       <div class="footer__bottom">
         <p class="footer__copyright">
-          &copy; {{ new Date().getFullYear() }} mi casa es tuya.
+          &copy; {{ new Date().getFullYear() }} micasaestuya.
         </p>
         <div class="footer__actions">
           <BaseCta
             data-cy="footer-i18n-button"
             variant="flat"
-            aria-label="Change country and language"
+            :aria-label="t('header.change_locale')"
             @click="authStore.showLocaleModal"
           >
             <BaseIcon icon="globe" size="sm" />
-            {{ getLocale(locale).language }}
-            ({{ getLocale(locale).countryCode.toLocaleUpperCase() }})
-            <span class="sr-only">Change country and language</span>
+            {{ getLocale(locale)?.language }}
+            ({{ getLocale(locale)?.countryCode.toLocaleUpperCase() }})
           </BaseCta>
           <a
             class="footer__github-mark"
-            href="https://github.com/marlonbdez/micasaestuya-web"
+            :href="SOURCE_CODE_URL"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Ver el código fuente en GitHub"
+            :aria-label="t('footer.github_label')"
           >
             <BaseIcon icon="github" size="sm" />
           </a>
@@ -118,43 +120,51 @@ const localePath = useLocalePath()
 <style lang="scss" scoped>
 .footer {
   position: relative;
-  background-color: var(--footer-background-color);
+  background-color: var(--bg-2);
+  border-top: px-to-rem(1) solid var(--border);
   margin: 0;
+  padding-top: $gap-huge;
 
   &__links {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: $gap-large;
+    margin-bottom: $gap-large;
+
+    @include media-breakpoint-up(sm) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
   }
 
   &__group {
-    flex: 1 1 50%;
-    padding: $gap-medium 0;
-
-    @include media-breakpoint-up(sm) {
-      flex: 1 1 20%;
-    }
-
     &-title {
-      @include font-roboto-condensed-regular;
-      margin-bottom: $gap-extra-medium;
+      @include font-outfit-semibold;
+      font-size: $font-size-xs;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin: 0 0 $gap-extra-small;
     }
 
     &-list {
+      display: flex;
+      flex-direction: column;
+      gap: $gap-small;
       list-style: none;
       padding: 0;
       margin: 0;
 
-      &-item {
-        margin-bottom: $gap-medium;
+      &-item a {
+        @include font-outfit-regular;
+        font-size: $font-size-sm;
+        letter-spacing: normal;
+        color: var(--text-2);
+        text-decoration: none;
 
-        a {
-          @include font-roboto-condensed-light;
-          color: var(--footer-link-color);
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
+        &:hover,
+        &:focus {
+          color: var(--text);
+          text-decoration: underline;
         }
       }
     }
@@ -164,9 +174,9 @@ const localePath = useLocalePath()
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: $gap-medium 0;
-    border-top: 0.0625rem solid var(--border-color);
+    gap: $gap-small;
+    padding: $gap-extra-medium 0;
+    border-top: px-to-rem(1) solid var(--border);
 
     @include media-breakpoint-up(sm) {
       flex-direction: row;
@@ -175,19 +185,21 @@ const localePath = useLocalePath()
   }
 
   &__copyright {
-    @include font-roboto-condensed-light;
+    font-size: $font-size-sm;
+    color: var(--text-3);
     margin: 0;
   }
 
   &__actions {
     display: flex;
     align-items: center;
-    gap: $gap-medium;
+    gap: $gap-extra-tiny;
   }
 
   &__github-mark {
     display: flex;
-    color: var(--footer-link-color);
+    padding: $gap-small;
+    color: var(--text-2);
     opacity: 0.7;
 
     &:hover,

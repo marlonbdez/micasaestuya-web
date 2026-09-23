@@ -32,6 +32,7 @@ onMounted(() => {
           <BaseCta
             class="modal__close"
             variant="flat"
+            :aria-label="$t('modals.close')"
             @click="isVisible = false"
           >
             <BaseIcon icon="close" size="md" />

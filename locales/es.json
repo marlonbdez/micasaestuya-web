@@ -95,7 +95,10 @@
   },
   "header": {
     "advertise_property": "Publica tu propiedad gratis",
-    "login": "Iniciar sesión"
+    "login": "Iniciar sesión",
+    "explore": "Explorar",
+    "publish": "Publicar mi alojamiento",
+    "change_locale": "Cambiar país e idioma"
   },
   "regions": {
     "cu": "Cuba",
@@ -288,6 +291,90 @@
       "region_label": "Región",
       "language_label": "Lenguaje",
       "save_button": "Guardar"
+    },
+    "close": "Cerrar",
+    "back": "Volver"
+  },
+  "publish_listing": {
+    "title": "Publica tu alojamiento",
+    "intro": "Es gratis y toma unos minutos. Después, quien quiera colaborar te escribirá directamente por WhatsApp.",
+    "fields": {
+      "title": "Título del alojamiento",
+      "title_placeholder": "Ej. Casa con jardín en Playa Girón",
+      "region": "Región",
+      "photos": "Fotos",
+      "photos_add": "Añade fotos de tu casa",
+      "photos_hint": "Hasta {max} fotos. Por ahora solo se ven en este navegador.",
+      "photos_main": "Principal",
+      "photos_remove": "Quitar foto",
+      "photos_alt": "Foto {position} del alojamiento",
+      "photos_saving": "Guardando fotos…",
+      "description": "Descripción",
+      "description_placeholder": "Cuéntales cómo es tu casa, el ambiente, y qué tipo de colaboración esperas.",
+      "tasks": "Tareas de colaboración",
+      "capacity": "¿Cuántas personas pueden alojarse a la vez?",
+      "whatsapp": "Tu WhatsApp de contacto",
+      "whatsapp_placeholder": "Ej. +53 5123 4567"
+    },
+    "tasks": {
+      "cooking": "Cocina",
+      "gardening": "Jardín",
+      "cleaning": "Limpieza",
+      "childcare": "Cuidado de niños",
+      "pet_care": "Cuidado de mascotas",
+      "maintenance": "Mantenimiento",
+      "other": "Otras"
+    },
+    "errors": {
+      "title_required": "Ponle un título a tu alojamiento",
+      "title_max": "El título no puede pasar de {max} caracteres",
+      "region_required": "Elige la región hasta el último nivel",
+      "description_required": "Cuéntales cómo es tu alojamiento",
+      "tasks_required": "Elige al menos una tarea",
+      "capacity_required": "Indica cuántas personas caben",
+      "capacity_range": "Tiene que ser un número entero entre {min} y {max}",
+      "whatsapp_required": "Indica tu número de WhatsApp",
+      "whatsapp_invalid": "Escríbelo con el código de país, por ejemplo +53 5123 4567",
+      "photos": {
+        "storage": "No se pudieron leer las fotos guardadas en este navegador",
+        "not_an_image": "Algún archivo no era una imagen y no se ha añadido",
+        "too_many": "Como máximo {max} fotos",
+        "unreadable": "Alguna foto no se pudo procesar"
+      },
+      "publish": "No se pudo publicar el alojamiento. Inténtalo de nuevo."
+    },
+    "submit": "Publicar alojamiento",
+    "disclaimer": "Al publicar, aceptas que el trato final (fechas, condiciones, cualquier detalle) se acuerda directamente con quien te contacte. micasaestuya solo os pone en contacto, de forma gratuita.",
+    "published": {
+      "title": "¡Tu alojamiento ya está visible!",
+      "text": "Los viajeros que busquen en {region} ya pueden encontrar tu casa y escribirte directo por WhatsApp.",
+      "capacity": "{count} persona | {count} personas",
+      "explore": "Volver a explorar"
     }
+  },
+  "footer": {
+    "about": {
+      "title": "Sobre nosotros",
+      "who_we_are": "Quiénes somos",
+      "sitemap": "Mapa web",
+      "source_code": "Código fuente"
+    },
+    "help": {
+      "title": "Ayuda",
+      "faq": "Preguntas frecuentes",
+      "contact": "Contacta con micasaestuya"
+    },
+    "legal": {
+      "title": "Legales",
+      "privacy": "Política de privacidad",
+      "cookies": "Política de cookies",
+      "terms": "Condiciones generales"
+    },
+    "hosts": {
+      "title": "Anfitriones",
+      "publish": "Publica tu alojamiento gratis",
+      "share": "Compartir en redes sociales"
+    },
+    "github_label": "Ver el código fuente en GitHub"
   }
 }
