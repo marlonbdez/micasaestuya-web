@@ -9,19 +9,13 @@ export default class ListingModule
   extends FetchFactory
   implements IListingModule
 {
-  // SERVICIO SIMULADO: todavía no existe POST /api/listings
-  // (micasaestuya-docs/Listing.md). El día que exista, el cuerpo entero se
-  // sustituye por:
-  //   return await this.call<IListing>('POST', 'listings', input, {
-  //     headers: this.authHeaders
-  //   })
+  private resource = 'listings'
+
+  // Contrato en micasaestuya-docs/Listing.md. Requiere sesión: el dueño del
+  // alojamiento lo pone la API a partir del token.
   async create(input: IListingCreateInput): Promise<IListing> {
-    return await Promise.resolve({
-      ...input,
-      id: `mock-${Date.now()}`,
-      owner: this.store.user?.id ?? 'mock-owner',
-      photos: [],
-      createdAt: new Date().toISOString()
+    return await this.call<IListing>('POST', this.resource, input, {
+      headers: this.authHeaders
     })
   }
 }
