@@ -9,6 +9,7 @@ const showSignUp = ref(false)
 const hideModal = () => {
   isVisible.value = false
   showSignUp.value = false
+  authStore.hideAuthModal()
 }
 
 const title = computed(() =>
@@ -46,7 +47,7 @@ onMounted(() => {
             class="modal__close"
             variant="flat"
             :aria-label="$t('modals.close')"
-            @click="isVisible = false"
+            @click="hideModal"
           >
             <BaseIcon icon="close" size="md" />
           </BaseCta>

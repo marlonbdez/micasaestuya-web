@@ -18,12 +18,12 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
           <h4 class="footer__group-title">{{ t('footer.about.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/about-us">
+              <BaseCta is-link :to="localePath('about-us')">
                 {{ t('footer.about.who_we_are') }}
               </BaseCta>
             </li>
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/sitemap">
+              <BaseCta is-link :to="localePath('sitemap')">
                 {{ t('footer.about.sitemap') }}
               </BaseCta>
             </li>
@@ -43,7 +43,9 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
           <h4 class="footer__group-title">{{ t('footer.help.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/faq">{{ t('footer.help.faq') }}</BaseCta>
+              <BaseCta is-link :to="localePath('faq')">{{
+                t('footer.help.faq')
+              }}</BaseCta>
             </li>
             <li class="footer__group-list-item">
               <BaseCta is-link to="mailto:micasaestuya@gmail.com">
@@ -56,17 +58,17 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
           <h4 class="footer__group-title">{{ t('footer.legal.title') }}</h4>
           <ul class="footer__group-list">
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/privacy-policy">
+              <BaseCta is-link :to="localePath('privacy-policy')">
                 {{ t('footer.legal.privacy') }}
               </BaseCta>
             </li>
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/cookie-policy">
+              <BaseCta is-link :to="localePath('cookie-policy')">
                 {{ t('footer.legal.cookies') }}
               </BaseCta>
             </li>
             <li class="footer__group-list-item">
-              <BaseCta is-link to="/terms-and-conditions">
+              <BaseCta is-link :to="localePath('terms-and-conditions')">
                 {{ t('footer.legal.terms') }}
               </BaseCta>
             </li>

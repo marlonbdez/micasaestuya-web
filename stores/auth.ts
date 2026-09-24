@@ -68,7 +68,10 @@ export const useAuthStore = defineStore('auth', {
       this.user = null
       this.token = null
     },
+    // Acciones vacías a propósito: AuthModal y LocaleModal se suscriben con
+    // $onAction. hideAuthModal avisa de que el modal se cerró, con login o sin él.
     showAuthModal() {},
+    hideAuthModal() {},
     showLocaleModal() {}
   }
 })

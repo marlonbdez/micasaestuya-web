@@ -96,7 +96,9 @@
     "login": "Login",
     "explore": "Explore",
     "publish": "List my place",
-    "change_locale": "Change country and language"
+    "change_locale": "Change country and language",
+    "my_listings": "My places (coming soon)",
+    "logout": "Log out"
   },
   "regions": {
     "cu": "Cuba",
@@ -374,5 +376,176 @@
       "share": "Share on social media"
     },
     "github_label": "View the source code on GitHub"
+  },
+  "meta": {
+    "title": "micasaestuya · a place to stay in exchange for helping out",
+    "description": "Accommodation and meals in exchange for a few hours of help a day. Free, in Cuba and the Dominican Republic."
+  },
+  "info_pages": {
+    "contact_email_label": "Write to us at {email}.",
+    "draft_notice": "Draft pending legal review. It describes how micasaestuya works today, but no specialist has reviewed it yet.",
+    "about_us": {
+      "title": "About us",
+      "sections": [
+        {
+          "title": "What micasaestuya is",
+          "paragraphs": [
+            "A platform that connects people who offer a place to stay and meals with people willing to help out a few hours a day in return: cooking, gardening, cleaning, looking after children or animals, maintenance…",
+            "No money changes hands between host and traveler: the exchange is a place to stay and meals for help."
+          ]
+        },
+        {
+          "title": "Where",
+          "paragraphs": [
+            "We're starting in Cuba and the Dominican Republic, aiming to grow to any country."
+          ]
+        },
+        {
+          "title": "Free, for real",
+          "paragraphs": [
+            "No commission, no fee, no subscription. The project runs on voluntary donations that only cover development and hosting.",
+            "The code is open source and lives on GitHub."
+          ]
+        },
+        {
+          "title": "We only put you in touch",
+          "paragraphs": [
+            "Host and traveler agree on the arrangement (dates, hours, conditions) directly, on WhatsApp or however you prefer. micasaestuya doesn't mediate that agreement, doesn't verify identities and doesn't guarantee what happens during the stay."
+          ]
+        }
+      ]
+    },
+    "faq": {
+      "title": "FAQ",
+      "sections": [
+        {
+          "title": "How much does it cost?",
+          "paragraphs": ["Nothing. Neither for hosts nor for travelers."]
+        },
+        {
+          "title": "Do I need an account to list my place?",
+          "paragraphs": [
+            "You can fill in the whole form without one. We only ask you to log in or sign up when you press “Publish my place”."
+          ]
+        },
+        {
+          "title": "How do I contact a host?",
+          "paragraphs": [
+            "On WhatsApp, with the number the host gives in their listing. From there you talk directly."
+          ]
+        },
+        {
+          "title": "Do you verify hosts or travelers?",
+          "paragraphs": [
+            "No. We have no way to check identities or guarantee what's published. Talk things through first, on a video call if you can, and use common sense."
+          ]
+        },
+        {
+          "title": "Is there a minimum age?",
+          "paragraphs": ["Yes: 18."]
+        },
+        {
+          "title": "Which countries does it work in?",
+          "paragraphs": ["For now, Cuba and the Dominican Republic."]
+        },
+        {
+          "title": "How do you keep going if it's free?",
+          "paragraphs": [
+            "With voluntary donations, used only to cover development and hosting."
+          ]
+        }
+      ]
+    },
+    "privacy_policy": {
+      "title": "Privacy policy",
+      "sections": [
+        {
+          "title": "What data we keep",
+          "paragraphs": [
+            "If you create an account: your first name, last name, email and password. The password is stored encrypted, never in plain text.",
+            "If you list a place: what you write in the form (title, region, description, tasks, capacity and your WhatsApp number). All of it will be visible to anyone who sees your listing: the number is there precisely so people can message you.",
+            "For now, the photos you add to the form stay in your browser and are not sent to any server."
+          ]
+        },
+        {
+          "title": "What we keep in your browser",
+          "paragraphs": [
+            "Your session, language, light or dark theme, the form draft and its photos. The details are in the cookie policy."
+          ]
+        },
+        {
+          "title": "Who it's shared with",
+          "paragraphs": [
+            "Nobody, for commercial purposes. To run, we use these services: Netlify (serves the website), Render (serves the API), MongoDB Atlas (stores accounts), Upstash (stores the list of regions, no personal data) and Sentry (records errors and session replays so we can reproduce bugs; it doesn't record what you type into fields)."
+          ]
+        },
+        {
+          "title": "Your rights",
+          "paragraphs": [
+            "You can ask us to see, correct or delete your data, and to delete your account. {contact}"
+          ]
+        }
+      ]
+    },
+    "cookie_policy": {
+      "title": "Cookie policy",
+      "sections": [
+        {
+          "title": "Only what's needed",
+          "paragraphs": [
+            "We don't use advertising or third-party tracking cookies. What's stored in your browser is there for the site to work."
+          ]
+        },
+        {
+          "title": "Cookies",
+          "paragraphs": [
+            "access-token: keeps you logged in. It lasts a year, unless you log in without ticking “Remember me”: then it lasts until you close the browser.",
+            "i18n_redirected: remembers your country and language."
+          ]
+        },
+        {
+          "title": "Other browser storage",
+          "paragraphs": [
+            "nuxt-color-mode (localStorage): light or dark theme.",
+            "listing-draft (localStorage) and the “micasaestuya” IndexedDB database: your listing draft and its photos, so they aren't lost if you reload. They're deleted when you publish.",
+            "Sentry stores a session identifier to group the errors from a single visit."
+          ]
+        }
+      ]
+    },
+    "terms_and_conditions": {
+      "title": "Terms and conditions",
+      "sections": [
+        {
+          "title": "What the service is",
+          "paragraphs": [
+            "micasaestuya is a free board where hosts list places to stay and travelers find them. It only puts you in touch."
+          ]
+        },
+        {
+          "title": "What we don't do",
+          "paragraphs": [
+            "We're not a party to the agreement between host and traveler, we don't mediate it and we don't guarantee it.",
+            "We don't verify identities or check that what's published is true.",
+            "We're not responsible for what happens during a stay."
+          ]
+        },
+        {
+          "title": "What we ask",
+          "paragraphs": [
+            "Be at least 18 years old.",
+            "Publish truthful information about your place and what you ask in return.",
+            "Treat others with respect. We may remove false, illegal or offensive content and close the accounts that publish it."
+          ]
+        },
+        {
+          "title": "Contact",
+          "paragraphs": ["{contact}"]
+        }
+      ]
+    },
+    "sitemap": {
+      "title": "Sitemap"
+    }
   }
 }

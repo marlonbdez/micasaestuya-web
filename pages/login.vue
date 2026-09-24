@@ -74,9 +74,7 @@ definePageMeta({
         :error-message="errors?.password"
         @icon-click="showPassword = !showPassword"
       />
-      <BaseCheckbox id="remember" v-model:checked="remember">
-        Remember
-      </BaseCheckbox>
+      <BaseCheckbox id="remember" v-model="remember"> Remember </BaseCheckbox>
       <BaseCta type="submit" :disabled="loading">
         <BaseSpinner v-if="loading" /> Login
       </BaseCta>
