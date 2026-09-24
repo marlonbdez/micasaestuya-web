@@ -31,7 +31,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run test:unit:coverage
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: coverage-report
@@ -54,7 +54,7 @@ jobs:
       - run: npm run generate
         env:
           NUXT_PUBLIC_API_BASE: https://micasaestuya-api.onrender.com/api
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: build-output
           path: .output/public
@@ -104,7 +104,7 @@ jobs:
           npx --yes wait-on http://localhost:3000
           SPEC_FILES=$(node cypress/cypress-parallel.mjs)
           npx cypress run --browser chrome --spec "$SPEC_FILES"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: cypress-artifacts-${{ matrix.shard }}
