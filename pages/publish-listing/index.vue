@@ -168,6 +168,15 @@ watch(isLogged, (logged) => {
   if (logged && isWaitingForLogin.value) publish()
 })
 
+// Si el modal se cierra sin identificarse, se cancela la publicación
+// pendiente: un login posterior desde el header no debe publicar por sorpresa.
+// Tras un login correcto isLogged ya es true y no se cancela nada.
+authStore.$onAction(({ name }) => {
+  if (name === 'hideAuthModal' && !isLogged.value) {
+    isWaitingForLogin.value = false
+  }
+})
+
 // Al fallar la validación, se lleva al usuario al primer campo con error: en
 // móvil el botón queda muy lejos de lo que hay que arreglar.
 const FIELD_IDS: Record<string, string> = {
