@@ -98,7 +98,9 @@
     "login": "Iniciar sesión",
     "explore": "Explorar",
     "publish": "Publicar mi alojamiento",
-    "change_locale": "Cambiar país e idioma"
+    "change_locale": "Cambiar país e idioma",
+    "my_listings": "Mis alojamientos (próximamente)",
+    "logout": "Cerrar sesión"
   },
   "regions": {
     "cu": "Cuba",

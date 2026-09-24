@@ -96,7 +96,9 @@
     "login": "Login",
     "explore": "Explore",
     "publish": "List my place",
-    "change_locale": "Change country and language"
+    "change_locale": "Change country and language",
+    "my_listings": "My places (coming soon)",
+    "logout": "Log out"
   },
   "regions": {
     "cu": "Cuba",

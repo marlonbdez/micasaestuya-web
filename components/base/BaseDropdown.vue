@@ -52,7 +52,9 @@ const emit = defineEmits<{
   'update:selected': [value: string]
 }>()
 
-const updateSelected = ({ id, callback }: Options) => {
+const updateSelected = ({ id, callback, disabled }: Options) => {
+  // `disabled` ya estaba en el tipo Option pero no se respetaba.
+  if (disabled) return
   if (callback) {
     callback()
   }
@@ -95,7 +97,11 @@ watch(
         :data-cy="option.dataTestId || option.id"
         tabindex="0"
         class="dropdown__option"
-        :class="{ 'dropdown__option--selected': option.id === selected }"
+        :class="{
+          'dropdown__option--selected': option.id === selected,
+          'dropdown__option--disabled': option.disabled
+        }"
+        :aria-disabled="option.disabled || undefined"
         @click="updateSelected(option)"
         @keydown.space.enter.exact.prevent="updateSelected(option)"
         @keydown.esc.exact="hideDropdown"
@@ -178,6 +184,17 @@ watch(
       background: var(--color-gray-light);
       color: var(--color-gray);
       text-decoration: underline;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+
+      &:hover,
+      &:focus {
+        background: transparent;
+        color: var(--input-text-color);
+      }
     }
   }
 

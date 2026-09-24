@@ -17,17 +17,19 @@ const localeLabel = computed(() => {
 })
 
 const userOptions = computed(() => [
+  // Deshabilitada hasta que exista el listado de alojamientos del usuario
+  // (necesita GET /api/listings en api).
   {
-    id: 'my-ads',
-    dataTestId: 'myads-dropdown-option',
-    value: t('MY_ADS'),
-    icon: 'pin',
-    callback: () => navigateTo({ path: '/properties' })
+    id: 'my-listings',
+    dataTestId: 'mylistings-dropdown-option',
+    value: t('header.my_listings'),
+    icon: 'house',
+    disabled: true
   },
   {
     id: 'logout',
     dataTestId: 'logout-dropdown-option',
-    value: t('LOGOUT'),
+    value: t('header.logout'),
     icon: 'exit',
     callback: () => authStore.logout()
   }
