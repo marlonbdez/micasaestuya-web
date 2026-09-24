@@ -54,7 +54,7 @@
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/i18n": "^8.5.6",
-    "@pinia/nuxt": "^0.4.11",
+    "@pinia/nuxt": "^1.0.2",
     "@sentry/nuxt": "^9.0.0",
     "@vee-validate/nuxt": "^4.11.6",
     "@vee-validate/yup": "^4.11.6",
