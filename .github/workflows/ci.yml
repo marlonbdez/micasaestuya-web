@@ -76,7 +76,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - run: npm ci
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v8
         with:
           name: build-output
           path: .output/public
