@@ -374,5 +374,9 @@
       "share": "Share on social media"
     },
     "github_label": "View the source code on GitHub"
+  },
+  "meta": {
+    "title": "micasaestuya · a place to stay in exchange for helping out",
+    "description": "Accommodation and meals in exchange for a few hours of help a day. Free, in Cuba and the Dominican Republic."
   }
 }

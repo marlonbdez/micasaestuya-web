@@ -33,12 +33,12 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Alquiler, compra y venta de casas. | mi casa es tuya',
+      title: 'micasaestuya · alojamiento a cambio de colaboración',
       meta: [
         {
           name: 'description',
           content:
-            'Encuentra las mejores ofertas de alquiler, compra y venta de casas.'
+            'Alojamiento y comida a cambio de unas horas de colaboración. Gratis, en Cuba y República Dominicana.'
         }
       ],
       link: [
