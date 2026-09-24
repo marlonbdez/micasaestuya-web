@@ -382,5 +382,172 @@
   "meta": {
     "title": "micasaestuya · alojamiento a cambio de colaboración",
     "description": "Alojamiento y comida a cambio de unas horas de colaboración. Gratis, en Cuba y República Dominicana."
+  },
+  "info_pages": {
+    "contact_email_label": "Escríbenos a {email}.",
+    "draft_notice": "Borrador pendiente de revisión legal. Describe cómo funciona hoy micasaestuya, pero todavía no lo ha revisado nadie especializado.",
+    "about_us": {
+      "title": "Quiénes somos",
+      "sections": [
+        {
+          "title": "Qué es micasaestuya",
+          "paragraphs": [
+            "Una plataforma que pone en contacto a personas que ofrecen alojamiento y comida con personas dispuestas a colaborar unas horas al día a cambio: cocina, jardín, limpieza, cuidado de niños o de animales, mantenimiento…",
+            "Sin dinero de por medio entre anfitrión y viajero: el intercambio es alojamiento y comida por colaboración."
+          ]
+        },
+        {
+          "title": "Dónde",
+          "paragraphs": [
+            "Empezamos en Cuba y República Dominicana, con la idea de crecer a cualquier país."
+          ]
+        },
+        {
+          "title": "Gratis, de verdad",
+          "paragraphs": [
+            "No cobramos comisión, cuota ni suscripción. El proyecto se sostiene con donaciones voluntarias que solo cubren el desarrollo y el alojamiento de la web.",
+            "El código es libre y está en GitHub."
+          ]
+        },
+        {
+          "title": "Nosotros solo os ponemos en contacto",
+          "paragraphs": [
+            "El trato (fechas, horas, condiciones) lo acordáis anfitrión y viajero directamente, por WhatsApp o como prefiráis. micasaestuya no media en ese acuerdo, no verifica identidades y no garantiza lo que ocurra durante la estancia."
+          ]
+        }
+      ]
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "sections": [
+        {
+          "title": "¿Cuánto cuesta?",
+          "paragraphs": ["Nada. Ni para quien publica ni para quien viaja."]
+        },
+        {
+          "title": "¿Necesito una cuenta para publicar mi alojamiento?",
+          "paragraphs": [
+            "Puedes rellenar todo el formulario sin cuenta. Solo al pulsar «Publicar alojamiento» te pedimos entrar o registrarte."
+          ]
+        },
+        {
+          "title": "¿Cómo contacto con un anfitrión?",
+          "paragraphs": [
+            "Por WhatsApp, con el número que el anfitrión indica en su alojamiento. A partir de ahí habláis directamente."
+          ]
+        },
+        {
+          "title": "¿Verificáis a los anfitriones o a los viajeros?",
+          "paragraphs": [
+            "No. No tenemos forma de comprobar identidades ni de garantizar lo que se publica. Hablad antes con calma, por videollamada si podéis, y usad el sentido común."
+          ]
+        },
+        {
+          "title": "¿Hay edad mínima?",
+          "paragraphs": ["Sí: 18 años."]
+        },
+        {
+          "title": "¿En qué países funciona?",
+          "paragraphs": ["De momento, Cuba y República Dominicana."]
+        },
+        {
+          "title": "¿Cómo os mantenéis si es gratis?",
+          "paragraphs": [
+            "Con donaciones voluntarias, destinadas solo a cubrir el desarrollo y el alojamiento de la web."
+          ]
+        }
+      ]
+    },
+    "privacy_policy": {
+      "title": "Política de privacidad",
+      "sections": [
+        {
+          "title": "Qué datos guardamos",
+          "paragraphs": [
+            "Si creas una cuenta: tu nombre, tu apellido, tu email y tu contraseña. La contraseña se guarda cifrada; nunca en claro.",
+            "Si publicas un alojamiento: lo que escribes en el formulario (título, región, descripción, tareas, capacidad y tu número de WhatsApp). Todo eso será visible para quien vea tu alojamiento: el número está ahí precisamente para que te puedan escribir.",
+            "Las fotos que añades al formulario, por ahora, se quedan en tu navegador y no se envían a ningún servidor."
+          ]
+        },
+        {
+          "title": "Qué guardamos en tu navegador",
+          "paragraphs": [
+            "La sesión, el idioma, el tema claro u oscuro, el borrador del formulario y sus fotos. El detalle está en la política de cookies."
+          ]
+        },
+        {
+          "title": "Con quién se comparten",
+          "paragraphs": [
+            "Con nadie con fines comerciales. Para funcionar usamos estos servicios: Netlify (sirve la web), Render (sirve la API), MongoDB Atlas (guarda las cuentas), Upstash (guarda la lista de regiones, sin datos personales) y Sentry (registra errores y graba las sesiones para poder reproducir los fallos; no graba lo que escribes en los campos)."
+          ]
+        },
+        {
+          "title": "Tus derechos",
+          "paragraphs": [
+            "Puedes pedirnos ver, corregir o borrar tus datos, y borrar tu cuenta. {contact}"
+          ]
+        }
+      ]
+    },
+    "cookie_policy": {
+      "title": "Política de cookies",
+      "sections": [
+        {
+          "title": "Solo lo necesario",
+          "paragraphs": [
+            "No usamos cookies de publicidad ni de seguimiento de terceros. Lo que se guarda en tu navegador sirve para que la web funcione."
+          ]
+        },
+        {
+          "title": "Cookies",
+          "paragraphs": [
+            "access-token: mantiene tu sesión iniciada. Dura un año, salvo si al entrar no marcas «Recuérdame»: entonces dura hasta que cierras el navegador.",
+            "i18n_redirected: recuerda tu país e idioma."
+          ]
+        },
+        {
+          "title": "Otro almacenamiento del navegador",
+          "paragraphs": [
+            "nuxt-color-mode (localStorage): el tema claro u oscuro.",
+            "listing-draft (localStorage) y la base IndexedDB «micasaestuya»: el borrador del alojamiento y sus fotos, para que no se pierdan si recargas. Se borran al publicar.",
+            "Sentry guarda un identificador de sesión para agrupar los errores de una misma visita."
+          ]
+        }
+      ]
+    },
+    "terms_and_conditions": {
+      "title": "Condiciones generales",
+      "sections": [
+        {
+          "title": "Qué es el servicio",
+          "paragraphs": [
+            "micasaestuya es un tablón gratuito donde anfitriones publican alojamientos y viajeros los encuentran. Solo os pone en contacto."
+          ]
+        },
+        {
+          "title": "Lo que no hacemos",
+          "paragraphs": [
+            "No somos parte del acuerdo entre anfitrión y viajero, no mediamos en él y no lo garantizamos.",
+            "No verificamos identidades ni comprobamos que lo publicado sea cierto.",
+            "No respondemos de lo que ocurra durante una estancia."
+          ]
+        },
+        {
+          "title": "Lo que pedimos",
+          "paragraphs": [
+            "Tener al menos 18 años.",
+            "Publicar información veraz sobre tu alojamiento y lo que pides a cambio.",
+            "Tratar a los demás con respeto. Podemos retirar contenidos falsos, ilegales u ofensivos y cerrar las cuentas que los publiquen."
+          ]
+        },
+        {
+          "title": "Contacto",
+          "paragraphs": ["{contact}"]
+        }
+      ]
+    },
+    "sitemap": {
+      "title": "Mapa web"
+    }
   }
 }
