@@ -59,14 +59,11 @@ export interface UserModel {
   name: string
 }
 
-export type UserRole = 'guest' | 'host' | 'admin'
-
 export interface IUserInfo {
   id: string
   email: string
   firstName: string
   lastName: string
-  role: UserRole
 }
 
 export interface IAuthModule {
