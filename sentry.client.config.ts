@@ -6,12 +6,12 @@ Sentry.init({
   environment: process.env.NUXT_PUBLIC_SENTRY_ENVIRONMENT,
   integrations: [
     Sentry.replayIntegration({
-      maskAllText: false,
-      blockAllMedia: false
+      maskAllText: true,
+      blockAllMedia: true
     })
   ],
   tracesSampleRate: 0.2,
   tracePropagationTargets: ['localhost', 'https://www.micasaestuya.com'],
-  replaysSessionSampleRate: 1.0,
+  replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0
 })
