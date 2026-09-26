@@ -99,8 +99,17 @@
     "explore": "Explorar",
     "publish": "Publicar mi alojamiento",
     "change_locale": "Cambiar país e idioma",
-    "my_listings": "Mis alojamientos (próximamente)",
-    "logout": "Cerrar sesión"
+    "my_listings": "Mis alojamientos",
+    "logout": "Cerrar sesión",
+    "menu": "Menú",
+    "sign_up": "Registrarse",
+    "language": "Idioma y país",
+    "theme": "Tema",
+    "theme_light": "Claro",
+    "theme_dark": "Oscuro",
+    "faq": "Preguntas frecuentes",
+    "coming_soon": "Próximamente",
+    "exit": "Salir"
   },
   "regions": {
     "cu": "Cuba",
@@ -343,10 +352,11 @@
         "too_many": "Como máximo {max} fotos",
         "unreadable": "Alguna foto no se pudo procesar"
       },
+      "terms_required": "Tienes que aceptarlo para publicar",
       "publish": "No se pudo publicar el alojamiento. Inténtalo de nuevo."
     },
     "submit": "Publicar alojamiento",
-    "disclaimer": "Al publicar, aceptas que el trato final (fechas, condiciones, cualquier detalle) se acuerda directamente con quien te contacte. micasaestuya solo os pone en contacto, de forma gratuita.",
+    "terms": "Acepto que el trato final (fechas, condiciones, cualquier detalle) se acuerda directamente con quien me contacte. micasaestuya solo nos pone en contacto, de forma gratuita.",
     "published": {
       "title": "¡Tu alojamiento ya está visible!",
       "text": "Los viajeros que busquen en {region} ya pueden encontrar tu casa y escribirte directo por WhatsApp.",

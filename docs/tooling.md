@@ -144,3 +144,21 @@ GitHub Actions no comparte tanto estado entre steps como parece a primera
 vista, sobre todo dentro de un `container:`. La forma más simple de
 evitarlo es no depender de que algo backgrounded cruce el límite entre
 steps.
+
+## 5. El hook de commit no debe formatear lo generado, y el de push pisa `.nuxt`
+
+`lint:prettier:fix` (lo ejecuta el hook `pre-commit` a través de `lint:fix`) no
+llevaba `--ignore-path .gitignore`, como sí tiene `lint:prettier`. Reformateaba
+los ficheros generados de `.nuxt` en cada commit, y el build del hook
+`pre-push` fallaba después al leerlos:
+
+```
+.nuxt/dist/server/client.manifest.mjs (18:1): Expected ';', got ','
+```
+
+**Lo que enseña:** los dos scripts de Prettier (comprobar y arreglar) tienen que
+compartir las mismas exclusiones.
+
+Además, `npm run build` escribe en el mismo `.nuxt` que usa el servidor de
+desarrollo del contenedor `nuxt`. Tras un `push`, reinícialo
+(`docker compose restart nuxt` desde `infra`) o se queda con ficheros a medias.

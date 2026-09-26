@@ -97,8 +97,17 @@
     "explore": "Explore",
     "publish": "List my place",
     "change_locale": "Change country and language",
-    "my_listings": "My places (coming soon)",
-    "logout": "Log out"
+    "my_listings": "My places",
+    "logout": "Log out",
+    "menu": "Menu",
+    "sign_up": "Sign up",
+    "language": "Country and language",
+    "theme": "Theme",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "faq": "FAQ",
+    "coming_soon": "Coming soon",
+    "exit": "Exit"
   },
   "regions": {
     "cu": "Cuba",
@@ -341,10 +350,11 @@
         "too_many": "{max} photos at most",
         "unreadable": "Some photo couldn't be processed"
       },
+      "terms_required": "You have to accept this to publish",
       "publish": "The place couldn't be published. Please try again."
     },
     "submit": "Publish my place",
-    "disclaimer": "By publishing, you agree that the final arrangement (dates, conditions, any details) is made directly with whoever contacts you. micasaestuya only puts you in touch, for free.",
+    "terms": "I agree that the final arrangement (dates, conditions, any details) is made directly with whoever contacts me. micasaestuya only puts us in touch, for free.",
     "published": {
       "title": "Your place is now visible!",
       "text": "Travelers looking in {region} can now find your home and message you directly on WhatsApp.",

@@ -11,7 +11,7 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
 </script>
 
 <template>
-  <footer class="footer">
+  <footer class="footer" :class="{ 'footer--minimal': minimal }">
     <div class="container">
       <nav v-if="!minimal" class="footer__links">
         <div class="footer__group">
@@ -93,7 +93,7 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
         <p class="footer__copyright">
           &copy; {{ new Date().getFullYear() }} micasaestuya.
         </p>
-        <div class="footer__actions">
+        <div v-if="!minimal" class="footer__actions">
           <BaseCta
             data-cy="footer-i18n-button"
             variant="flat"
@@ -126,6 +126,10 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
   border-top: px-to-rem(1) solid var(--border);
   margin: 0;
   padding-top: $gap-huge;
+
+  &--minimal {
+    padding-top: 0;
+  }
 
   &__links {
     display: grid;
@@ -184,6 +188,11 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
       flex-direction: row;
       justify-content: space-between;
     }
+  }
+
+  &--minimal &__bottom {
+    border-top: 0;
+    justify-content: center;
   }
 
   &__copyright {

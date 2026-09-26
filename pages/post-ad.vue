@@ -14,7 +14,7 @@ defineI18nRoute({
 })
 
 definePageMeta({
-  layout: 'flow'
+  layout: 'minimal'
 })
 
 const { t } = useI18n()

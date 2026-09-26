@@ -85,6 +85,11 @@ export type HttpRequestOptions = {
   extras?: object
 }
 
+export enum AuthModalMode {
+  SignIn = 'sign-in',
+  SignUp = 'sign-up'
+}
+
 export enum ThemeType {
   Light = 'LIGHT',
   Dark = 'DARK',

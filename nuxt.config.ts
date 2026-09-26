@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vee-validate/nuxt',
     '@nuxtjs/i18n',
+    '@vueuse/nuxt',
     '@sentry/nuxt/module'
   ],
   sentry: {
