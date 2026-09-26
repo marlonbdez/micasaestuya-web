@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { array, mixed, number, object, string } from 'yup'
+import { array, boolean, mixed, number, object, string } from 'yup'
 import { useForm } from 'vee-validate'
 import { storeToRefs } from 'pinia'
 import { CollaborationTask } from '~/core/types'
@@ -19,6 +19,7 @@ defineI18nRoute({
 // No protege la página: se rellena sin cuenta. Está para restaurar la sesión
 // desde el token guardado; sin él, un usuario ya logueado vería el modal.
 definePageMeta({
+  layout: 'minimal',
   middleware: ['auth']
 })
 
@@ -82,7 +83,8 @@ const { handleSubmit, errors, defineField } = useForm({
       .required(() => t('publish_listing.errors.whatsapp_required'))
       .matches(WHATSAPP_PATTERN, () =>
         t('publish_listing.errors.whatsapp_invalid')
-      )
+      ),
+    accepted: boolean().isTrue(() => t('publish_listing.errors.terms_required'))
   }),
   initialValues: {
     title: draft.value.title,
@@ -91,7 +93,8 @@ const { handleSubmit, errors, defineField } = useForm({
     tasks: [...draft.value.tasks],
     // BaseInput trabaja con texto, también con type="number".
     capacity: draft.value.capacity === null ? '' : String(draft.value.capacity),
-    whatsapp: draft.value.whatsapp
+    whatsapp: draft.value.whatsapp,
+    accepted: false
   }
 })
 
@@ -101,6 +104,7 @@ const [description, descriptionAttrs] = defineField('description')
 const [tasks] = defineField('tasks')
 const [capacity, capacityAttrs] = defineField('capacity')
 const [whatsapp, whatsappAttrs] = defineField('whatsapp')
+const [accepted] = defineField('accepted')
 
 // El formulario es la vista; el store, lo que sobrevive a una recarga.
 watch(title, (value) => listingDraftStore.update({ title: value ?? '' }))
@@ -185,7 +189,8 @@ const FIELD_IDS: Record<string, string> = {
   description: 'listing-description',
   tasks: `listing-task-${TASKS[0]}`,
   capacity: 'listing-capacity',
-  whatsapp: 'listing-whatsapp'
+  whatsapp: 'listing-whatsapp',
+  accepted: 'listing-terms'
 }
 
 const onSubmit = handleSubmit(
@@ -341,6 +346,14 @@ const onSubmit = handleSubmit(
         @focusout="whatsappAttrs.onBlur"
       />
 
+      <BaseCheckbox
+        id="listing-terms"
+        v-model="accepted"
+        :error-message="errors.accepted"
+      >
+        {{ t('publish_listing.terms') }}
+      </BaseCheckbox>
+
       <BaseAlert v-if="publishFailed" variant="error">
         {{ t('publish_listing.errors.publish') }}
       </BaseAlert>
@@ -355,9 +368,6 @@ const onSubmit = handleSubmit(
           <BaseSpinner v-if="isPublishing" />
           {{ t('publish_listing.submit') }}
         </BaseCta>
-        <p class="publish-listing__disclaimer">
-          {{ t('publish_listing.disclaimer') }}
-        </p>
       </div>
     </form>
   </main>
@@ -475,13 +485,6 @@ const onSubmit = handleSubmit(
     flex-direction: column;
     align-items: flex-start;
     gap: $gap-medium;
-  }
-
-  &__disclaimer {
-    font-size: $font-size-xs;
-    line-height: 1.6;
-    color: var(--text-3);
-    margin: 0;
   }
 }
 </style>

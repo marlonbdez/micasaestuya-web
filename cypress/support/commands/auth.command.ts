@@ -1,4 +1,5 @@
 Cypress.Commands.add('openAuthModal', () => {
+  cy.getByTestId('header-menu-button').click()
   cy.getByTestId('header-login-button').click()
 })
 

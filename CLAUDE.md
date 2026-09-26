@@ -35,7 +35,7 @@ de patrones técnicos, nunca como descripción del producto.
 ## Stack
 
 Nuxt 3 (`ssr: false`, estático) · Vue 3 con `<script setup lang="ts">` · Pinia ·
-SCSS modular con BEM y tokens · @nuxtjs/i18n · vee-validate + yup · nuxt-icons.
+SCSS modular con BEM y tokens · @nuxtjs/i18n · vee-validate + yup · nuxt-icons · VueUse.
 
 TypeScript estricto: sin `any`, sin props sin tipar.
 
@@ -51,7 +51,7 @@ core/
   models/          clases de dominio
   constants/       constantes y enums
 pages/             rutas Nuxt, mínima lógica
-layouts/           default.vue y flow.vue
+layouts/           default.vue y minimal.vue
 locales/           traducciones
 docs/              el porqué de las decisiones, específico de este repo
 ```
@@ -102,6 +102,8 @@ modificar uno**: los usa todo el proyecto.
 | `any`                                      | tipo explícito o `unknown`             |
 | Colores, píxeles o fuentes a mano          | tokens (`docs/design-system.md`)       |
 | `!important`                               | arreglar la especificidad              |
+| Icono con varios trazos o colores          | un `<path fill="currentColor">`        |
+| Clic fuera, teclas o `matchMedia` a mano   | composables de VueUse                  |
 | `$services` en un componente               | solo en stores y composables           |
 | Formulario sin validar                     | vee-validate + yup                     |
 
@@ -117,6 +119,12 @@ TypeScript avise (`gotchas.md` § 1).
   obvia. Y **explica los cambios que nadie pidió**, incluidos los renombrados.
 - **De menos a más.** Primera iteración, lo justo necesario. Reutiliza los enums
   y tipos que ya existen en vez de inventar vocabulario nuevo.
+- **Lo que nadie usa se borra:** iconos, tokens, componentes, claves de
+  traducción. Nada de código "por si acaso".
+- **Datos antes que plantillas repetidas.** Si un bloque del template se repite
+  con pequeñas variaciones, es una lista y un `v-for` (`UserMenu.vue`).
+- **Antes de escribir un composable o una directiva a mano, mira VueUse**
+  (`@vueuse/nuxt`, ya instalado).
 - **Código en inglés.** Las URLs se traducen por locale con `defineI18nRoute`.
 - **Verifica en el navegador**, no des por hecho que funciona.
 - Explica a nivel _mid-junior_: que se entienda el porqué, no solo que compile.

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth'
+import { AuthModalMode } from '~/core/types'
 const { t } = useI18n()
 
 const authStore = useAuthStore()
 const isVisible = ref(false)
 const showSignUp = ref(false)
+const dialog = ref<HTMLElement | null>(null)
 
 const hideModal = () => {
   isVisible.value = false
@@ -12,14 +14,17 @@ const hideModal = () => {
   authStore.hideAuthModal()
 }
 
+onClickOutside(dialog, hideModal)
+
 const title = computed(() =>
   showSignUp.value
     ? t('modals.auth.sign_up.title')
     : t('modals.auth.sign_in.title')
 )
 onMounted(() => {
-  authStore.$onAction(({ name }) => {
+  authStore.$onAction(({ name, args }) => {
     if (name === 'showAuthModal') {
+      showSignUp.value = args[0] === AuthModalMode.SignUp
       isVisible.value = true
     }
   })
@@ -29,7 +34,7 @@ onMounted(() => {
 <template>
   <Transition name="modal-in">
     <div v-if="isVisible" data-cy="auth-modal" class="modal">
-      <div v-click-outside="hideModal" class="modal__dialog">
+      <div ref="dialog" class="modal__dialog">
         <div class="modal__header">
           <BaseCta
             v-if="showSignUp"

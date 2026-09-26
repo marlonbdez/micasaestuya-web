@@ -7,10 +7,13 @@ const switchLocalePath = useSwitchLocalePath()
 
 const authStore = useAuthStore()
 const isVisible = ref(false)
+const dialog = ref<HTMLElement | null>(null)
 
 const hideModal = () => {
   isVisible.value = false
 }
+
+onClickOutside(dialog, hideModal)
 
 const isSelectedLocale = (code: string): boolean => locale.value === code
 
@@ -26,7 +29,7 @@ onMounted(() => {
 <template>
   <Transition name="modal-in">
     <div v-if="isVisible" data-cy="locale-modal" class="modal">
-      <div v-click-outside="hideModal" class="modal__dialog">
+      <div ref="dialog" class="modal__dialog">
         <div class="modal__header">
           <h2 class="modal__title">{{ $t('modals.locale.title') }}</h2>
           <BaseCta

@@ -9,12 +9,12 @@ const htmlAttrs = computed(() => head.value.htmlAttrs!)
 <template>
   <Html :lang="htmlAttrs.lang" :dir="htmlAttrs.dir">
     <Body>
-      <div class="flow-layout">
+      <div class="minimal-layout">
         <TheHeader minimal />
-        <main class="flow-layout__content">
+        <div class="minimal-layout__content">
           <slot />
-        </main>
-        <LocaleModal />
+        </div>
+        <AuthModal />
         <TheFooter minimal />
       </div>
     </Body>
@@ -22,7 +22,7 @@ const htmlAttrs = computed(() => head.value.htmlAttrs!)
 </template>
 
 <style lang="scss" scoped>
-.flow-layout {
+.minimal-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

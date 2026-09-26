@@ -164,6 +164,30 @@ border-color: #d4d4d8;
 }
 ```
 
+## Iconos — ligeros y de un solo color
+
+Los iconos son ficheros de `assets/icons/` y se pintan con `BaseIcon`
+(`<BaseIcon icon="menu" size="sm" />`; el nombre es el del fichero). El color lo
+pone el CSS con `color`, así que cambia con el tema sin tocar el SVG.
+
+Un icono nuevo cumple todo esto:
+
+- `viewBox="0 0 24 24"` y **un único `<path fill="currentColor">`**. Sin
+  `<style>`, degradados, `clip-path` ni colores dentro del fichero.
+- Relleno y trazo simple, como los de Material Design Icons (Apache 2.0), para
+  que todo el conjunto se lea igual. Por debajo de unos 500 bytes.
+- Si ya hay uno parecido, se reutiliza. **Un icono que nadie referencia se
+  borra**; no se guarda por si acaso.
+
+Dos excepciones, y solo dos:
+
+- **Banderas** (`cu-flag-circle`, `do-flag-circle`): llevan su color, porque una
+  bandera monocroma no sirve.
+- **Iconos usados como `background-image`** en los campos de formulario
+  (`check`, `error-circle`, `chevron-down`...): `currentColor` no funciona en un
+  `background-image`, así que llevan el color dentro. Por eso `BaseSelect` tiene
+  un chevron para cada tema.
+
 ## Tokens disponibles (variables SCSS)
 
 | Variable                 | Valor             | Uso                  |

@@ -83,7 +83,7 @@ describe('Auth', () => {
     })
 
     it('logs out', () => {
-      cy.getByTestId('header-logged-user-dropdown').click()
+      cy.getByTestId('header-menu-button').click()
       cy.getByTestId('logout-dropdown-option').click()
       cy.getCookie('access-token').should('not.exist')
     })

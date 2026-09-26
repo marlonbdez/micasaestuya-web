@@ -39,7 +39,7 @@ pages/
     photos.vue             ← Paso 4: elegir fotos y verlas en miniatura
 
 layouts/
-  flow.vue                 ← header solo con logo, footer solo con copyright
+  minimal.vue              ← header solo con logo, footer solo con copyright
 
 components/
   RegionCascade.vue        ← los desplegables encadenados de región
@@ -185,14 +185,14 @@ hacía un `navigateTo()` crudo, sin prefijo de idioma, y a la página equivocada
 
 ## 4. El layout minimalista
 
-`layouts/flow.vue` deja el header con solo el logo y el footer con solo el
+`layouts/minimal.vue` deja el header con solo el logo y el footer con solo el
 copyright y el selector de idioma. En un flow de conversión cada enlace es una
 vía de escape.
 
 Se activa desde el padre y lo heredan todos los pasos:
 
 ```ts
-definePageMeta({ layout: 'flow' })
+definePageMeta({ layout: 'minimal' })
 ```
 
 Funciona porque **Vue Router fusiona el `meta` de todas las rutas coincidentes**,

@@ -34,6 +34,7 @@ const props = defineProps({
 
 const isVisible = ref(false)
 const inputValue = ref('')
+const dropdown = ref<HTMLElement | null>(null)
 
 const toogleVisibility = () => {
   isVisible.value = !isVisible.value
@@ -42,6 +43,8 @@ const toogleVisibility = () => {
 const hideDropdown = () => {
   isVisible.value = false
 }
+
+onClickOutside(dropdown, hideDropdown)
 
 const showDropdown = computed(() => {
   return props.externalDropdownCtrl ? props.showOptions : isVisible.value
@@ -71,7 +74,7 @@ watch(
 </script>
 
 <template>
-  <div v-click-outside="hideDropdown" class="dropdown">
+  <div ref="dropdown" class="dropdown">
     <div
       class="dropdown__selector"
       @click="toogleVisibility"
