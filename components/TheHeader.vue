@@ -23,7 +23,7 @@ const localePath = useLocalePath()
               {{ t('header.explore') }}
             </BaseCta>
           </li>
-          <li class="header__item">
+          <li class="header__item header__item--wide-only">
             <BaseCta
               is-link
               data-cy="header-publish-link"
@@ -31,12 +31,7 @@ const localePath = useLocalePath()
               :to="localePath('publish-listing')"
               :aria-label="t('header.publish')"
             >
-              <span class="header__publish-full">{{
-                t('header.publish')
-              }}</span>
-              <span class="header__publish-short">{{
-                t('header.publish_short')
-              }}</span>
+              {{ t('header.publish') }}
             </BaseCta>
           </li>
           <li class="header__item">
@@ -105,20 +100,6 @@ const localePath = useLocalePath()
     &:focus {
       color: var(--text);
       text-decoration: none;
-    }
-  }
-
-  &__publish-short {
-    display: none;
-
-    @include media-breakpoint-down(xs) {
-      display: inline;
-    }
-  }
-
-  &__publish-full {
-    @include media-breakpoint-down(xs) {
-      display: none;
     }
   }
 

@@ -109,7 +109,6 @@
     "theme_dark": "Oscuro",
     "faq": "Preguntas frecuentes",
     "coming_soon": "Próximamente",
-    "publish_short": "Publicar",
     "exit": "Salir"
   },
   "regions": {
@@ -353,7 +352,7 @@
         "too_many": "Como máximo {max} fotos",
         "unreadable": "Alguna foto no se pudo procesar"
       },
-      "publish": "No se pudo publicar el alojamiento. Inténtalo de nuevo."
+        "publish": "No se pudo publicar el alojamiento. Inténtalo de nuevo."
     },
     "submit": "Publicar alojamiento",
     "disclaimer": "Al publicar, aceptas que el trato final (fechas, condiciones, cualquier detalle) se acuerda directamente con quien te contacte. micasaestuya solo os pone en contacto, de forma gratuita.",

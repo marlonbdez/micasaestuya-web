@@ -107,7 +107,6 @@
     "theme_dark": "Dark",
     "faq": "FAQ",
     "coming_soon": "Coming soon",
-    "publish_short": "List",
     "exit": "Exit"
   },
   "regions": {
@@ -351,7 +350,7 @@
         "too_many": "{max} photos at most",
         "unreadable": "Some photo couldn't be processed"
       },
-      "publish": "The place couldn't be published. Please try again."
+        "publish": "The place couldn't be published. Please try again."
     },
     "submit": "Publish my place",
     "disclaimer": "By publishing, you agree that the final arrangement (dates, conditions, any details) is made directly with whoever contacts you. micasaestuya only puts you in touch, for free.",

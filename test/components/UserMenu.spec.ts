@@ -63,6 +63,14 @@ describe('UserMenu', () => {
     ).toBe('true')
   })
 
+  it('offers Explore and Publish, which the bar hides on narrow screens', async () => {
+    const wrapper = mountMenu()
+    await byCy(wrapper, 'header-menu-button').trigger('click')
+
+    expect(wrapper.text()).toContain('Explore')
+    expect(wrapper.text()).toContain('List my place')
+  })
+
   it('closes with Escape', async () => {
     const wrapper = mountMenu()
     await byCy(wrapper, 'header-menu-button').trigger('click')

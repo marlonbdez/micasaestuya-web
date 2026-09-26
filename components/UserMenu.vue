@@ -85,6 +85,12 @@ const sections = computed<MenuSection[]>(() => [
         icon: 'search',
         label: t('header.explore'),
         to: localePath('index')
+      },
+      {
+        id: 'publish',
+        icon: 'add',
+        label: t('header.publish'),
+        to: localePath('publish-listing')
       }
     ]
   },
