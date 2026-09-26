@@ -16,7 +16,7 @@
     "lint:js": "eslint --ext \".ts,.vue\" --ignore-path .gitignore .",
     "lint:js:fix": "eslint --ext \".ts,.vue\" --ignore-path .gitignore . --fix",
     "lint:prettier": "prettier --check . --ignore-path .gitignore",
-    "lint:prettier:fix": "prettier --write --list-different .",
+    "lint:prettier:fix": "prettier --write --list-different . --ignore-path .gitignore",
     "lint:fix": "npm-run-all -p lint:prettier:fix lint:js:fix",
     "dev": "nuxt dev",
     "build": "nuxt build",
