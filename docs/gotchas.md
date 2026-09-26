@@ -104,6 +104,49 @@ Al extraer el autocompletado aparecieron dos: el backend resalta con `<b>` y el
 parser solo contemplaba `<mark>`, así que se veía `La <b>Haba</b>na` literal; y
 `isSearchDisabled` se ponía a `true` al seleccionar y **nunca volvía a `false`**.
 
+### 9. `.container` no sabe que es un contenedor flex
+
+`.container` lleva un clearfix (`::before` y `::after` con `display: table`).
+Dentro de un contenedor `flex` con `justify-content: space-between` esos
+pseudoelementos son dos elementos flex más, y el logo del header quedaba a unos
+200 px del borde izquierdo en vez de pegado a él.
+
+**Cómo detectarlo:** mide con `getBoundingClientRect()` y compara con el borde
+del contenido de la página. **Solución:** `content: none` en los pseudoelementos
+del contenedor flex (`TheHeader`).
+
+### 10. Dos `z-index` iguales se resuelven por el orden del DOM
+
+`$zindex-radio` vale 1020, lo mismo que `$zindex-sticky`. Como el radio va
+después en el DOM, tapaba el panel del menú de usuario, que cuelga del header
+sticky. El header usa `$zindex-fixed`. **Lo que enseña:** un panel desplegable
+compite con el `z-index` de su contenedor, no con el suyo.
+
+### 11. Validar un checkbox obligatorio con yup
+
+`boolean().required()` deja pasar `false`: solo rechaza `undefined`. Un usuario
+que marca el checkbox y lo desmarca supera la validación. `boolean().isTrue()`
+sí exige `true`, pero deja pasar `undefined`, así que el campo necesita un valor
+inicial `false` (`publish-listing/index.vue`).
+
+`SignUp.vue` valida los términos con `bool().required()`: solo protege mientras
+el usuario no toque el checkbox.
+
+### 12. Probar un componente que usa composables de Nuxt
+
+El entorno de tests es `jsdom`, sin instancia de Nuxt: `useLocalePath` o
+`useColorMode` fallan con `[nuxt] instance unavailable`, y `NuxtLink` y
+`nuxt-icons` también. El entorno `nuxt` de `@nuxt/test-utils` pide `happy-dom`,
+que no está instalado. `UserMenu.spec.ts` lo resuelve con `vi.mock` de la ruta
+relativa del fichero del composable (el paquete no exporta subrutas) y con
+`stubs` de `BaseCta` y `BaseIcon`. Comprueba el comportamiento, no el aspecto.
+
+### 13. `onClickOutside` ignora el segundo clic del mismo tick
+
+Un test que hace clic dentro y enseguida fuera no cierra nada. Un usuario real
+nunca hace las dos cosas en el mismo tick: `test/helpers/click-outside.ts`
+espera uno entre ambos.
+
 ---
 
 ## Los guardarraíles que sí están en el código
