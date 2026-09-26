@@ -97,8 +97,17 @@
     "explore": "Explore",
     "publish": "List my place",
     "change_locale": "Change country and language",
-    "my_listings": "My places (coming soon)",
-    "logout": "Log out"
+    "my_listings": "My places",
+    "logout": "Log out",
+    "menu": "Menu",
+    "sign_up": "Sign up",
+    "language": "Country and language",
+    "theme": "Theme",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "faq": "FAQ",
+    "coming_soon": "Coming soon",
+    "publish_short": "List"
   },
   "regions": {
     "cu": "Cuba",

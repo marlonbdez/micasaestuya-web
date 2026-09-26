@@ -1,39 +1,10 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { useAuthStore } from '~/stores/auth'
 
 withDefaults(defineProps<{ minimal?: boolean }>(), { minimal: false })
 
-const authStore = useAuthStore()
-const { t, locale } = useI18n()
-const { isLogged, name } = storeToRefs(authStore)
+const { t } = useI18n()
 const localePath = useLocalePath()
-
-// "es-CU" → "ES (CU)", como en el prototipo.
-const localeLabel = computed(() => {
-  const [language, country] = locale.value.split('-')
-  return `${language.toUpperCase()} (${country})`
-})
-
-const userOptions = computed(() => [
-  // Deshabilitada hasta que exista el listado de alojamientos del usuario
-  // (necesita GET /api/listings en api).
-  {
-    id: 'my-listings',
-    dataTestId: 'mylistings-dropdown-option',
-    value: t('header.my_listings'),
-    icon: 'house',
-    disabled: true
-  },
-  {
-    id: 'logout',
-    dataTestId: 'logout-dropdown-option',
-    value: t('header.logout'),
-    icon: 'exit',
-    callback: () => authStore.logout()
-  }
-])
 </script>
 
 <template>
@@ -60,54 +31,16 @@ const userOptions = computed(() => [
               :to="localePath('publish-listing')"
               :aria-label="t('header.publish')"
             >
-              {{ t('header.publish') }}
+              <span class="header__publish-full">{{
+                t('header.publish')
+              }}</span>
+              <span class="header__publish-short">{{
+                t('header.publish_short')
+              }}</span>
             </BaseCta>
           </li>
-          <li class="header__item header__item--divider" aria-hidden="true" />
           <li class="header__item">
-            <ThemeSwitcher />
-          </li>
-          <li class="header__item">
-            <BaseCta
-              data-cy="header-i18n-button"
-              variant="flat"
-              :aria-label="t('header.change_locale')"
-              @click="authStore.showLocaleModal"
-            >
-              <BaseIcon icon="globe" size="sm" />
-              <span class="header__locale">{{ localeLabel }}</span>
-            </BaseCta>
-          </li>
-          <!--
-            El prototipo no dibuja login: se pide al publicar. Se queda aquí,
-            discreto, porque es la única forma de entrar sin publicar y de
-            cerrar sesión.
-          -->
-          <li v-if="!isLogged" class="header__item">
-            <BaseCta
-              data-cy="header-login-button"
-              variant="flat"
-              class="header__login"
-              :aria-label="t('header.login')"
-              @click="authStore.showAuthModal"
-            >
-              <BaseIcon icon="person" size="sm" />
-              <span class="header__login-label">{{ t('header.login') }}</span>
-            </BaseCta>
-          </li>
-          <li v-else class="header__item">
-            <BaseDropdown id="user-options" :options="userOptions">
-              <template #selector>
-                <BaseCta
-                  data-cy="header-logged-user-dropdown"
-                  variant="flat"
-                  aria-label="Logged user options"
-                  class="header__user"
-                >
-                  {{ name?.charAt(0).toUpperCase() }}
-                </BaseCta>
-              </template>
-            </BaseDropdown>
+            <UserMenu />
           </li>
         </ul>
       </nav>
@@ -119,7 +52,7 @@ const userOptions = computed(() => [
 .header {
   position: sticky;
   top: 0;
-  z-index: $zindex-sticky;
+  z-index: $zindex-fixed;
   background: var(--bg);
   border-bottom: px-to-rem(1) solid var(--border);
 
@@ -129,6 +62,11 @@ const userOptions = computed(() => [
     justify-content: space-between;
     gap: $gap-extra-medium;
     min-height: px-to-rem(66);
+
+    &::before,
+    &::after {
+      content: none;
+    }
   }
 
   &__menu {
@@ -150,13 +88,6 @@ const userOptions = computed(() => [
         display: none;
       }
     }
-
-    &--divider {
-      width: px-to-rem(1);
-      height: px-to-rem(22);
-      margin: 0 $gap-extra-tiny;
-      background: var(--border);
-    }
   }
 
   // BaseCta en modo enlace es texto subrayado; en el header es navegación.
@@ -164,12 +95,27 @@ const userOptions = computed(() => [
     @include font-outfit-medium;
     padding: $gap-small $gap-extra-small;
     color: var(--text-2);
+    letter-spacing: normal;
     text-decoration: none;
 
     &:hover,
     &:focus {
       color: var(--text);
       text-decoration: none;
+    }
+  }
+
+  &__publish-short {
+    display: none;
+
+    @include media-breakpoint-down(xs) {
+      display: inline;
+    }
+  }
+
+  &__publish-full {
+    @include media-breakpoint-down(xs) {
+      display: none;
     }
   }
 
@@ -181,6 +127,7 @@ const userOptions = computed(() => [
     background: var(--primary-button-color);
     color: var(--primary-button-text-color);
     font-size: $font-size-sm;
+    letter-spacing: normal;
     text-decoration: none;
     white-space: nowrap;
 
@@ -189,44 +136,6 @@ const userOptions = computed(() => [
       background: var(--primary-button-color-hover);
       color: var(--primary-button-text-color);
       text-decoration: none;
-    }
-  }
-
-  &__locale {
-    @include font-outfit-semibold;
-    white-space: nowrap;
-    font-size: $font-size-xs;
-    color: var(--text-2);
-
-    @include media-breakpoint-down(xs) {
-      display: none;
-    }
-  }
-
-  &__login-label {
-    font-size: $font-size-sm;
-    white-space: nowrap;
-
-    @include media-breakpoint-down(xs) {
-      display: none;
-    }
-  }
-
-  &__user {
-    width: px-to-rem(40);
-    height: px-to-rem(40);
-    min-height: auto;
-    border-radius: 50%;
-    padding: 0;
-    @include font-outfit-semibold;
-    font-size: $font-size-md;
-    color: var(--header-logged-user-color);
-    background-color: var(--header-logged-user-background-color);
-
-    &:not(:disabled):hover,
-    &:not(:disabled):focus {
-      color: var(--header-logged-user-color-hover);
-      background-color: var(--header-logged-user-background-color-hover);
     }
   }
 }

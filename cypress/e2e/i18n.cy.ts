@@ -7,6 +7,7 @@ describe('i18n', () => {
     cy.getByTestId('color-mode-spinner').should('not.exist')
 
     // Open the locale modal
+    cy.getByTestId('header-menu-button').click()
     cy.getByTestId('header-i18n-button').click()
     cy.getByTestId('locale-modal').should('exist')
   })

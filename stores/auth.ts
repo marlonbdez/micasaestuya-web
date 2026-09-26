@@ -4,7 +4,8 @@ import type {
   IServicesInstance,
   ILoginInput,
   IRegisterInput,
-  IUserInfo
+  IUserInfo,
+  AuthModalMode
 } from '@/core/types'
 
 export const useAuthStore = defineStore('auth', {
@@ -70,7 +71,7 @@ export const useAuthStore = defineStore('auth', {
     },
     // Acciones vacías a propósito: AuthModal y LocaleModal se suscriben con
     // $onAction. hideAuthModal avisa de que el modal se cerró, con login o sin él.
-    showAuthModal() {},
+    showAuthModal(_mode?: AuthModalMode) {},
     hideAuthModal() {},
     showLocaleModal() {}
   }
