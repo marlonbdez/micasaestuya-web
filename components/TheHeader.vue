@@ -44,6 +44,9 @@ const localePath = useLocalePath()
           </li>
         </ul>
       </nav>
+      <BaseCta v-else is-link class="header__link" :to="localePath('index')">
+        {{ t('header.exit') }}
+      </BaseCta>
     </div>
   </header>
 </template>

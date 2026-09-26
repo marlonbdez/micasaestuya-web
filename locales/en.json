@@ -107,7 +107,8 @@
     "theme_dark": "Dark",
     "faq": "FAQ",
     "coming_soon": "Coming soon",
-    "publish_short": "List"
+    "publish_short": "List",
+    "exit": "Exit"
   },
   "regions": {
     "cu": "Cuba",

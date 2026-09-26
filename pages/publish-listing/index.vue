@@ -19,6 +19,7 @@ defineI18nRoute({
 // No protege la página: se rellena sin cuenta. Está para restaurar la sesión
 // desde el token guardado; sin él, un usuario ya logueado vería el modal.
 definePageMeta({
+  layout: 'minimal',
   middleware: ['auth']
 })
 

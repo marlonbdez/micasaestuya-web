@@ -51,7 +51,7 @@ core/
   models/          clases de dominio
   constants/       constantes y enums
 pages/             rutas Nuxt, mínima lógica
-layouts/           default.vue y flow.vue
+layouts/           default.vue y minimal.vue
 locales/           traducciones
 docs/              el porqué de las decisiones, específico de este repo
 ```

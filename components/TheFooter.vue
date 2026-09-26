@@ -94,6 +94,22 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
           &copy; {{ new Date().getFullYear() }} micasaestuya.
         </p>
         <div class="footer__actions">
+          <template v-if="minimal">
+            <BaseCta
+              is-link
+              class="footer__legal-link"
+              :to="localePath('terms-and-conditions')"
+            >
+              {{ t('footer.legal.terms') }}
+            </BaseCta>
+            <BaseCta
+              is-link
+              class="footer__legal-link"
+              :to="localePath('privacy-policy')"
+            >
+              {{ t('footer.legal.privacy') }}
+            </BaseCta>
+          </template>
           <BaseCta
             data-cy="footer-i18n-button"
             variant="flat"
@@ -105,6 +121,7 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
             ({{ getLocale(locale)?.countryCode.toLocaleUpperCase() }})
           </BaseCta>
           <a
+            v-if="!minimal"
             class="footer__github-mark"
             :href="SOURCE_CODE_URL"
             target="_blank"
@@ -194,8 +211,25 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
 
   &__actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: $gap-extra-tiny;
+  }
+
+  &__legal-link {
+    @include font-outfit-regular;
+    margin-right: $gap-small;
+    font-size: $font-size-sm;
+    letter-spacing: normal;
+    color: var(--text-2);
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: var(--text);
+      text-decoration: underline;
+    }
   }
 
   &__github-mark {

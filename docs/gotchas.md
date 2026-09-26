@@ -134,7 +134,7 @@ reescribe o se borra, se quitan de aquí con él.
 | `adFlow.ts` · `hydrate`                        | La mezcla de `address` va aparte; el spread plano dejaría `street` sin definir.              |
 | `address.vue` · `update`                       | El parche se arma sobre la dirección actual: sin el spread, la calle borraría la región.     |
 | `core/types.ts` · `IAdAddress`                 | Región y calle anidadas: cada parte tiene su dueño y no se pisan.                            |
-| `flow.vue` · `LocaleModal`                     | Parece no usarse; lo dispara el selector de idioma del footer.                               |
+| `minimal.vue` · `LocaleModal`                  | Parece no usarse; lo dispara el selector de idioma del footer.                               |
 
 ---
 

@@ -109,7 +109,8 @@
     "theme_dark": "Oscuro",
     "faq": "Preguntas frecuentes",
     "coming_soon": "Próximamente",
-    "publish_short": "Publicar"
+    "publish_short": "Publicar",
+    "exit": "Salir"
   },
   "regions": {
     "cu": "Cuba",
