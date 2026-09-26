@@ -350,10 +350,11 @@
         "too_many": "{max} photos at most",
         "unreadable": "Some photo couldn't be processed"
       },
-        "publish": "The place couldn't be published. Please try again."
+      "terms_required": "You have to accept this to publish",
+      "publish": "The place couldn't be published. Please try again."
     },
     "submit": "Publish my place",
-    "disclaimer": "By publishing, you agree that the final arrangement (dates, conditions, any details) is made directly with whoever contacts you. micasaestuya only puts you in touch, for free.",
+    "terms": "I agree that the final arrangement (dates, conditions, any details) is made directly with whoever contacts me. micasaestuya only puts us in touch, for free.",
     "published": {
       "title": "Your place is now visible!",
       "text": "Travelers looking in {region} can now find your home and message you directly on WhatsApp.",
