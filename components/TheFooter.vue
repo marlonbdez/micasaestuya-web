@@ -11,7 +11,7 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
 </script>
 
 <template>
-  <footer class="footer">
+  <footer class="footer" :class="{ 'footer--minimal': minimal }">
     <div class="container">
       <nav v-if="!minimal" class="footer__links">
         <div class="footer__group">
@@ -93,23 +93,7 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
         <p class="footer__copyright">
           &copy; {{ new Date().getFullYear() }} micasaestuya.
         </p>
-        <div class="footer__actions">
-          <template v-if="minimal">
-            <BaseCta
-              is-link
-              class="footer__legal-link"
-              :to="localePath('terms-and-conditions')"
-            >
-              {{ t('footer.legal.terms') }}
-            </BaseCta>
-            <BaseCta
-              is-link
-              class="footer__legal-link"
-              :to="localePath('privacy-policy')"
-            >
-              {{ t('footer.legal.privacy') }}
-            </BaseCta>
-          </template>
+        <div v-if="!minimal" class="footer__actions">
           <BaseCta
             data-cy="footer-i18n-button"
             variant="flat"
@@ -121,7 +105,6 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
             ({{ getLocale(locale)?.countryCode.toLocaleUpperCase() }})
           </BaseCta>
           <a
-            v-if="!minimal"
             class="footer__github-mark"
             :href="SOURCE_CODE_URL"
             target="_blank"
@@ -143,6 +126,10 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
   border-top: px-to-rem(1) solid var(--border);
   margin: 0;
   padding-top: $gap-huge;
+
+  &--minimal {
+    padding-top: 0;
+  }
 
   &__links {
     display: grid;
@@ -203,6 +190,11 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
     }
   }
 
+  &--minimal &__bottom {
+    border-top: 0;
+    justify-content: center;
+  }
+
   &__copyright {
     font-size: $font-size-sm;
     color: var(--text-3);
@@ -211,25 +203,8 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
 
   &__actions {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
     gap: $gap-extra-tiny;
-  }
-
-  &__legal-link {
-    @include font-outfit-regular;
-    margin-right: $gap-small;
-    font-size: $font-size-sm;
-    letter-spacing: normal;
-    color: var(--text-2);
-    text-decoration: none;
-
-    &:hover,
-    &:focus {
-      color: var(--text);
-      text-decoration: underline;
-    }
   }
 
   &__github-mark {

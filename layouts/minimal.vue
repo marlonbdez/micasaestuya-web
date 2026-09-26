@@ -15,7 +15,6 @@ const htmlAttrs = computed(() => head.value.htmlAttrs!)
           <slot />
         </div>
         <AuthModal />
-        <LocaleModal />
         <TheFooter minimal />
       </div>
     </Body>
