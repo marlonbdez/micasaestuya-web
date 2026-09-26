@@ -1,8 +1,8 @@
 {
   "valid": {
-    "firstName": "Marlon",
-    "lastName": "Bdez",
-    "email": "marlonbdez@gmail.com",
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "e2e.user@example.com",
     "password": "micasaestuya"
   },
   "invalid": {
