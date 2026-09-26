@@ -1,6 +1,6 @@
 {
   "valid": {
-    "firstName": "E2E",
+    "firstName": "Test",
     "lastName": "User",
     "email": "e2e.user@example.com",
     "password": "micasaestuya"
