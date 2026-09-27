@@ -60,8 +60,10 @@ const newId = () =>
     : `${Date.now()}-${Math.random().toString(16).slice(2)}`
 
 export const usePhotoDb = () => {
-  const savePhoto = async (photo: Blob) => {
-    const id = newId()
+  // Sin `id`, genera uno nuevo (una foto). Con `id`, guarda bajo esa clave
+  // exacta (la miniatura de una foto ya guardada, con la clave derivada
+  // `${id}-thumb`).
+  const savePhoto = async (photo: Blob, id = newId()) => {
     await runInStore('readwrite', (store) => store.put(photo, id))
     return id
   }

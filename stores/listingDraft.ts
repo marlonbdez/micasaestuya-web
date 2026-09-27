@@ -44,7 +44,10 @@ export const useListingDraftStore = defineStore('listingDraft', {
     draft: emptyListingDraft(),
     // Solo en memoria: la pantalla de confirmación lo lee y, si se recarga,
     // no hay nada que confirmar.
-    published: null as IListing | null
+    published: null as IListing | null,
+    // El alojamiento se publica igual aunque falle la subida de las fotos
+    // (Listing.md § Fotos, opción B): esto es lo que distingue el mensaje.
+    photosFailed: false
   }),
 
   actions: {
@@ -79,19 +82,38 @@ export const useListingDraftStore = defineStore('listingDraft', {
     },
 
     async publish() {
+      let listing: IListing
       try {
         const { $services } = useNuxtApp()
-        const listing = await ($services as IServicesInstance).listing.create(
+        listing = await ($services as IServicesInstance).listing.create(
           toCreateInput(this.draft)
         )
-        this.published = listing
-        this.reset()
-        return listing
       } catch (error) {
         console.error('Unable to publish the listing', error)
         Sentry.captureException(error)
         throw error
       }
+
+      // A partir de aquí el alojamiento ya existe: un fallo en las fotos no
+      // debe volver a intentar crearlo, así que no se relanza el error.
+      this.published = listing
+      this.photosFailed = false
+      const photoIds = [...this.draft.photos]
+
+      if (photoIds.length > 0) {
+        try {
+          const { uploadListingPhotos } = useListingPhotoUpload()
+          const updated = await uploadListingPhotos(listing.id, photoIds)
+          if (updated) this.published = updated
+        } catch (photoError) {
+          console.error('Unable to upload the listing photos', photoError)
+          Sentry.captureException(photoError)
+          this.photosFailed = true
+        }
+      }
+
+      this.reset()
+      return this.published
     },
 
     reset() {
@@ -102,8 +124,11 @@ export const useListingDraftStore = defineStore('listingDraft', {
       localStorage.removeItem(STORAGE_KEY)
       // Se borran una a una y no con clearPhotos(): el almacén de IndexedDB es
       // el mismo que usa /post-ad, y vaciarlo entero se llevaría sus fotos.
+      // Borrar `${id}-thumb` no falla si no existe (/post-ad no guarda ninguna).
       const { deletePhoto } = usePhotoDb()
-      Promise.all(photoIds.map((id) => deletePhoto(id))).catch((error) => {
+      Promise.all(
+        photoIds.flatMap((id) => [deletePhoto(id), deletePhoto(`${id}-thumb`)])
+      ).catch((error) => {
         console.error('Unable to clear the listing photos', error)
         Sentry.captureException(error)
       })

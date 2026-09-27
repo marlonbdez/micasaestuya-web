@@ -43,6 +43,24 @@ export interface IListing extends IListingCreateInput {
   createdAt: string
 }
 
+export interface IPhotoUploadRequest {
+  contentType: string
+}
+
+// Lo que la api devuelve por cada foto pedida: el id que ella asigna y las
+// dos URLs firmadas (foto y miniatura) para subir directo a R2.
+export interface IPhotoUpload {
+  photoId: string
+  contentType: string
+  uploadUrl: string
+  thumbUploadUrl: string
+}
+
 export interface IListingModule {
   create(input: IListingCreateInput): Promise<IListing>
+  requestPhotoUploads(
+    listingId: string,
+    photos: IPhotoUploadRequest[]
+  ): Promise<IPhotoUpload[]>
+  confirmPhotos(listingId: string, photoIds: string[]): Promise<IListing>
 }
