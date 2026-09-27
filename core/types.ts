@@ -24,7 +24,9 @@ export type {
   IListingDraft,
   IListingCreateInput,
   IListing,
-  IListingModule
+  IListingModule,
+  IPhotoUploadRequest,
+  IPhotoUpload
 } from './types/listing'
 
 export interface ICredentials {

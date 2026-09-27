@@ -342,6 +342,7 @@
       "region_required": "Elige la región hasta el último nivel",
       "description_required": "Cuéntales cómo es tu alojamiento",
       "tasks_required": "Elige al menos una tarea",
+      "photos_required": "Añade al menos una foto",
       "capacity_required": "Indica cuántas personas caben",
       "capacity_range": "Tiene que ser un número entero entre {min} y {max}",
       "whatsapp_required": "Indica tu número de WhatsApp",
@@ -361,7 +362,8 @@
       "title": "¡Tu alojamiento ya está visible!",
       "text": "Los viajeros que busquen en {region} ya pueden encontrar tu casa y escribirte directo por WhatsApp.",
       "capacity": "{count} persona | {count} personas",
-      "explore": "Volver a explorar"
+      "explore": "Volver a explorar",
+      "photos_failed": "No pudimos subir las fotos. Puedes contarles cómo es tu casa por WhatsApp mientras tanto."
     }
   },
   "footer": {

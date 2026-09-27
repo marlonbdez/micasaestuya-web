@@ -23,7 +23,7 @@ definePageMeta({
 
 const { t } = useI18n()
 const localePath = useLocalePath()
-const { published } = storeToRefs(useListingDraftStore())
+const { published, photosFailed } = storeToRefs(useListingDraftStore())
 </script>
 
 <template>
@@ -40,6 +40,10 @@ const { published } = storeToRefs(useListingDraftStore())
         t('publish_listing.published.text', { region: published.region.term })
       }}
     </p>
+
+    <BaseAlert v-if="photosFailed" variant="warning">
+      {{ t('publish_listing.published.photos_failed') }}
+    </BaseAlert>
 
     <article class="listing-published__card">
       <div class="listing-published__card-image">

@@ -72,6 +72,9 @@ const { handleSubmit, errors, defineField } = useForm({
     tasks: array()
       .of(string())
       .min(1, () => t('publish_listing.errors.tasks_required')),
+    photos: array()
+      .of(string())
+      .min(1, () => t('publish_listing.errors.photos_required')),
     capacity: number()
       .typeError(() => t('publish_listing.errors.capacity_required'))
       .required(() => t('publish_listing.errors.capacity_required'))
@@ -91,6 +94,7 @@ const { handleSubmit, errors, defineField } = useForm({
     region: draft.value.region,
     description: draft.value.description,
     tasks: [...draft.value.tasks],
+    photos: [...draft.value.photos],
     // BaseInput trabaja con texto, también con type="number".
     capacity: draft.value.capacity === null ? '' : String(draft.value.capacity),
     whatsapp: draft.value.whatsapp,
@@ -102,6 +106,7 @@ const [title, titleAttrs] = defineField('title')
 const [region] = defineField('region')
 const [description, descriptionAttrs] = defineField('description')
 const [tasks] = defineField('tasks')
+const [photos] = defineField('photos')
 const [capacity, capacityAttrs] = defineField('capacity')
 const [whatsapp, whatsappAttrs] = defineField('whatsapp')
 const [accepted] = defineField('accepted')
@@ -120,6 +125,14 @@ watch(capacity, (value) => {
   })
 })
 watch(whatsapp, (value) => listingDraftStore.update({ whatsapp: value ?? '' }))
+// photos no tiene su propio v-model: useDraftPhotos ya escribe los ids en el
+// store (getIds/setIds); esto solo refleja ese cambio en la validación.
+watch(
+  () => draft.value.photos,
+  (ids) => {
+    photos.value = [...ids]
+  }
+)
 
 // El orden de los chips es el del enum, no el del clic: así el dato guardado
 // no depende de en qué orden se pulsaron.
@@ -130,6 +143,7 @@ const toggleTask = (task: CollaborationTask, checked: boolean) => {
   tasks.value = TASKS.filter((option) => next.includes(option))
 }
 
+const { resizePhoto } = useImageResize()
 const {
   previews,
   isSaving,
@@ -141,7 +155,8 @@ const {
 } = useDraftPhotos({
   getIds: () => listingDraftStore.draft.photos,
   setIds: (ids) => listingDraftStore.update({ photos: ids }),
-  max: MAX_PHOTOS
+  max: MAX_PHOTOS,
+  resize: resizePhoto
 })
 
 onMounted(loadPhotos)
@@ -187,6 +202,7 @@ const FIELD_IDS: Record<string, string> = {
   title: 'listing-title',
   region: 'ad-region-1',
   description: 'listing-description',
+  photos: 'listing-photos',
   tasks: `listing-task-${TASKS[0]}`,
   capacity: 'listing-capacity',
   whatsapp: 'listing-whatsapp',
@@ -254,7 +270,7 @@ const onSubmit = handleSubmit(
               ? t(`publish_listing.errors.photos.${photoError}`, {
                   max: MAX_PHOTOS
                 })
-              : ''
+              : errors.photos ?? ''
           "
           @select="addPhotos"
         />

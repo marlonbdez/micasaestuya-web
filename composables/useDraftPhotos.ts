@@ -16,19 +16,31 @@ export type DraftPhotoError =
   | 'too_many'
   | 'unreadable'
 
+interface IResizedDraftPhoto {
+  photo: Blob
+  // Sin miniatura, la deja sin usar quien no la necesita (/post-ad).
+  thumbnail?: Blob
+}
+
 interface IDraftPhotosOptions {
   getIds: () => string[]
   setIds: (ids: string[]) => void
   max: number
+  // Por defecto, el reescalado de siempre (una sola imagen, sin miniatura):
+  // así /post-ad sigue igual sin tener que saber nada de esto.
+  resize?: (file: File) => Promise<IResizedDraftPhoto>
 }
 
 export const useDraftPhotos = ({
   getIds,
   setIds,
-  max
+  max,
+  resize
 }: IDraftPhotosOptions) => {
   const { savePhoto, getPhoto, deletePhoto } = usePhotoDb()
   const { resizeImage } = useImageResize()
+  const resizePhoto =
+    resize ?? (async (file: File) => ({ photo: await resizeImage(file) }))
 
   const previews = ref<IDraftPhotoPreview[]>([])
   const isSaving = ref(false)
@@ -83,8 +95,9 @@ export const useDraftPhotos = ({
     // el try va por foto: una que no se pueda decodificar no tumba al resto.
     for (const file of images.slice(0, room)) {
       try {
-        const photo = await resizeImage(file)
+        const { photo, thumbnail } = await resizePhoto(file)
         const id = await savePhoto(photo)
+        if (thumbnail) await savePhoto(thumbnail, `${id}-thumb`)
 
         setIds([...getIds(), id])
         if (isMounted) {
@@ -109,7 +122,8 @@ export const useDraftPhotos = ({
     setIds(getIds().filter((photoId) => photoId !== id))
 
     try {
-      await deletePhoto(id)
+      // Borrar la miniatura no falla si no existe (/post-ad no guarda ninguna).
+      await Promise.all([deletePhoto(id), deletePhoto(`${id}-thumb`)])
     } catch (deleteError) {
       console.error('Unable to delete the photo', deleteError)
       Sentry.captureException(deleteError)
