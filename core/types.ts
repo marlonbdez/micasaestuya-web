@@ -2,16 +2,6 @@ import type { IRegionModule, IRegion } from './types/region'
 import type { IListingModule } from './types/listing'
 
 export type {
-  IProperty,
-  IPropertyLocation,
-  IPropertyHost,
-  IPropertyListResponse,
-  IPropertyFilters,
-  IPropertyCreateInput,
-  IPropertyUpdateInput,
-  PropertyStatus
-} from './types/property'
-export type {
   IBooking,
   IBookingUser,
   IBookingListResponse,
@@ -128,26 +118,3 @@ export enum PropertyType {
 }
 
 export type IAdRegion = Omit<IRegion, 'highlighted_text'>
-
-export interface IAdAddress {
-  region: IAdRegion | null
-  street: string
-  streetNumber: string
-}
-
-export interface IAdDetails {
-  price: number | null
-  surface: number | null
-  bedrooms: number | null
-  bathrooms: number | null
-}
-
-export interface IAdDraft {
-  type: PropertyType | null
-  operation: OperationType | null
-  address: IAdAddress
-  details: IAdDetails
-  // Solo ids: los ficheros viven en IndexedDB, no en el borrador.
-  photos: string[]
-  description: string
-}

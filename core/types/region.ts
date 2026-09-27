@@ -5,7 +5,7 @@ export enum LevelType {
 }
 
 // Una región es un nodo del árbol administrativo: provincia, municipio o
-// localidad. Nunca lleva calle ni coordenadas; eso vive en IAdAddress.
+// localidad. Nunca lleva calle ni coordenadas.
 export interface IRegion {
   id?: string
   highlighted_text?: string

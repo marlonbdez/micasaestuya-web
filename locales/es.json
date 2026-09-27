@@ -116,6 +116,9 @@
     "do": "República Dominicana",
     "pr": "Puerto Rico"
   },
+  "region_cascade": {
+    "select_placeholder": "Selecciona"
+  },
   "search": {
     "placeholder": "Buscar en provincia, municipio...",
     "error": "Escribe una ubicación donde buscar",
@@ -176,91 +179,6 @@
     "garage": "Garaje",
     "house": "Casa",
     "apartment": "Apartamento"
-  },
-  "post_ad": {
-    "next": "Siguiente",
-    "back": "Atrás",
-    "publish": "Publicar",
-    "steps": {
-      "basic_info": "Datos básicos",
-      "address": "Ubicación",
-      "details": "Detalles",
-      "photos": "Fotos",
-      "description": "Descripción y extras"
-    },
-    "basic_info": {
-      "title": "¿Qué quieres publicar?",
-      "type_label": "Tipo de inmueble",
-      "operation_label": "Operación",
-      "operation": {
-        "sale": "Vender",
-        "rent": "Alquilar",
-        "share": "Compartir"
-      },
-      "price_label": {
-        "sale": "Precio de venta (USD)",
-        "rent": "Precio del alquiler (USD/mes)",
-        "share": "Precio de la habitación (USD/mes)"
-      },
-      "price_placeholder": {
-        "sale": "Ej. 150000",
-        "rent": "Ej. 500",
-        "share": "Ej. 200"
-      }
-    },
-    "address": {
-      "title": "¿Dónde está el inmueble?",
-      "street_label": "Dirección",
-      "street_placeholder": "Ej. Calle 23",
-      "number_label": "Número (opcional)",
-      "number_placeholder": "Ej. 154",
-      "select_placeholder": "Selecciona",
-      "errors": {
-        "street_required": "Indica la dirección"
-      }
-    },
-    "details": {
-      "title": "¿Cómo es el inmueble?",
-      "surface_label": "Superficie (m²)",
-      "surface_placeholder": "Ej. 80",
-      "bedrooms_label": "Habitaciones (opcional)",
-      "bedrooms_placeholder": "Ej. 3",
-      "bathrooms_label": "Baños (opcional)",
-      "bathrooms_placeholder": "Ej. 2",
-      "errors": {
-        "number": "Tiene que ser un número",
-        "price_required": "Indica el precio",
-        "price_positive": "El precio tiene que ser mayor que cero",
-        "surface_required": "Indica la superficie",
-        "surface_positive": "La superficie tiene que ser mayor que cero",
-        "rooms_integer": "Tiene que ser un número entero",
-        "rooms_positive": "Tiene que ser mayor que cero"
-      }
-    },
-    "photos": {
-      "title": "Enseña el inmueble",
-      "add_label": "Elige tus fotos",
-      "hint": "Hasta {max} fotos · se guardan en tu navegador",
-      "saving": "Preparando las fotos…",
-      "empty": "Todavía no has añadido ninguna foto",
-      "main": "Principal",
-      "remove": "Quitar la foto",
-      "alt": "Foto {position} del inmueble",
-      "errors": {
-        "too_many": "Solo puedes añadir {max} fotos",
-        "not_an_image": "Se han descartado los ficheros que no eran imágenes",
-        "unreadable": "No hemos podido guardar alguna foto. Inténtalo otra vez",
-        "storage": "Tu navegador no nos deja guardar las fotos. Prueba a salir del modo privado"
-      }
-    },
-    "description": {
-      "title": "Cuéntanos más sobre el inmueble",
-      "label": "Descripción",
-      "placeholder": "Describe el inmueble: distribución, estado, luminosidad, qué lo hace especial…",
-      "errors": {
-        "description_required": "Añade una descripción"
-      }
-    }
   },
   "modals": {
     "auth": {

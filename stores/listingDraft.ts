@@ -117,21 +117,18 @@ export const useListingDraftStore = defineStore('listingDraft', {
     },
 
     reset() {
-      const photoIds = this.draft.photos
       this.draft = emptyListingDraft()
       if (!import.meta.client) return
 
       localStorage.removeItem(STORAGE_KEY)
-      // Se borran una a una y no con clearPhotos(): el almacén de IndexedDB es
-      // el mismo que usa /post-ad, y vaciarlo entero se llevaría sus fotos.
-      // Borrar `${id}-thumb` no falla si no existe (/post-ad no guarda ninguna).
-      const { deletePhoto } = usePhotoDb()
-      Promise.all(
-        photoIds.flatMap((id) => [deletePhoto(id), deletePhoto(`${id}-thumb`)])
-      ).catch((error) => {
-        console.error('Unable to clear the listing photos', error)
-        Sentry.captureException(error)
-      })
+      // Este almacén de IndexedDB es solo del borrador de Publicar: vaciarlo
+      // entero no se lleva por delante nada de otro flujo.
+      usePhotoDb()
+        .clearPhotos()
+        .catch((error) => {
+          console.error('Unable to clear the listing photos', error)
+          Sentry.captureException(error)
+        })
     }
   }
 })

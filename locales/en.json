@@ -114,6 +114,9 @@
     "do": "Dominican Republic",
     "pr": "Puerto Rico"
   },
+  "region_cascade": {
+    "select_placeholder": "Select"
+  },
   "search": {
     "placeholder": "Search by province, municipality...",
     "error": "Write a location where to search",
@@ -174,91 +177,6 @@
     "garage": "Garage",
     "house": "House",
     "apartment": "Apartment"
-  },
-  "post_ad": {
-    "next": "Next",
-    "back": "Back",
-    "publish": "Publish",
-    "steps": {
-      "basic_info": "Basic information",
-      "address": "Location",
-      "details": "Details",
-      "photos": "Photos",
-      "description": "Description and extras"
-    },
-    "basic_info": {
-      "title": "What do you want to publish?",
-      "type_label": "Property type",
-      "operation_label": "Operation",
-      "operation": {
-        "sale": "Sell",
-        "rent": "Rent out",
-        "share": "Share"
-      },
-      "price_label": {
-        "sale": "Sale price (USD)",
-        "rent": "Rent price (USD/month)",
-        "share": "Room price (USD/month)"
-      },
-      "price_placeholder": {
-        "sale": "E.g. 150000",
-        "rent": "E.g. 500",
-        "share": "E.g. 200"
-      }
-    },
-    "address": {
-      "title": "Where is the property?",
-      "street_label": "Street",
-      "street_placeholder": "E.g. Calle 23",
-      "number_label": "Number (optional)",
-      "number_placeholder": "E.g. 154",
-      "select_placeholder": "Select",
-      "errors": {
-        "street_required": "Enter the street"
-      }
-    },
-    "details": {
-      "title": "What is the property like?",
-      "surface_label": "Surface (m²)",
-      "surface_placeholder": "E.g. 80",
-      "bedrooms_label": "Bedrooms (optional)",
-      "bedrooms_placeholder": "E.g. 3",
-      "bathrooms_label": "Bathrooms (optional)",
-      "bathrooms_placeholder": "E.g. 2",
-      "errors": {
-        "number": "Must be a number",
-        "price_required": "Enter the price",
-        "price_positive": "The price must be greater than zero",
-        "surface_required": "Enter the surface",
-        "surface_positive": "The surface must be greater than zero",
-        "rooms_integer": "Must be a whole number",
-        "rooms_positive": "Must be greater than zero"
-      }
-    },
-    "photos": {
-      "title": "Show the property",
-      "add_label": "Choose your photos",
-      "hint": "Up to {max} photos · they stay in your browser",
-      "saving": "Preparing the photos…",
-      "empty": "You have not added any photos yet",
-      "main": "Main",
-      "remove": "Remove the photo",
-      "alt": "Photo {position} of the property",
-      "errors": {
-        "too_many": "You can only add {max} photos",
-        "not_an_image": "Files that were not images have been discarded",
-        "unreadable": "We could not save one of the photos. Please try again",
-        "storage": "Your browser will not let us store the photos. Try leaving private mode"
-      }
-    },
-    "description": {
-      "title": "Tell us more about the property",
-      "label": "Description",
-      "placeholder": "Describe the property: layout, condition, natural light, what makes it special…",
-      "errors": {
-        "description_required": "Add a description"
-      }
-    }
   },
   "modals": {
     "auth": {
