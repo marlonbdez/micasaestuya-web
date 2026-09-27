@@ -19,16 +19,17 @@ la tarea lo pida. El porqué que cruza todo el proyecto vive en
 | `../micasaestuya-docs/product-vision.md` | **Siempre al empezar.** Qué es el proyecto; manda sobre todo lo demás |
 | `../micasaestuya-docs/status.md`         | Justo después: dónde estamos, siguiente paso y deuda                  |
 | `docs/regions.md`                        | Componentes de ubicación — implementación en `web`                    |
-| `docs/post-ad-flow.md`                   | Cualquier cosa en `/post-ad` (modelo anterior al pivote)              |
 | `docs/gotchas.md`                        | Algo falla de forma rara, o vas a depurar                             |
 | `docs/tooling.md`                        | CI, lint y Docker — específico de `web`                               |
 | `docs/design-system.md`                  | Escribes SCSS                                                         |
 
 **Ojo con el código del modelo anterior.** micasaestuya ya no es un portal
-inmobiliario (ADR 006 en `micasaestuya-docs`). Parte del código de este repo
-—`/post-ad`, el store `adFlow`, `core/types/property.ts`, `core/models/Property.ts`,
-`PropertyType`, `OperationType`— es de antes del pivote: sirve como referencia
-de patrones técnicos, nunca como descripción del producto.
+inmobiliario (ADR 006 en `micasaestuya-docs`). `/post-ad`, el store `adFlow` y
+`core/types/property.ts` ya se borraron (deuda anotada en `status.md`
+resuelta). Lo que queda del modelo anterior —`HomeSearch.vue` en la home,
+`PropertyType`, `OperationType`— sigue ahí porque `HomeSearch` sigue en
+producción; no describe el producto actual y su retirada es una decisión
+aparte, todavía sin tomar (`status.md`).
 
 ---
 

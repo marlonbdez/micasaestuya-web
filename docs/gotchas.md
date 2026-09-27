@@ -151,32 +151,15 @@ espera uno entre ambos.
 
 ## Los guardarraíles que sí están en el código
 
-Las filas de `post-ad.vue`, `basic-info.vue`, `address.vue`, `adFlow.ts` e
-`IAdAddress` son del flow de publicar anuncio, anterior al pivote
-(`post-ad-flow.md`). Siguen siendo ciertas mientras ese código exista; si se
-reescribe o se borra, se quitan de aquí con él.
-
-| Dónde                                          | Qué protege                                                                                  |
-| ---------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `post-ad.vue` · `STEPS`                        | Identificarse falta a propósito; parece un paso olvidado.                                    |
-| `post-ad.vue` · `hydrate()`                    | Va en el `setup`, no en `onMounted`, o los hijos leen el borrador vacío.                     |
-| `post-ad.vue` · `currentStepName`              | Por nombre de ruta, no por path (ver § 4).                                                   |
-| `post-ad.vue` · `.post-ad`                     | El `max-width` vive aquí; si cada paso pone el suyo, se desalinean.                          |
-| `post-ad.vue` · `__nav`                        | La navegación vive en el layout para no duplicarla cinco veces.                              |
-| `index.vue` · `middleware`                     | `useLocalePath()` va dentro; `definePageMeta` se extrae fuera del setup.                     |
-| `basic-info.vue` · `--joined`                  | `gap: 0` y `nowrap` parecen un descuido: el modo `inline` une bordes con márgenes negativos. |
-| `basic-info.vue` · `__option`                  | El `line-height` de `BaseRadioButton` está pensado para una sola línea.                      |
-| `useRegionCascade.ts` · `select`               | El truncado con `slice` es lo que invalida los niveles inferiores.                           |
-| `RegionCascade.vue` · `toSelectOptions`        | La opción vacía hace de placeholder; un `<select>` nativo no tiene ese atributo.             |
-| `RegionSuggest.vue` · `getLevelName`           | La clave es el nivel, no su nombre: en RD el nivel 3 es "Sector".                            |
-| `RegionSuggest.vue` · `dropdown__content`      | `BaseDropdown` ancla el panel a la derecha, pensado para selectores estrechos.               |
-| `useRegionSuggest.ts` · `skipNextSearch`       | Escribir la opción elegida en el campo no debe relanzar la búsqueda.                         |
-| `useRegionSuggest.ts` · `parseHighlightedText` | Se trocea en segmentos en vez de usar `v-html`: sería una vía de XSS.                        |
-| `BaseSelect.vue` · `updateModelValue`          | `HTMLSelectElement`, no `HTMLInputElement` (ver `gotchas.md` § 6).                           |
-| `adFlow.ts` · `STORAGE_KEY`                    | La versión en la clave no es decorativa (`post-ad-flow.md` § 5).                             |
-| `adFlow.ts` · `hydrate`                        | La mezcla de `address` va aparte; el spread plano dejaría `street` sin definir.              |
-| `address.vue` · `update`                       | El parche se arma sobre la dirección actual: sin el spread, la calle borraría la región.     |
-| `core/types.ts` · `IAdAddress`                 | Región y calle anidadas: cada parte tiene su dueño y no se pisan.                            |
+| Dónde                                          | Qué protege                                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------------- |
+| `useRegionCascade.ts` · `select`               | El truncado con `slice` es lo que invalida los niveles inferiores.               |
+| `RegionCascade.vue` · `toSelectOptions`        | La opción vacía hace de placeholder; un `<select>` nativo no tiene ese atributo. |
+| `RegionSuggest.vue` · `getLevelName`           | La clave es el nivel, no su nombre: en RD el nivel 3 es "Sector".                |
+| `RegionSuggest.vue` · `dropdown__content`      | `BaseDropdown` ancla el panel a la derecha, pensado para selectores estrechos.   |
+| `useRegionSuggest.ts` · `skipNextSearch`       | Escribir la opción elegida en el campo no debe relanzar la búsqueda.             |
+| `useRegionSuggest.ts` · `parseHighlightedText` | Se trocea en segmentos en vez de usar `v-html`: sería una vía de XSS.            |
+| `BaseSelect.vue` · `updateModelValue`          | `HTMLSelectElement`, no `HTMLInputElement` (ver `gotchas.md` § 6).               |
 
 ---
 

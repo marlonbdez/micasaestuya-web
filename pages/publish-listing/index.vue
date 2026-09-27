@@ -143,7 +143,6 @@ const toggleTask = (task: CollaborationTask, checked: boolean) => {
   tasks.value = TASKS.filter((option) => next.includes(option))
 }
 
-const { resizePhoto } = useImageResize()
 const {
   previews,
   isSaving,
@@ -155,8 +154,7 @@ const {
 } = useDraftPhotos({
   getIds: () => listingDraftStore.draft.photos,
   setIds: (ids) => listingDraftStore.update({ photos: ids }),
-  max: MAX_PHOTOS,
-  resize: resizePhoto
+  max: MAX_PHOTOS
 })
 
 onMounted(loadPhotos)

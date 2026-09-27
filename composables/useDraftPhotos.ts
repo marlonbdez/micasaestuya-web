@@ -1,9 +1,7 @@
 import * as Sentry from '@sentry/nuxt'
 
-// La versión genérica de useAdPhotos: la misma lógica (IndexedDB para los
-// ficheros, el borrador solo guarda los ids), pero sin atarse a un store. Quien
-// la usa le dice dónde leer y escribir los ids. useAdPhotos se queda como está
-// mientras exista /post-ad.
+// IndexedDB para los ficheros; el borrador (quien llama con getIds/setIds)
+// solo guarda los ids.
 
 export interface IDraftPhotoPreview {
   id: string
@@ -16,31 +14,19 @@ export type DraftPhotoError =
   | 'too_many'
   | 'unreadable'
 
-interface IResizedDraftPhoto {
-  photo: Blob
-  // Sin miniatura, la deja sin usar quien no la necesita (/post-ad).
-  thumbnail?: Blob
-}
-
 interface IDraftPhotosOptions {
   getIds: () => string[]
   setIds: (ids: string[]) => void
   max: number
-  // Por defecto, el reescalado de siempre (una sola imagen, sin miniatura):
-  // así /post-ad sigue igual sin tener que saber nada de esto.
-  resize?: (file: File) => Promise<IResizedDraftPhoto>
 }
 
 export const useDraftPhotos = ({
   getIds,
   setIds,
-  max,
-  resize
+  max
 }: IDraftPhotosOptions) => {
   const { savePhoto, getPhoto, deletePhoto } = usePhotoDb()
-  const { resizeImage } = useImageResize()
-  const resizePhoto =
-    resize ?? (async (file: File) => ({ photo: await resizeImage(file) }))
+  const { resizePhoto } = useImageResize()
 
   const previews = ref<IDraftPhotoPreview[]>([])
   const isSaving = ref(false)
@@ -97,7 +83,7 @@ export const useDraftPhotos = ({
       try {
         const { photo, thumbnail } = await resizePhoto(file)
         const id = await savePhoto(photo)
-        if (thumbnail) await savePhoto(thumbnail, `${id}-thumb`)
+        await savePhoto(thumbnail, `${id}-thumb`)
 
         setIds([...getIds(), id])
         if (isMounted) {
@@ -122,7 +108,6 @@ export const useDraftPhotos = ({
     setIds(getIds().filter((photoId) => photoId !== id))
 
     try {
-      // Borrar la miniatura no falla si no existe (/post-ad no guarda ninguna).
       await Promise.all([deletePhoto(id), deletePhoto(`${id}-thumb`)])
     } catch (deleteError) {
       console.error('Unable to delete the photo', deleteError)

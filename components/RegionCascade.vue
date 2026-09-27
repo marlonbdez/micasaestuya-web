@@ -37,7 +37,7 @@ const onSelect = async (index: number, value: string) => {
 // tiene placeholder, y sin ella el navegador preselecciona el primer valor
 // como si el usuario ya hubiese elegido.
 const toSelectOptions = (nodes: IRegionNode[]) => [
-  { id: '', value: t('post_ad.address.select_placeholder') },
+  { id: '', value: t('region_cascade.select_placeholder') },
   ...nodes.map(({ name }) => ({ id: name, value: name }))
 ]
 
