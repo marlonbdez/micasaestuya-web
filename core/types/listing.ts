@@ -25,7 +25,7 @@ export interface IListingDraft {
   whatsapp: string
 }
 
-// Lo que se envía al crear. Sin fotos: todavía no hay dónde subirlas.
+// Lo que se envía al crear. Las fotos se suben aparte, cuando el alojamiento ya existe.
 export interface IListingCreateInput {
   title: string
   region: IAdRegion
@@ -38,9 +38,25 @@ export interface IListingCreateInput {
 export interface IListing extends IListingCreateInput {
   id: string
   owner: string
-  // URLs públicas. Vacío hasta que exista la subida de fotos.
+  // URLs públicas de R2; la miniatura de cada una es `${url}-thumb`.
   photos: string[]
   createdAt: string
+}
+
+// Lo que pinta una tarjeta de Explorar (`GET /api/listings`).
+export type IListingCard = Pick<
+  IListing,
+  'id' | 'title' | 'region' | 'tasks' | 'capacity' | 'photos'
+>
+
+export interface IListingPage {
+  items: IListingCard[]
+  total: number
+}
+
+// `GET /api/listings/:id`: el anfitrión llega solo con su nombre de pila.
+export interface IListingDetail extends Omit<IListing, 'owner'> {
+  owner: { id: string; firstName: string }
 }
 
 export interface IPhotoUploadRequest {
@@ -57,6 +73,8 @@ export interface IPhotoUpload {
 }
 
 export interface IListingModule {
+  list(page: number): Promise<IListingPage>
+  get(listingId: string): Promise<IListingDetail>
   create(input: IListingCreateInput): Promise<IListing>
   requestPhotoUploads(
     listingId: string,

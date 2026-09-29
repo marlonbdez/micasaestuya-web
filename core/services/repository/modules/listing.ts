@@ -2,7 +2,9 @@ import FetchFactory from '../fetchFactory'
 import type {
   IListing,
   IListingCreateInput,
+  IListingDetail,
   IListingModule,
+  IListingPage,
   IPhotoUpload,
   IPhotoUploadRequest
 } from '~/core/types'
@@ -12,6 +14,18 @@ export default class ListingModule
   implements IListingModule
 {
   private resource = 'listings'
+
+  // Lectura pública (Listing.md § Endpoints de lectura): sin token.
+  async list(page: number): Promise<IListingPage> {
+    return await this.call<IListingPage>('GET', `${this.resource}?page=${page}`)
+  }
+
+  async get(listingId: string): Promise<IListingDetail> {
+    return await this.call<IListingDetail>(
+      'GET',
+      `${this.resource}/${listingId}`
+    )
+  }
 
   // Contrato en micasaestuya-docs/Listing.md. Requiere sesión: el dueño del
   // alojamiento lo pone la API a partir del token.
