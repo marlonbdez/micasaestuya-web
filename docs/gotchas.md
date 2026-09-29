@@ -8,7 +8,7 @@ Léelo antes de depurar algo raro. Hay una probabilidad decente de que ya esté.
 ### 1. Los auto-imports de Nuxt no cubren los stores
 
 ```
-ReferenceError: useAdFlowStore is not defined
+ReferenceError: useListingDraftStore is not defined
 ```
 
 Nuxt auto-importa muchísimo, y es fácil asumir que auto-importa todo. **No
