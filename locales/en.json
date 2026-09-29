@@ -147,8 +147,38 @@
       "text": "Travelers looking in {region} can now find your home and message you directly on WhatsApp.",
       "capacity": "{count} person | {count} people",
       "explore": "Back to explore",
-      "photos_failed": "We couldn't upload the photos. You can tell them what your home is like over WhatsApp in the meantime."
+      "photos_failed": "We couldn't upload the photos. You can tell them what your home is like over WhatsApp in the meantime.",
+      "view": "See my listing"
     }
+  },
+  "explore": {
+    "title": "Find a place, share your time",
+    "subtitle": "Lodging and meals in exchange for helping around the house. Free, no fees: the arrangement is between you.",
+    "heading": "Available places",
+    "empty": "There are no places yet. Be the first to list yours.",
+    "load_more": "Show more",
+    "retry": "Try again",
+    "error": "We couldn't load the places."
+  },
+  "listing": {
+    "capacity": "Fits {count} person | Fits {count} people",
+    "more_tasks": "+{count}",
+    "back": "Back to explore",
+    "host": "Host: {name}",
+    "about": "About this place",
+    "tasks": "Collaboration tasks",
+    "how_title": "How it works",
+    "how_1": "You contact {host} on WhatsApp.",
+    "how_2": "You talk and agree on dates and conditions.",
+    "how_3": "You confirm directly between you: micasaestuya isn't part of the deal.",
+    "contact": "Contact on WhatsApp",
+    "whatsapp_message": "Hi {host}, I saw your place \"{title}\" on micasaestuya and I'd like to help out.",
+    "contact_note": "A direct conversation opens. The final arrangement is up to you.",
+    "adults_note": "For people over 18 only. Make sure you agree on everything before you travel.",
+    "photo_alt": "Photo of \"{title}\"",
+    "not_found_title": "This place doesn't exist",
+    "not_found_text": "It may have been removed, or the link is wrong.",
+    "error": "We couldn't load the place."
   },
   "footer": {
     "about": {
