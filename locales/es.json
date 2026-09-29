@@ -1,97 +1,6 @@
 {
   "home": {
-    "title": "Encuentra tu espacio",
-    "hero": {
-      "eyebrow": "Casas particulares cubanas",
-      "title": "Tu casa particular te espera.",
-      "subtitle": "Reserva casas particulares en Cuba directamente con el dueño. Sin tarjetas internacionales. Paga en crypto."
-    },
-    "destinations": {
-      "subtitle": "Destinos auténticos, anfitriones locales",
-      "title": "¿A dónde quieres ir?",
-      "see_all": "Ver todos"
-    },
-    "featured_properties": {
-      "label": "Casas destacadas",
-      "title": "Lo más reservado ahora",
-      "see_all": "Ver todas"
-    },
-    "cuba_banner": {
-      "tag": "Ya abierto",
-      "title": "Cuba. El mercado que nosotros hemos abierto.",
-      "subtitle": "Somos la única plataforma con casas particulares legales en Cuba. Las mejores casas de La Habana, Trinidad y Varadero, con pagos en crypto y sin restricciones bancarias.",
-      "features": {
-        "crypto": "Pagos sin intermediarios",
-        "verified": "Casas verificadas",
-        "commission": "Solo 8% de comisión",
-        "spanish": "100% en español"
-      },
-      "button": "Explorar Cuba"
-    },
-    "how_it_works": {
-      "label": "El proceso",
-      "title": "Cómo funciona",
-      "step1": {
-        "title": "Busca y filtra",
-        "description": "Elige destino, fechas y número de personas. Filtra por precio, tipo de alojamiento o servicios."
-      },
-      "step2": {
-        "title": "Contacta con el anfitrión",
-        "description": "Paga en USDT o USDC sin necesidad de tarjeta de crédito internacional ni transferencias bancarias."
-      },
-      "step3": {
-        "title": "Paga de forma segura",
-        "description": "Con crypto (USDT/USDC) o tarjeta. Tu dinero está en escrow hasta el check-in."
-      },
-      "step4": {
-        "title": "Disfruta el Caribe",
-        "description": "Llega, conoce a tu anfitrión y vive la experiencia que ningún hotel puede darte."
-      }
-    },
-    "payments": {
-      "label": "Pagos",
-      "title": "Sin fronteras bancarias",
-      "subtitle": "Las sanciones no son tu problema. Aceptamos las principales stablecoins para que tu reserva llegue donde ningún banco llega.",
-      "commission": {
-        "value": "8%",
-        "title": "Comisión total — la más baja del Caribe",
-        "description": "Airbnb cobra entre 14% y 16% a los anfitriones. Nosotros, la mitad. Y va directo al anfitrión."
-      },
-      "methods": {
-        "header": "Métodos de pago aceptados",
-        "usdt": {
-          "name": "Tether USDT",
-          "description": "Stablecoin: 1 USDT = 1 USD",
-          "status": "Activo"
-        },
-        "usdc": {
-          "name": "USD Coin USDC",
-          "description": "Stablecoin: 1 USDC = 1 USD",
-          "status": "Activo"
-        },
-        "btc": {
-          "name": "Bitcoin — Lightning",
-          "description": "Red Lightning para pagos rápidos",
-          "status": "Próximo"
-        },
-        "card": {
-          "name": "Tarjeta de crédito",
-          "description": "Visa · Mastercard",
-          "status": "Activo"
-        }
-      }
-    },
-    "host_cta": {
-      "title": "¿Tienes una casa en el Caribe?",
-      "subtitle": "Publica gratis. Sin costes de alta, sin contrato. Empieza a recibir reservas en menos de 24 horas.",
-      "button": "Publicar mi casa"
-    },
-    "stats": {
-      "properties": "Casas verificadas",
-      "destinations": "Destinos",
-      "commission": "Comisión total",
-      "rating": "Valoración media"
-    }
+    "title": "Encuentra tu espacio"
   },
   "header": {
     "advertise_property": "Publica tu propiedad gratis",
@@ -124,53 +33,10 @@
     "error": "Escribe una ubicación donde buscar",
     "property_type": "Tipo de propiedad",
     "button": "Buscar casas",
-    "popular": "Popular",
-    "destination": {
-      "label": "¿A dónde vas?",
-      "placeholder": "Destino, ciudad o alojamiento"
-    },
-    "check_in": {
-      "label": "Llegada",
-      "placeholder": "Añade fecha"
-    },
-    "check_out": {
-      "label": "Salida",
-      "placeholder": "Añade fecha"
-    },
-    "guests": {
-      "label": "Huéspedes",
-      "placeholder": "Añade huéspedes",
-      "one": "1 persona",
-      "two": "2 personas",
-      "three_four": "3–4 personas",
-      "five_plus": "5+ personas"
-    },
     "operation_type": {
       "sale": "Comprar",
       "rent": "Alquilar",
       "share": "Compartir"
-    },
-    "vacation": {
-      "destination": {
-        "label": "¿A dónde vas?",
-        "placeholder": "Destino, ciudad o país"
-      },
-      "check_in": {
-        "label": "Llegada"
-      },
-      "check_out": {
-        "label": "Salida"
-      },
-      "guests": {
-        "label": "Huéspedes",
-        "placeholder": "1 persona",
-        "one": "1 persona",
-        "two": "2 personas",
-        "three_four": "3–4 personas",
-        "five_plus": "5+ personas"
-      },
-      "button": "Buscar casas",
-      "popular": "Popular"
     }
   },
   "property_types": {

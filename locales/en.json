@@ -1,95 +1,6 @@
 {
   "home": {
-    "title": "Find your space",
-    "hero": {
-      "eyebrow": "Caribbean private homes",
-      "title": "The perfect place already exists.",
-      "subtitle": "Find and book private homes in Cuba, the Caribbean and Latin America. Without excessive commissions."
-    },
-    "destinations": {
-      "title": "Where do you want to go?",
-      "subtitle": "Authentic destinations, local hosts"
-    },
-    "featured_properties": {
-      "label": "Featured homes",
-      "title": "Most booked now"
-    },
-    "cuba_banner": {
-      "tag": "Opening 2025",
-      "title": "Cuba. The market no one has digitized.",
-      "subtitle": "Airbnb left. Booking has no private homes. We do. The best homes in Havana, Trinidad and Varadero, with crypto payments and no banking restrictions.",
-      "features": {
-        "crypto": "USDT / USDC payments",
-        "verified": "Verified homes",
-        "commission": "Only 8% commission",
-        "spanish": "100% in Spanish"
-      },
-      "button": "Explore Cuba →"
-    },
-    "how_it_works": {
-      "label": "The process",
-      "title": "How it works",
-      "step1": {
-        "title": "Search and filter",
-        "description": "Choose destination, dates and number of guests. Filter by price, accommodation type or amenities."
-      },
-      "step2": {
-        "title": "Talk to the host",
-        "description": "Contact directly with the person who will host you. No bots. No scripts. Real people."
-      },
-      "step3": {
-        "title": "Pay securely",
-        "description": "With crypto (USDT/USDC) or card. Your money is in escrow until check-in."
-      },
-      "step4": {
-        "title": "Enjoy the Caribbean",
-        "description": "Arrive, meet your host and live an experience no hotel can offer."
-      }
-    },
-    "payments": {
-      "label": "Payments",
-      "title": "No banking borders",
-      "subtitle": "Sanctions are not your problem. We accept major stablecoins so your reservation reaches where no bank goes.",
-      "commission": {
-        "value": "8%",
-        "title": "Total commission — the lowest in the Caribbean",
-        "description": "Airbnb charges hosts between 14 and 16%. We charge half. And it goes directly to the host."
-      },
-      "methods": {
-        "header": "Accepted payment methods",
-        "usdt": {
-          "name": "Tether USDT",
-          "description": "Stablecoin · 1 USDT = 1 USD",
-          "status": "Active"
-        },
-        "usdc": {
-          "name": "USD Coin USDC",
-          "description": "Stablecoin · 1 USDC = 1 USD",
-          "status": "Active"
-        },
-        "btc": {
-          "name": "Bitcoin — Lightning",
-          "description": "Lightning Network for fast payments",
-          "status": "Coming soon"
-        },
-        "card": {
-          "name": "Credit card",
-          "description": "Visa · Mastercard",
-          "status": "Active"
-        }
-      }
-    },
-    "host_cta": {
-      "title": "Do you have a home in the Caribbean?",
-      "subtitle": "List for free. No listing fees, no contract. Start receiving bookings in less than 24 hours.",
-      "button": "List my home →"
-    },
-    "stats": {
-      "properties": "Verified homes",
-      "destinations": "Destinations",
-      "commission": "Total commission",
-      "rating": "Average rating"
-    }
+    "title": "Find your space"
   },
   "header": {
     "advertise_property": "Advertise your property for free",
@@ -122,53 +33,10 @@
     "error": "Write a location where to search",
     "property_type": "Property type",
     "button": "Search homes",
-    "popular": "Popular",
-    "destination": {
-      "label": "Where are you going?",
-      "placeholder": "Destination, city or accommodation"
-    },
-    "check_in": {
-      "label": "Check-in",
-      "placeholder": "Add date"
-    },
-    "check_out": {
-      "label": "Check-out",
-      "placeholder": "Add date"
-    },
-    "guests": {
-      "label": "Guests",
-      "placeholder": "Add guests",
-      "one": "1 person",
-      "two": "2 people",
-      "three_four": "3–4 people",
-      "five_plus": "5+ people"
-    },
     "operation_type": {
       "sale": "Buy",
       "rent": "Rent",
       "share": "Share"
-    },
-    "vacation": {
-      "destination": {
-        "label": "Where are you going?",
-        "placeholder": "Destination, city or country"
-      },
-      "check_in": {
-        "label": "Check-in"
-      },
-      "check_out": {
-        "label": "Check-out"
-      },
-      "guests": {
-        "label": "Guests",
-        "placeholder": "1 guest",
-        "one": "1 guest",
-        "two": "2 guests",
-        "three_four": "3–4 guests",
-        "five_plus": "5+ guests"
-      },
-      "button": "Find homes",
-      "popular": "Popular"
     }
   },
   "property_types": {
