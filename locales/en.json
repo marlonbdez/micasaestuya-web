@@ -231,7 +231,7 @@
       "region": "Region",
       "photos": "Photos",
       "photos_add": "Add photos of your home",
-      "photos_hint": "Up to {max} photos. For now they're only visible in this browser.",
+      "photos_hint": "Up to {max} photos.",
       "photos_main": "Main",
       "photos_remove": "Remove photo",
       "photos_alt": "Photo {position} of the place",
@@ -394,7 +394,7 @@
           "paragraphs": [
             "If you create an account: your first name, last name, email and password. The password is stored encrypted, never in plain text.",
             "If you list a place: what you write in the form (title, region, description, tasks, capacity and your WhatsApp number). All of it will be visible to anyone who sees your listing: the number is there precisely so people can message you.",
-            "For now, the photos you add to the form stay in your browser and are not sent to any server."
+            "The photos you add to the form are uploaded when you publish and will be visible to anyone who sees your listing."
           ]
         },
         {
@@ -406,7 +406,7 @@
         {
           "title": "Who it's shared with",
           "paragraphs": [
-            "Nobody, for commercial purposes. To run, we use these services: Netlify (serves the website), Render (serves the API), MongoDB Atlas (stores accounts), Upstash (stores the list of regions, no personal data) and Sentry (records errors and session replays so we can reproduce bugs; it doesn't record what you type into fields)."
+            "Nobody, for commercial purposes. To run, we use these services: Netlify (serves the website), Render (serves the API), MongoDB Atlas (stores accounts), Upstash (stores the list of regions, no personal data), Cloudflare R2 (stores the photos of the listings) and Sentry (records errors and session replays so we can reproduce bugs; it doesn't record what you type into fields)."
           ]
         },
         {

@@ -233,7 +233,7 @@
       "region": "Región",
       "photos": "Fotos",
       "photos_add": "Añade fotos de tu casa",
-      "photos_hint": "Hasta {max} fotos. Por ahora solo se ven en este navegador.",
+      "photos_hint": "Hasta {max} fotos.",
       "photos_main": "Principal",
       "photos_remove": "Quitar foto",
       "photos_alt": "Foto {position} del alojamiento",
@@ -396,7 +396,7 @@
           "paragraphs": [
             "Si creas una cuenta: tu nombre, tu apellido, tu email y tu contraseña. La contraseña se guarda cifrada; nunca en claro.",
             "Si publicas un alojamiento: lo que escribes en el formulario (título, región, descripción, tareas, capacidad y tu número de WhatsApp). Todo eso será visible para quien vea tu alojamiento: el número está ahí precisamente para que te puedan escribir.",
-            "Las fotos que añades al formulario, por ahora, se quedan en tu navegador y no se envían a ningún servidor."
+            "Las fotos que añades al formulario se suben al publicar y serán visibles para quien vea tu alojamiento."
           ]
         },
         {
@@ -408,7 +408,7 @@
         {
           "title": "Con quién se comparten",
           "paragraphs": [
-            "Con nadie con fines comerciales. Para funcionar usamos estos servicios: Netlify (sirve la web), Render (sirve la API), MongoDB Atlas (guarda las cuentas), Upstash (guarda la lista de regiones, sin datos personales) y Sentry (registra errores y graba las sesiones para poder reproducir los fallos; no graba lo que escribes en los campos)."
+            "Con nadie con fines comerciales. Para funcionar usamos estos servicios: Netlify (sirve la web), Render (sirve la API), MongoDB Atlas (guarda las cuentas), Upstash (guarda la lista de regiones, sin datos personales), Cloudflare R2 (guarda las fotos de los alojamientos) y Sentry (registra errores y graba las sesiones para poder reproducir los fallos; no graba lo que escribes en los campos)."
           ]
         },
         {
