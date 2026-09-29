@@ -17,7 +17,7 @@ const localePath = useLocalePath()
             <BaseCta
               is-link
               class="header__link"
-              :to="localePath('index')"
+              :to="localePath('explore')"
               :aria-label="t('header.explore')"
             >
               {{ t('header.explore') }}
