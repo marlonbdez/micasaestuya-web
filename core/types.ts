@@ -14,6 +14,9 @@ export type {
   IListingDraft,
   IListingCreateInput,
   IListing,
+  IListingCard,
+  IListingPage,
+  IListingDetail,
   IListingModule,
   IPhotoUploadRequest,
   IPhotoUpload

@@ -147,8 +147,38 @@
       "text": "Los viajeros que busquen en {region} ya pueden encontrar tu casa y escribirte directo por WhatsApp.",
       "capacity": "{count} persona | {count} personas",
       "explore": "Volver a explorar",
-      "photos_failed": "No pudimos subir las fotos. Puedes contarles cómo es tu casa por WhatsApp mientras tanto."
+      "photos_failed": "No pudimos subir las fotos. Puedes contarles cómo es tu casa por WhatsApp mientras tanto.",
+      "view": "Ver mi alojamiento"
     }
+  },
+  "explore": {
+    "title": "Encuentra un lugar, comparte tu tiempo",
+    "subtitle": "Alojamiento y comida a cambio de colaborar en tareas de la casa. Gratis, sin comisiones: el acuerdo es entre ustedes.",
+    "heading": "Alojamientos disponibles",
+    "empty": "Todavía no hay alojamientos. Sé el primero en publicar el tuyo.",
+    "load_more": "Ver más",
+    "retry": "Reintentar",
+    "error": "No pudimos cargar los alojamientos."
+  },
+  "listing": {
+    "capacity": "Caben {count} persona | Caben {count} personas",
+    "more_tasks": "+{count}",
+    "back": "Volver a explorar",
+    "host": "Anfitrión: {name}",
+    "about": "Sobre este lugar",
+    "tasks": "Tareas de colaboración",
+    "how_title": "Cómo funciona",
+    "how_1": "Contactas a {host} por WhatsApp.",
+    "how_2": "Hablan y se ponen de acuerdo en fechas y condiciones.",
+    "how_3": "Confirman directamente entre ustedes: micasaestuya no interviene en el trato.",
+    "contact": "Contactar por WhatsApp",
+    "whatsapp_message": "Hola {host}, vi tu alojamiento «{title}» en micasaestuya y me gustaría colaborar.",
+    "contact_note": "Se abre una conversación directa. El acuerdo final es cosa de ustedes.",
+    "adults_note": "Solo para mayores de 18 años. Asegúrense de estar de acuerdo en todo antes de viajar.",
+    "photo_alt": "Foto del alojamiento «{title}»",
+    "not_found_title": "Este alojamiento no existe",
+    "not_found_text": "Puede que se haya retirado o que el enlace esté mal.",
+    "error": "No pudimos cargar el alojamiento."
   },
   "footer": {
     "about": {

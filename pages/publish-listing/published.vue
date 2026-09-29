@@ -64,16 +64,14 @@ const { published, photosFailed } = storeToRefs(useListingDraftStore())
       </div>
     </article>
 
-    <!--
-      "Ver mi alojamiento" falta a propósito: la página de detalle todavía no
-      existe, y un botón que no lleva a ningún sitio confunde más que ayuda.
-    -->
     <BaseCta
       is-link
-      class="listing-published__explore"
-      :aria-label="t('publish_listing.published.explore')"
-      :to="localePath('index')"
+      class="listing-published__view"
+      :to="localePath({ name: 'explore-id', params: { id: published.id } })"
     >
+      {{ t('publish_listing.published.view') }}
+    </BaseCta>
+    <BaseCta is-link :to="localePath('explore')">
       {{ t('publish_listing.published.explore') }}
     </BaseCta>
   </main>
@@ -153,7 +151,7 @@ const { published, photosFailed } = storeToRefs(useListingDraftStore())
 
   // BaseCta en modo enlace es texto subrayado; aquí tiene que leerse como el
   // botón principal de la pantalla, igual que en el prototipo.
-  &__explore {
+  &__view {
     @include font-outfit-semibold;
     margin-top: $gap-small;
     padding: $gap-extra-small $gap-extra-medium;
