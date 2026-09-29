@@ -71,21 +71,20 @@ zona, lee los dos.
 
 ## Componentes base — úsalos siempre
 
-| Necesitas       | Usa                 | Props clave                                                   |
-| --------------- | ------------------- | ------------------------------------------------------------- |
-| Botón o enlace  | `BaseCta`           | `variant`, `size: sm/md/lg`, `is-link`, `to`, `disabled`      |
-| Input de texto  | `BaseInput`         | `id`, `v-model`, `label`, `error-message`                     |
-| Texto largo     | `BaseTextarea`      | `id`, `v-model`, `label`, `rows`, `error-message`             |
-| Elegir ficheros | `BaseFileInput`     | `id`, `accept`, `multiple`, `@select` → `File[]`              |
-| Dropdown custom | `BaseDropdown`      | `id`, `options: Option<T>[]`, `selected`                      |
-| Select nativo   | `BaseSelect`        | `id`, `v-model`, `options: [{id, value}]`                     |
-| Icono           | `BaseIcon`          | `icon`, `size: xs/sm/md/lg/xl`                                |
-| Checkbox        | `BaseCheckbox`      | `id`, `v-model`, `label`                                      |
-| Radio           | `BaseRadioButton`   | `id`, `name`, `value`, `v-model:selected`, `button`, `inline` |
-| Paso de un flow | `BaseStepIndicator` | `current`, `total`, `label`                                   |
-| Alert           | `BaseAlert`         | `variant: error/warning/success/info`                         |
-| Toggle          | `BaseSwitch`        | `v-model`                                                     |
-| Spinner         | `BaseSpinner`       | (sin props)                                                   |
+| Necesitas       | Usa               | Props clave                                                   |
+| --------------- | ----------------- | ------------------------------------------------------------- |
+| Botón o enlace  | `BaseCta`         | `variant`, `size: sm/md/lg`, `is-link`, `to`, `disabled`      |
+| Input de texto  | `BaseInput`       | `id`, `v-model`, `label`, `error-message`                     |
+| Texto largo     | `BaseTextarea`    | `id`, `v-model`, `label`, `rows`, `error-message`             |
+| Elegir ficheros | `BaseFileInput`   | `id`, `accept`, `multiple`, `@select` → `File[]`              |
+| Dropdown custom | `BaseDropdown`    | `id`, `options: Option<T>[]`, `selected`                      |
+| Select nativo   | `BaseSelect`      | `id`, `v-model`, `options: [{id, value}]`                     |
+| Icono           | `BaseIcon`        | `icon`, `size: xs/sm/md/lg/xl`                                |
+| Checkbox        | `BaseCheckbox`    | `id`, `v-model`, `label`                                      |
+| Radio           | `BaseRadioButton` | `id`, `name`, `value`, `v-model:selected`, `button`, `inline` |
+| Alert           | `BaseAlert`       | `variant: error/warning/success/info`                         |
+| Toggle          | `BaseSwitch`      | `v-model`                                                     |
+| Spinner         | `BaseSpinner`     | (sin props)                                                   |
 
 Antes de crear un elemento de UI, comprueba si ya existe. **Y pregunta antes de
 modificar uno**: los usa todo el proyecto.

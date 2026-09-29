@@ -96,13 +96,6 @@ export enum PropertyCategory {
   Cabin = 'CABIN'
 }
 
-export interface ISearchParams {
-  destination: string
-  checkIn: string | null
-  checkOut: string | null
-  guests: number
-}
-
 export enum OperationType {
   Rent = 'RENT',
   Sale = 'SALE',
