@@ -67,15 +67,7 @@ onMounted(load)
     </div>
 
     <template v-else-if="listing">
-      <ul v-if="listing.photos.length" class="listing__gallery">
-        <li v-for="photo in listing.photos" :key="photo">
-          <img
-            class="listing__photo"
-            :src="photo"
-            :alt="t('listing.photo_alt', { title: listing.title })"
-          />
-        </li>
-      </ul>
+      <ListingGallery v-if="listing.photos.length" :photos="listing.photos" />
       <div v-else class="listing__no-photos">
         <BaseIcon icon="house" size="xl" />
       </div>
@@ -174,30 +166,6 @@ onMounted(load)
     margin: 0;
     color: var(--text);
     font-size: px-to-rem(26);
-  }
-
-  &__gallery {
-    display: flex;
-    gap: $gap-small;
-    margin: 0 0 $gap-extra-medium;
-    padding: 0 0 $gap-small;
-    overflow-x: auto;
-    list-style: none;
-    scroll-snap-type: x mandatory;
-
-    li {
-      flex: 0 0 min(100%, px-to-rem(720));
-      scroll-snap-align: start;
-    }
-  }
-
-  &__photo {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    border-radius: var(--radius);
-    object-fit: cover;
-    background: var(--bg-3);
   }
 
   &__no-photos {
