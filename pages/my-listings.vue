@@ -110,7 +110,6 @@ onMounted(load)
         </div>
         <div v-else class="my-listings__buttons">
           <BaseCta
-            is-link
             variant="secondary"
             size="sm"
             :to="

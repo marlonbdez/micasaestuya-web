@@ -72,7 +72,11 @@ onMounted(load)
   padding: $gap-large $gap-medium $gap-extra-huge;
 
   &__back {
+    display: inline-flex;
+    align-items: center;
     margin-bottom: $gap-large;
+    color: var(--text);
+    text-decoration: none;
   }
 
   &__skeleton {
