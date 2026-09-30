@@ -13,7 +13,7 @@ export default defineVitestConfig({
     },
     setupFiles: ['./test/setup/setup.js'],
     coverage: {
-      reporter: ['text', 'json', 'html']
+      reporter: ['text', 'json', 'json-summary', 'html']
     }
   }
 })
