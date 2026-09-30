@@ -1,9 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "ignore": [
-    "assets/scss/tokens/*.scss",
-    "components/base/BaseSwitch.vue"
-  ],
+  "ignore": ["assets/scss/tokens/*.scss", "components/base/BaseSwitch.vue"],
   "ignoreDependencies": [
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",
