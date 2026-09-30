@@ -41,6 +41,7 @@ const { handleSubmit, errors, defineField } = useForm({
     acceptedTerms: yup
       .bool()
       .required(t('modals.auth.sign_up.terms_not_accepted'))
+      .isTrue(t('modals.auth.sign_up.terms_not_accepted'))
   })
 })
 
