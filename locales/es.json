@@ -171,10 +171,11 @@
     "contact": "Contactar por WhatsApp",
     "whatsapp_message": "Hola {host}, vi tu alojamiento «{title}» en micasaestuya y me gustaría colaborar.",
     "adults_note": "Solo para mayores de 18 años. Asegúrense de estar de acuerdo en todo antes de viajar.",
-    "photo_alt": "Foto del alojamiento «{title}»",
+    "photo_alt": "Foto {position} de {total}",
     "not_found_title": "Este alojamiento no existe",
     "not_found_text": "Puede que se haya retirado o que el enlace esté mal.",
-    "error": "No pudimos cargar el alojamiento."
+    "error": "No pudimos cargar el alojamiento.",
+    "photos_count": "{count} foto | {count} fotos"
   },
   "footer": {
     "about": {
