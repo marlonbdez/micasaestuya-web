@@ -6,7 +6,9 @@ const props = defineProps<{ listing: IListingCard }>()
 const { t } = useI18n()
 const localePath = useLocalePath()
 
-const thumbnail = computed(() => `${props.listing.photos[0]}-thumb`)
+const thumbnail = computed(() =>
+  props.listing.photos.length ? `${props.listing.photos[0]}-thumb` : ''
+)
 </script>
 
 <template>
@@ -14,7 +16,16 @@ const thumbnail = computed(() => `${props.listing.photos[0]}-thumb`)
     class="listing-card"
     :to="localePath({ name: 'explore-id', params: { id: listing.id } })"
   >
-    <img class="listing-card__image" :src="thumbnail" alt="" loading="lazy" />
+    <img
+      v-if="thumbnail"
+      class="listing-card__image"
+      :src="thumbnail"
+      alt=""
+      loading="lazy"
+    />
+    <div v-else class="listing-card__image listing-card__image--empty">
+      <BaseIcon icon="house" size="xl" />
+    </div>
     <div class="listing-card__body">
       <h3 class="listing-card__title">{{ listing.title }}</h3>
       <p class="listing-card__meta">
@@ -50,6 +61,13 @@ const thumbnail = computed(() => `${props.listing.photos[0]}-thumb`)
     aspect-ratio: 4 / 3;
     object-fit: cover;
     background: var(--bg-3);
+
+    &--empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-2);
+    }
   }
 
   &__body {

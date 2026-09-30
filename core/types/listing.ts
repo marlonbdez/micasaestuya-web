@@ -74,6 +74,7 @@ export interface IPhotoUpload {
 
 export interface IListingModule {
   list(page: number): Promise<IListingPage>
+  mine(): Promise<IListingCard[]>
   get(listingId: string): Promise<IListingDetail>
   create(input: IListingCreateInput): Promise<IListing>
   requestPhotoUploads(
@@ -81,4 +82,5 @@ export interface IListingModule {
     photos: IPhotoUploadRequest[]
   ): Promise<IPhotoUpload[]>
   confirmPhotos(listingId: string, photoIds: string[]): Promise<IListing>
+  remove(listingId: string): Promise<void>
 }

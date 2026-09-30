@@ -17,7 +17,6 @@
     "theme_light": "Light",
     "theme_dark": "Dark",
     "faq": "FAQ",
-    "coming_soon": "Coming soon",
     "exit": "Exit"
   },
   "regions": {
@@ -147,6 +146,17 @@
       "photos_failed": "We couldn't upload the photos. You can tell them what your home is like over WhatsApp in the meantime.",
       "view": "See my listing"
     }
+  },
+  "my_listings": {
+    "title": "My places",
+    "subtitle": "The ones you've listed. Places without photos don't show up in Explore.",
+    "empty": "You haven't listed a place yet.",
+    "error": "We couldn't load your places.",
+    "no_photos": "No photos: it doesn't show up in Explore.",
+    "delete": "Delete",
+    "confirm": "Delete this place? This can't be undone.",
+    "cancel": "Cancel",
+    "delete_error": "We couldn't delete it. Please try again."
   },
   "explore": {
     "title": "Find a place, share your time",

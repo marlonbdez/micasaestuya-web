@@ -17,7 +17,6 @@
     "theme_light": "Claro",
     "theme_dark": "Oscuro",
     "faq": "Preguntas frecuentes",
-    "coming_soon": "Próximamente",
     "exit": "Salir"
   },
   "regions": {
@@ -147,6 +146,17 @@
       "photos_failed": "No pudimos subir las fotos. Puedes contarles cómo es tu casa por WhatsApp mientras tanto.",
       "view": "Ver mi alojamiento"
     }
+  },
+  "my_listings": {
+    "title": "Mis alojamientos",
+    "subtitle": "Los que has publicado. Los que no tienen fotos no aparecen en Explorar.",
+    "empty": "Todavía no has publicado ningún alojamiento.",
+    "error": "No pudimos cargar tus alojamientos.",
+    "no_photos": "Sin fotos: no aparece en Explorar.",
+    "delete": "Eliminar",
+    "confirm": "¿Eliminar este alojamiento? No se puede deshacer.",
+    "cancel": "Cancelar",
+    "delete_error": "No pudimos eliminarlo. Inténtalo de nuevo."
   },
   "explore": {
     "title": "Encuentra un lugar, comparte tu tiempo",
