@@ -9,7 +9,7 @@ export const i18nLocales = locales.map((l) => ({
 
 // El código de país sale del propio locale (es-CU → cu) en vez de guardarse
 // aparte: así no pueden desincronizarse.
-export const localeList = () =>
+const localeList = () =>
   locales.map((l) => ({
     ...l,
     countryCode: l.code.split('-')[1].toLowerCase()

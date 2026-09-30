@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "ignore": [
+    "assets/scss/tokens/*.scss",
+    "components/base/BaseSwitch.vue"
+  ],
+  "ignoreDependencies": [
+    "@typescript-eslint/eslint-plugin",
+    "@typescript-eslint/parser",
+    "@vee-validate/yup",
+    "@vueuse/core",
+    "sass",
+    "vee-validate",
+    "vue-i18n",
+    "dotenv"
+  ],
+  "ignoreUnresolved": ["vue-eslint-parser"],
+  "rules": {
+    "enumMembers": "off"
+  }
+}
