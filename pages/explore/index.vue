@@ -26,13 +26,18 @@ onMounted(loadMore)
 
     <h2 class="explore__heading">{{ t('explore.heading') }}</h2>
 
-    <ul v-if="items.length" class="explore__grid">
+    <ul v-if="items.length || (hasMore && !failed)" class="explore__grid">
       <li v-for="listing in items" :key="listing.id">
         <ListingCard :listing="listing" />
       </li>
+      <template v-if="!items.length">
+        <li v-for="n in 6" :key="n">
+          <BaseSkeleton class="explore__skeleton" />
+        </li>
+      </template>
     </ul>
 
-    <div v-else-if="!loading && !failed" class="explore__empty">
+    <div v-else-if="!failed" class="explore__empty">
       <p>{{ t('explore.empty') }}</p>
       <BaseCta is-link :to="localePath('publish-listing')">
         {{ t('header.publish') }}
@@ -44,7 +49,7 @@ onMounted(loadMore)
     </BaseAlert>
 
     <div class="explore__more">
-      <BaseSpinner v-if="loading" size="md" />
+      <BaseSpinner v-if="loading && items.length" size="md" />
       <BaseCta v-else-if="failed" variant="secondary" @click="loadMore">
         {{ t('explore.retry') }}
       </BaseCta>
@@ -95,6 +100,11 @@ onMounted(loadMore)
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  &__skeleton {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
   }
 
   &__empty {
