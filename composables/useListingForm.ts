@@ -1,5 +1,4 @@
-import { mixed, number, object, string, array } from 'yup'
-import type { AnyObject, ObjectShape } from 'yup'
+import { array, boolean, mixed, number, object, string } from 'yup'
 import { useForm } from 'vee-validate'
 import { CollaborationTask } from '~/core/types'
 import type { IAdRegion } from '~/core/types'
@@ -34,11 +33,14 @@ export interface IListingFormValues {
   whatsapp: string
 }
 
-// Los campos de Publicar y de Editar son los mismos; lo que cambia (fotos,
-// términos) entra por `extra`.
+// Validación y valores de los campos que comparten Publicar y Editar. Las
+// fotos viven fuera del formulario: solo se le dice cuántas hay.
 export const useListingForm = (
   initialValues: IListingFormValues,
-  extra: { schema?: ObjectShape; values?: AnyObject } = {}
+  {
+    photoCount,
+    requireTerms
+  }: { photoCount: () => number; requireTerms: boolean }
 ) => {
   const { t } = useI18n()
 
@@ -85,9 +87,16 @@ export const useListingForm = (
         .matches(WHATSAPP_PATTERN, () =>
           t('publish_listing.errors.whatsapp_invalid')
         ),
-      ...extra.schema
+      photos: mixed().test(
+        'required',
+        () => t('publish_listing.errors.photos_required'),
+        () => photoCount() > 0
+      ),
+      accepted: requireTerms
+        ? boolean().isTrue(() => t('publish_listing.errors.terms_required'))
+        : boolean()
     }),
-    initialValues: { ...initialValues, ...extra.values }
+    initialValues: { ...initialValues, photos: null, accepted: false }
   })
 
   // Al fallar la validación, se lleva al usuario al primer campo con error: en
