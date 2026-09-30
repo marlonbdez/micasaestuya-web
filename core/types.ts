@@ -4,6 +4,7 @@ import type { IListingModule } from './types/listing'
 export { CollaborationTask } from './types/listing'
 export type {
   IListingDraft,
+  IListingFormValues,
   IListingCreateInput,
   IListing,
   IListingCard,

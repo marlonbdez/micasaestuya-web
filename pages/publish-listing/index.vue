@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { MAX_PHOTOS } from '~/composables/useListingForm'
-import type { IListingFormValues } from '~/composables/useListingForm'
 import { useListingDraftStore } from '~/stores/listingDraft'
 import { useAuthStore } from '~/stores/auth'
 
@@ -31,44 +29,11 @@ const { isLogged } = storeToRefs(authStore)
 listingDraftStore.hydrate()
 const { draft } = storeToRefs(listingDraftStore)
 
-const initialValues: IListingFormValues = {
-  title: draft.value.title,
-  region: draft.value.region,
-  description: draft.value.description,
-  tasks: [...draft.value.tasks],
-  // BaseInput trabaja con texto, también con type="number".
-  capacity: draft.value.capacity === null ? '' : String(draft.value.capacity),
-  whatsapp: draft.value.whatsapp
-}
-
-// El formulario es la vista; el store, lo que sobrevive a una recarga.
-const saveDraft = (values: IListingFormValues) => {
-  const capacity = Number(values.capacity)
-  listingDraftStore.update({
-    title: values.title ?? '',
-    region: values.region ?? null,
-    description: values.description ?? '',
-    tasks: [...values.tasks],
-    capacity:
-      values.capacity !== '' && Number.isInteger(capacity) ? capacity : null,
-    whatsapp: values.whatsapp ?? ''
-  })
-}
-
-const {
-  previews,
-  isSaving,
-  error: photoError,
-  load: loadPhotos,
-  add: addPhotos,
-  remove: removePhoto
-} = useDraftPhotos({
-  getIds: () => listingDraftStore.draft.photos,
-  setIds: (ids) => listingDraftStore.update({ photos: ids }),
-  max: () => MAX_PHOTOS
+// Las fotos se guardan como ids en el borrador; los ficheros, en IndexedDB.
+const photoIds = computed({
+  get: () => draft.value.photos,
+  set: (ids) => listingDraftStore.update({ photos: ids })
 })
-
-onMounted(loadPhotos)
 
 // --- Publicar -------------------------------------------------------------
 // Identificarse no es un paso del formulario: se pide solo al final, y solo si
@@ -118,19 +83,18 @@ const onSubmit = () => {
     <p class="publish-listing__intro">{{ t('publish_listing.intro') }}</p>
 
     <ListingForm
-      :initial-values="initialValues"
-      :photos="previews"
-      :photo-saving="isSaving"
-      :photo-error="photoError"
+      :initial-values="draft"
       :submit-label="t('publish_listing.submit')"
       :submitting="isPublishing"
       :error="publishFailed ? t('publish_listing.errors.publish') : ''"
       require-terms
-      @change="saveDraft"
-      @add-photos="addPhotos"
-      @remove-photo="removePhoto"
+      @change="listingDraftStore.update"
       @submit="onSubmit"
-    />
+    >
+      <template #photos>
+        <ListingPhotos v-model:new-ids="photoIds" />
+      </template>
+    </ListingForm>
   </main>
 </template>
 

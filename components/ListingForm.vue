@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import type { IListingPhoto } from './ListingPhotos.vue'
 import { CollaborationTask } from '~/core/types'
-import type { IListingCreateInput } from '~/core/types'
-import type { DraftPhotoError } from '~/composables/useDraftPhotos'
-import { MAX_PHOTOS, useListingForm } from '~/composables/useListingForm'
-import type { IListingFormValues } from '~/composables/useListingForm'
-import { toCreateInput } from '~/stores/listingDraft'
+import type { IListingCreateInput, IListingFormValues } from '~/core/types'
+import { toCreateInput } from '~/core/listingForm'
+import { useListingForm } from '~/composables/useListingForm'
 
-// El formulario que comparten Publicar y Editar. Quien lo usa pone los
-// valores de partida y las fotos (cada pantalla las guarda a su manera) y
-// decide qué hacer con lo que sale.
+// El formulario que comparten Publicar y Editar. Quien lo usa pone los valores
+// de partida y las fotos (en el slot `photos`), y decide qué hacer al enviar.
 const props = defineProps<{
   initialValues: IListingFormValues
-  photos: IListingPhoto[]
-  photoSaving: boolean
-  photoError: DraftPhotoError | null
   submitLabel: string
   submitting: boolean
   error: string
@@ -24,8 +17,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   submit: [input: IListingCreateInput]
   change: [values: IListingFormValues]
-  'add-photos': [files: File[]]
-  'remove-photo': [id: string]
 }>()
 
 const TASKS = Object.values(CollaborationTask)
@@ -36,14 +27,9 @@ const {
   handleSubmit,
   errors,
   defineField,
-  values,
-  validateField,
   isRegionComplete,
   focusFirstInvalid
-} = useListingForm(props.initialValues, {
-  photoCount: () => props.photos.length,
-  requireTerms: !!props.requireTerms
-})
+} = useListingForm(props.initialValues, !!props.requireTerms)
 
 const [title, titleAttrs] = defineField('title')
 const [region] = defineField('region')
@@ -52,17 +38,17 @@ const [tasks] = defineField('tasks')
 const [capacity, capacityAttrs] = defineField('capacity')
 const [whatsapp, whatsappAttrs] = defineField('whatsapp')
 const [accepted] = defineField('accepted')
-// Sin registrarlo, su error saldría nada más cargar, antes de enviar.
-defineField('photos')
 
-watch(values, (current) => emit('change', current as IListingFormValues), {
-  deep: true
-})
-
-// El aviso de "falta una foto" se quita en cuanto hay una.
-watch(
-  () => props.photos.length,
-  () => errors.value.photos && validateField('photos')
+// Publicar guarda el borrador con cada cambio.
+watch([title, region, description, tasks, capacity, whatsapp], () =>
+  emit('change', {
+    title: title.value,
+    region: region.value,
+    description: description.value,
+    tasks: tasks.value,
+    capacity: capacity.value,
+    whatsapp: whatsapp.value
+  })
 )
 
 // El orden de los chips es el del enum, no el del clic: así el dato guardado
@@ -74,28 +60,8 @@ const toggleTask = (task: CollaborationTask, checked: boolean) => {
   tasks.value = TASKS.filter((option) => next.includes(option))
 }
 
-const photoMessage = computed(() =>
-  props.photoError
-    ? t(`publish_listing.errors.photos.${props.photoError}`, {
-        max: MAX_PHOTOS
-      })
-    : errors.value.photos ?? ''
-)
-
 const onSubmit = handleSubmit(
-  (form) =>
-    emit(
-      'submit',
-      toCreateInput({
-        title: form.title,
-        region: form.region,
-        photos: [],
-        description: form.description,
-        tasks: form.tasks,
-        capacity: Number(form.capacity),
-        whatsapp: form.whatsapp
-      })
-    ),
+  (values) => emit('submit', toCreateInput(values as IListingFormValues)),
   ({ errors: invalid }) => focusFirstInvalid(invalid)
 )
 </script>
@@ -125,15 +91,7 @@ const onSubmit = handleSubmit(
       </p>
     </fieldset>
 
-    <ListingPhotos
-      :photos="photos"
-      :max="MAX_PHOTOS"
-      :disabled="photos.length >= MAX_PHOTOS || photoSaving"
-      :saving="photoSaving"
-      :error-message="photoMessage"
-      @select="(files: File[]) => emit('add-photos', files)"
-      @remove="(id: string) => emit('remove-photo', id)"
-    />
+    <slot name="photos" />
 
     <BaseTextarea
       id="listing-description"

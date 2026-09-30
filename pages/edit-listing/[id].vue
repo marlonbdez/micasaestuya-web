@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { MAX_PHOTOS } from '~/composables/useListingForm'
-import type { IListingFormValues } from '~/composables/useListingForm'
-import type { IListingCreateInput } from '~/core/types'
+import type { IListingCreateInput, IListingFormValues } from '~/core/types'
 import { useAuthStore } from '~/stores/auth'
 
 defineI18nRoute({
@@ -35,40 +33,11 @@ const { save, discardPhotos } = useListingEdit(listingId)
 // Un alojamiento ajeno se trata como si no existiera, igual que hace la api.
 const isOwner = computed(() => listing.value?.owner.id === authStore.user?.id)
 
-// Las fotos que ya tenía están en R2 y se ven por su URL; las que se quitan se
-// borran al guardar, no antes: hasta entonces se puede cambiar de idea. Las
-// nuevas se preparan en el navegador igual que al publicar.
-const kept = ref<string[]>([])
+// Lo que se ha hecho con las fotos sin guardar todavía: las que se quitan se
+// borran al guardar, no antes (hasta entonces se puede cambiar de idea), y las
+// nuevas se suben entonces.
 const removed = ref<string[]>([])
 const newIds = ref<string[]>([])
-
-watch(listing, (loaded) => {
-  if (loaded) kept.value = [...loaded.photos]
-})
-
-const {
-  previews,
-  isSaving: isSavingPhoto,
-  error: photoError,
-  add: addPhotos,
-  remove: removeNewPhoto
-} = useDraftPhotos({
-  getIds: () => newIds.value,
-  setIds: (ids) => (newIds.value = ids),
-  max: () => MAX_PHOTOS - kept.value.length
-})
-
-const photos = computed(() => [
-  ...kept.value.map((url) => ({ id: url, url: `${url}-thumb` })),
-  ...previews.value
-])
-
-const removePhoto = (id: string) => {
-  if (!kept.value.includes(id)) return removeNewPhoto(id)
-  kept.value = kept.value.filter((url) => url !== id)
-  // Para la api, una foto es el último tramo de su URL.
-  removed.value.push(id.split('/').pop() as string)
-}
 
 const initialValues = computed<IListingFormValues | null>(() =>
   listing.value
@@ -140,16 +109,19 @@ onMounted(load)
       <h1 class="edit-listing__title">{{ t('edit_listing.title') }}</h1>
       <ListingForm
         :initial-values="initialValues"
-        :photos="photos"
-        :photo-saving="isSavingPhoto"
-        :photo-error="photoError"
         :submit-label="t('edit_listing.submit')"
         :submitting="isSaving"
         :error="saveFailed ? t('edit_listing.save_error') : ''"
-        @add-photos="addPhotos"
-        @remove-photo="removePhoto"
         @submit="onSubmit"
-      />
+      >
+        <template #photos>
+          <ListingPhotos
+            v-model:new-ids="newIds"
+            v-model:removed="removed"
+            :existing="listing?.photos"
+          />
+        </template>
+      </ListingForm>
     </template>
   </main>
 </template>

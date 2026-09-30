@@ -13,16 +13,21 @@ export enum CollaborationTask {
   Other = 'OTHER'
 }
 
-// Lo que el usuario va rellenando, tal cual se persiste en localStorage.
-export interface IListingDraft {
+// Lo que el formulario edita, con la forma en que lo maneja: la capacidad es
+// texto porque BaseInput trabaja con texto, también con type="number".
+export interface IListingFormValues {
   title: string
   region: IAdRegion | null
-  // Solo ids: los ficheros viven en IndexedDB, no en el borrador.
-  photos: string[]
   description: string
   tasks: CollaborationTask[]
-  capacity: number | null
+  capacity: string
   whatsapp: string
+}
+
+// Lo que se guarda en localStorage mientras se rellena Publicar. Solo ids de
+// fotos: los ficheros viven en IndexedDB, no en el borrador.
+export interface IListingDraft extends IListingFormValues {
+  photos: string[]
 }
 
 // Lo que se envía al crear. Las fotos se suben aparte, cuando el alojamiento ya existe.
