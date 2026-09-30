@@ -82,10 +82,7 @@
       }
     },
     "locale": {
-      "title": "Seleccione su región y lenguaje",
-      "region_label": "Región",
-      "language_label": "Lenguaje",
-      "save_button": "Guardar"
+      "title": "Seleccione su región y lenguaje"
     },
     "close": "Cerrar",
     "back": "Volver"

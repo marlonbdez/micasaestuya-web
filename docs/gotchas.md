@@ -129,8 +129,9 @@ que marca el checkbox y lo desmarca supera la validación. `boolean().isTrue()`
 sí exige `true`, pero deja pasar `undefined`, así que el campo necesita un valor
 inicial `false` (`publish-listing/index.vue`).
 
-`SignUp.vue` valida los términos con `bool().required()`: solo protege mientras
-el usuario no toque el checkbox.
+`SignUp.vue` encadena `bool().required().isTrue()`: `required` rechaza el
+`undefined` inicial (no hace falta valor inicial) e `isTrue` el `false` de quien
+marca y desmarca.
 
 ### 12. Probar un componente que usa composables de Nuxt
 
