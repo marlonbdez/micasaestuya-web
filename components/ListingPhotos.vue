@@ -1,23 +1,71 @@
 <script setup lang="ts">
-export interface IListingPhoto {
-  id: string
-  url: string
-}
+import { useField } from 'vee-validate'
+import { MAX_PHOTOS } from '~/composables/useListingForm'
 
-defineProps<{
-  photos: IListingPhoto[]
-  max: number
-  disabled: boolean
-  saving: boolean
-  errorMessage: string
-}>()
-
-const emit = defineEmits<{
-  select: [files: File[]]
-  remove: [id: string]
-}>()
+// Las fotos de un alojamiento, como un campo más de ListingForm. Enseña dos
+// tipos de foto en una sola lista:
+// - `existing`: las que ya están guardadas (URLs). Quitarlas solo las apunta
+//   en `removed`; quien guarda las borra de verdad.
+// - `newIds`: las que se acaban de elegir, que esperan en IndexedDB a que
+//   quien guarda las suba.
+const props = withDefaults(defineProps<{ existing?: string[] }>(), {
+  existing: () => []
+})
+const newIds = defineModel<string[]>('newIds', { required: true })
+const removed = defineModel<string[]>('removed', { default: () => [] })
 
 const { t } = useI18n()
+
+// Para la api, una foto es el último tramo de su URL.
+const apiId = (url: string) => url.split('/').pop() as string
+
+const kept = computed(() =>
+  props.existing.filter((url) => !removed.value.includes(apiId(url)))
+)
+
+const {
+  previews,
+  isSaving,
+  error,
+  load,
+  add,
+  remove: removeNew
+} = useDraftPhotos({
+  getIds: () => newIds.value,
+  setIds: (ids) => (newIds.value = ids),
+  max: () => MAX_PHOTOS - kept.value.length
+})
+
+const photos = computed(() => [
+  ...kept.value.map((url) => ({ id: url, url: `${url}-thumb` })),
+  ...previews.value
+])
+
+const removePhoto = (id: string) => {
+  if (props.existing.includes(id)) removed.value = [...removed.value, apiId(id)]
+  else removeNew(id)
+}
+
+// El formulario solo necesita saber si hay alguna. Se revalida solo si ya
+// estaba el aviso, para que desaparezca al añadir una foto.
+const { setValue, errorMessage } = useField<string[]>('photos')
+watch(
+  photos,
+  (list) =>
+    setValue(
+      list.map(({ id }) => id),
+      !!errorMessage.value
+    ),
+  { immediate: true }
+)
+
+const message = computed(() =>
+  error.value
+    ? t(`publish_listing.errors.photos.${error.value}`, { max: MAX_PHOTOS })
+    : errorMessage.value ?? ''
+)
+
+onMounted(load)
 </script>
 
 <template>
@@ -29,13 +77,13 @@ const { t } = useI18n()
       id="listing-photos"
       accept="image/*"
       multiple
-      :disabled="disabled"
+      :disabled="photos.length >= MAX_PHOTOS || isSaving"
       :label="t('publish_listing.fields.photos_add')"
-      :hint="t('publish_listing.fields.photos_hint', { max })"
-      :error-message="errorMessage"
-      @select="(files: File[]) => emit('select', files)"
+      :hint="t('publish_listing.fields.photos_hint', { max: MAX_PHOTOS })"
+      :error-message="message"
+      @select="add"
     />
-    <p v-if="saving" class="listing-photos__status">
+    <p v-if="isSaving" class="listing-photos__status">
       <BaseSpinner />
       {{ t('publish_listing.fields.photos_saving') }}
     </p>
@@ -59,7 +107,7 @@ const { t } = useI18n()
           type="button"
           class="listing-photos__remove"
           :aria-label="t('publish_listing.fields.photos_remove')"
-          @click="emit('remove', photo.id)"
+          @click="removePhoto(photo.id)"
         >
           <BaseIcon icon="close" size="xs" />
         </BaseCta>

@@ -2,14 +2,11 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { createPinia, setActivePinia } from 'pinia'
 import { CollaborationTask } from '@/core/types'
 import { LevelType } from '@/core/types/region'
-import type { IListingDraft } from '@/core/types'
-import {
-  emptyListingDraft,
-  toCreateInput,
-  useListingDraftStore
-} from '@/stores/listingDraft'
+import type { IListingFormValues } from '@/core/types'
+import { toCreateInput } from '@/core/listingForm'
+import { emptyListingDraft, useListingDraftStore } from '@/stores/listingDraft'
 
-const completeDraft = (): IListingDraft => ({
+const completeValues = (): IListingFormValues => ({
   title: '  Casa con jardín  ',
   region: {
     term: 'Matanzas, Cárdenas, Varadero',
@@ -19,18 +16,16 @@ const completeDraft = (): IListingDraft => ({
     level3: 'Varadero',
     level_type: LevelType.Level3
   },
-  photos: ['photo-1'],
   description: ' Una casa tranquila. ',
   tasks: [CollaborationTask.Cooking, CollaborationTask.Gardening],
-  capacity: 2,
+  capacity: '2',
   whatsapp: '+53 5123-4567'
 })
 
 describe('toCreateInput', () => {
-  it('drops the photos, trims the texts and normalizes the phone', () => {
-    const input = toCreateInput(completeDraft())
+  it('trims the texts, normalizes the phone and turns capacity into a number', () => {
+    const input = toCreateInput(completeValues())
 
-    expect(input).not.toHaveProperty('photos')
     expect(input.title).toBe('Casa con jardín')
     expect(input.description).toBe('Una casa tranquila.')
     expect(input.whatsapp).toBe('+5351234567')
@@ -38,7 +33,7 @@ describe('toCreateInput', () => {
     expect(input.region.level3).toBe('Varadero')
   })
 
-  it('refuses an incomplete draft', () => {
+  it('refuses an incomplete form', () => {
     expect(() => toCreateInput(emptyListingDraft())).toThrow()
   })
 })
@@ -59,10 +54,10 @@ describe('listingDraft store', () => {
     const store = useListingDraftStore()
 
     store.update({ title: 'Casa' })
-    store.update({ capacity: 3 })
+    store.update({ capacity: '3' })
 
     expect(store.draft.title).toBe('Casa')
-    expect(store.draft.capacity).toBe(3)
+    expect(store.draft.capacity).toBe('3')
     expect(store.draft.tasks).toEqual([])
   })
 })

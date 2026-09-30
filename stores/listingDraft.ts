@@ -1,11 +1,7 @@
 import { defineStore } from 'pinia'
 import * as Sentry from '@sentry/nuxt'
-import type {
-  IListing,
-  IListingCreateInput,
-  IListingDraft,
-  IServicesInstance
-} from '@/core/types'
+import type { IListing, IListingDraft, IServicesInstance } from '@/core/types'
+import { toCreateInput } from '@/core/listingForm'
 import { usePhotoDb } from '~/composables/usePhotoDb'
 
 const STORAGE_KEY = 'listing-draft:v1'
@@ -16,28 +12,9 @@ export const emptyListingDraft = (): IListingDraft => ({
   photos: [],
   description: '',
   tasks: [],
-  capacity: null,
+  capacity: '',
   whatsapp: ''
 })
-
-// El borrador admite huecos (región sin elegir, capacidad vacía); lo que se
-// envía, no. Si falta algo, es que alguien llamó a publicar sin validar.
-export const toCreateInput = (draft: IListingDraft): IListingCreateInput => {
-  if (!draft.region || draft.capacity === null) {
-    throw new Error('The listing draft is incomplete')
-  }
-
-  return {
-    title: draft.title.trim(),
-    region: draft.region,
-    description: draft.description.trim(),
-    tasks: [...draft.tasks],
-    capacity: draft.capacity,
-    // Espacios y guiones fuera: el número tiene que servir tal cual para
-    // abrir un chat de WhatsApp.
-    whatsapp: draft.whatsapp.replace(/[\s-]/g, '')
-  }
-}
 
 export const useListingDraftStore = defineStore('listingDraft', {
   state: () => ({
@@ -73,7 +50,9 @@ export const useListingDraftStore = defineStore('listingDraft', {
           ...stored,
           // Un campo que no sea array tumbaría cualquier .length o .includes.
           photos: Array.isArray(stored.photos) ? stored.photos : empty.photos,
-          tasks: Array.isArray(stored.tasks) ? stored.tasks : empty.tasks
+          tasks: Array.isArray(stored.tasks) ? stored.tasks : empty.tasks,
+          // Los borradores antiguos guardaban la capacidad como número.
+          capacity: stored.capacity == null ? '' : String(stored.capacity)
         }
       } catch (error) {
         console.error('Unable to parse listing draft from localStorage', error)

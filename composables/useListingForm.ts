@@ -1,7 +1,7 @@
 import { array, boolean, mixed, number, object, string } from 'yup'
 import { useForm } from 'vee-validate'
 import { CollaborationTask } from '~/core/types'
-import type { IAdRegion } from '~/core/types'
+import type { IAdRegion, IListingFormValues } from '~/core/types'
 
 export const TITLE_MAX = 100
 export const CAPACITY_MIN = 1
@@ -11,7 +11,7 @@ export const MAX_PHOTOS = 10
 const WHATSAPP_PATTERN = /^\+[1-9][\d\s-]{6,18}\d$/
 
 // En el orden en que salen en pantalla: el primero con error es el que se
-// enseña. Los de fotos y términos solo existen en Publicar.
+// enseña. Los términos solo existen en Publicar.
 const FIELD_IDS: Record<string, string> = {
   title: 'listing-title',
   region: 'ad-region-1',
@@ -23,24 +23,11 @@ const FIELD_IDS: Record<string, string> = {
   accepted: 'listing-terms'
 }
 
-export interface IListingFormValues {
-  title: string
-  region: IAdRegion | null
-  description: string
-  tasks: CollaborationTask[]
-  // BaseInput trabaja con texto, también con type="number".
-  capacity: string
-  whatsapp: string
-}
-
-// Validación y valores de los campos que comparten Publicar y Editar. Las
-// fotos viven fuera del formulario: solo se le dice cuántas hay.
+// El formulario que comparten Publicar y Editar: valores, reglas de validación
+// y el salto al primer error. El campo `photos` lo rellena ListingPhotos.
 export const useListingForm = (
   initialValues: IListingFormValues,
-  {
-    photoCount,
-    requireTerms
-  }: { photoCount: () => number; requireTerms: boolean }
+  requireTerms: boolean
 ) => {
   const { t } = useI18n()
 
@@ -87,18 +74,14 @@ export const useListingForm = (
         .matches(WHATSAPP_PATTERN, () =>
           t('publish_listing.errors.whatsapp_invalid')
         ),
-      photos: mixed()
-        .nullable()
-        .test(
-          'required',
-          () => t('publish_listing.errors.photos_required'),
-          () => photoCount() > 0
-        ),
+      photos: array()
+        .of(string())
+        .min(1, () => t('publish_listing.errors.photos_required')),
       accepted: requireTerms
         ? boolean().isTrue(() => t('publish_listing.errors.terms_required'))
         : boolean()
     }),
-    initialValues: { ...initialValues, photos: null, accepted: false }
+    initialValues: { ...initialValues, photos: [], accepted: false }
   })
 
   // Al fallar la validación, se lleva al usuario al primer campo con error: en
