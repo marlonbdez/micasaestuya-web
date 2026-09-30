@@ -1,6 +1,7 @@
 import FetchFactory from '../fetchFactory'
 import type {
   IListing,
+  IListingCard,
   IListingCreateInput,
   IListingDetail,
   IListingModule,
@@ -18,6 +19,18 @@ export default class ListingModule
   // Lectura pública (Listing.md § Endpoints de lectura): sin token.
   async list(page: number): Promise<IListingPage> {
     return await this.call<IListingPage>('GET', `${this.resource}?page=${page}`)
+  }
+
+  // Con sesión: incluye los que aún no tienen fotos, que Explorar no muestra.
+  async mine(): Promise<IListingCard[]> {
+    return await this.call<IListingCard[]>(
+      'GET',
+      `${this.resource}/mine`,
+      {},
+      {
+        headers: this.authHeaders
+      }
+    )
   }
 
   async get(listingId: string): Promise<IListingDetail> {
@@ -60,6 +73,17 @@ export default class ListingModule
       `${this.resource}/${listingId}/photos/confirm`,
       { photoIds },
       { headers: this.authHeaders }
+    )
+  }
+
+  async remove(listingId: string): Promise<void> {
+    await this.call(
+      'DELETE',
+      `${this.resource}/${listingId}`,
+      {},
+      {
+        headers: this.authHeaders
+      }
     )
   }
 }

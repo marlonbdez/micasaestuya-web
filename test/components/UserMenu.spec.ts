@@ -143,13 +143,13 @@ describe('UserMenu', () => {
       expect(wrapper.find('#user-menu-panel').exists()).toBe(false)
     })
 
-    it('keeps "my listings" disabled until the listings endpoint exists', async () => {
+    it('links "my listings" to its page', async () => {
       const wrapper = mountMenu(true)
       await byCy(wrapper, 'header-menu-button').trigger('click')
 
-      expect(
-        byCy(wrapper, 'mylistings-dropdown-option').attributes('disabled')
-      ).toBeDefined()
+      const row = byCy(wrapper, 'mylistings-dropdown-option')
+      expect(row.attributes('to')).toBe('/my-listings')
+      expect(row.attributes('disabled')).toBeUndefined()
     })
   })
 })

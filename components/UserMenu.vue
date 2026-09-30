@@ -70,9 +70,8 @@ const userItems = computed<MenuItem[]>(() => [
     id: 'my-listings',
     icon: 'house',
     label: t('header.my_listings'),
-    value: t('header.coming_soon'),
     dataCy: 'mylistings-dropdown-option',
-    disabled: true
+    to: localePath('my-listings')
   }
 ])
 
