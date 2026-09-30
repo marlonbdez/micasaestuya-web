@@ -17,7 +17,8 @@ export type DraftPhotoError =
 interface IDraftPhotosOptions {
   getIds: () => string[]
   setIds: (ids: string[]) => void
-  max: number
+  // Función y no número: al editar, el tope depende de las fotos que ya tiene.
+  max: () => number
 }
 
 export const useDraftPhotos = ({
@@ -32,7 +33,7 @@ export const useDraftPhotos = ({
   const isSaving = ref(false)
   const error = ref<DraftPhotoError | null>(null)
 
-  const canAddMore = computed(() => previews.value.length < max)
+  const canAddMore = computed(() => previews.value.length < max())
 
   // Guardar y leer son asíncronos: si el componente se desmonta mientras
   // tanto, las URLs que se crearan después ya no las revocaría nadie.
@@ -71,7 +72,7 @@ export const useDraftPhotos = ({
     const images = files.filter((file) => file.type.startsWith('image/'))
     if (images.length !== files.length) error.value = 'not_an_image'
 
-    const room = Math.max(max - previews.value.length, 0)
+    const room = Math.max(max() - previews.value.length, 0)
     if (images.length > room) error.value = 'too_many'
 
     isSaving.value = true

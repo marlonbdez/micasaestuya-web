@@ -156,7 +156,16 @@
     "delete": "Delete",
     "confirm": "Delete this place? This can't be undone.",
     "cancel": "Cancel",
-    "delete_error": "We couldn't delete it. Please try again."
+    "delete_error": "We couldn't delete it. Please try again.",
+    "edit": "Edit"
+  },
+  "edit_listing": {
+    "title": "Edit your listing",
+    "back": "Back to my listings",
+    "submit": "Save changes",
+    "save_error": "We couldn't save your changes. Please try again.",
+    "load_error": "We couldn't load your listing.",
+    "not_found": "We couldn't find this listing."
   },
   "explore": {
     "title": "Find a place, share your time",
