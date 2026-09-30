@@ -87,11 +87,13 @@ export const useListingForm = (
         .matches(WHATSAPP_PATTERN, () =>
           t('publish_listing.errors.whatsapp_invalid')
         ),
-      photos: mixed().test(
-        'required',
-        () => t('publish_listing.errors.photos_required'),
-        () => photoCount() > 0
-      ),
+      photos: mixed()
+        .nullable()
+        .test(
+          'required',
+          () => t('publish_listing.errors.photos_required'),
+          () => photoCount() > 0
+        ),
       accepted: requireTerms
         ? boolean().isTrue(() => t('publish_listing.errors.terms_required'))
         : boolean()

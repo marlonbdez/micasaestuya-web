@@ -52,6 +52,8 @@ const [tasks] = defineField('tasks')
 const [capacity, capacityAttrs] = defineField('capacity')
 const [whatsapp, whatsappAttrs] = defineField('whatsapp')
 const [accepted] = defineField('accepted')
+// Sin registrarlo, su error saldría nada más cargar, antes de enviar.
+defineField('photos')
 
 watch(values, (current) => emit('change', current as IListingFormValues), {
   deep: true
