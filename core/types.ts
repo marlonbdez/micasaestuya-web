@@ -1,14 +1,6 @@
 import type { IRegionModule, IRegion } from './types/region'
 import type { IListingModule } from './types/listing'
 
-export type {
-  IBooking,
-  IBookingUser,
-  IBookingListResponse,
-  IBookingCreateInput,
-  IBookingStatusUpdate,
-  BookingStatus
-} from './types/booking'
 export { CollaborationTask } from './types/listing'
 export type {
   IListingDraft,
@@ -21,11 +13,6 @@ export type {
   IPhotoUploadRequest,
   IPhotoUpload
 } from './types/listing'
-
-export interface ICredentials {
-  email: string
-  password: string
-}
 
 export interface ILoginInput {
   email: string
@@ -46,12 +33,6 @@ export interface IRegisterInput {
 
 export interface IRegisterResponse {
   token: string
-}
-
-export interface UserModel {
-  email: string
-  password: string
-  name: string
 }
 
 export interface IUserInfo {
@@ -89,14 +70,6 @@ export enum ThemeType {
   Light = 'LIGHT',
   Dark = 'DARK',
   System = 'SYSTEM'
-}
-
-export enum PropertyCategory {
-  House = 'HOUSE',
-  Apartment = 'APARTMENT',
-  Room = 'ROOM',
-  Villa = 'VILLA',
-  Cabin = 'CABIN'
 }
 
 export enum OperationType {
