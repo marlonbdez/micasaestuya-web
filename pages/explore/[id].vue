@@ -29,17 +29,29 @@ const whatsappUrl = computed(() => {
   )}?text=${encodeURIComponent(message)}`
 })
 
+const hostInitial = computed(() =>
+  listing.value?.owner.firstName.charAt(0).toUpperCase()
+)
+
+useHead(() => ({ title: listing.value?.title }))
+
 onMounted(load)
 </script>
 
 <template>
   <main class="container listing">
     <BaseCta is-link class="listing__back" :to="localePath('explore')">
+      <BaseIcon icon="chevron-left" size="sm" />
       {{ t('listing.back') }}
     </BaseCta>
 
-    <div v-if="status === 'loading'" class="listing__state">
-      <BaseSpinner size="md" />
+    <div v-if="status === 'loading'" class="listing__layout">
+      <div>
+        <BaseSkeleton class="listing__skeleton-photo" />
+        <BaseSkeleton class="listing__skeleton-title" />
+        <BaseSkeleton class="listing__skeleton-line" />
+        <BaseSkeleton class="listing__skeleton-line" />
+      </div>
     </div>
 
     <div v-else-if="status === 'not-found'" class="listing__state">
@@ -71,8 +83,9 @@ onMounted(load)
       <div class="listing__layout">
         <article class="listing__content">
           <h1 class="listing__title">{{ listing.title }}</h1>
-          <p class="listing__meta">
-            {{ listing.region.term }} ·
+          <p class="listing__meta">{{ listing.region.term }}</p>
+          <p class="listing__host">
+            <span class="listing__avatar">{{ hostInitial }}</span>
             {{ t('listing.host', { name: listing.owner.firstName }) }}
           </p>
 
@@ -88,6 +101,7 @@ onMounted(load)
             <li>{{ t('listing.how_2') }}</li>
             <li>{{ t('listing.how_3') }}</li>
           </ol>
+          <p class="listing__note">{{ t('listing.adults_note') }}</p>
         </article>
 
         <aside class="listing__aside">
@@ -109,8 +123,6 @@ onMounted(load)
           >
             {{ t('listing.contact') }}
           </BaseCta>
-          <p class="listing__note">{{ t('listing.contact_note') }}</p>
-          <p class="listing__note">{{ t('listing.adults_note') }}</p>
         </aside>
       </div>
     </template>
@@ -123,8 +135,28 @@ onMounted(load)
   padding-bottom: $gap-huge;
 
   &__back {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-bottom: $gap-medium;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  &__skeleton-photo {
+    aspect-ratio: 3 / 2;
+    margin-bottom: $gap-extra-medium;
+    border-radius: var(--radius);
+  }
+
+  &__skeleton-title {
+    width: 60%;
+    height: px-to-rem(32);
+    margin-bottom: $gap-medium;
+  }
+
+  &__skeleton-line {
+    height: px-to-rem(16);
+    margin-bottom: $gap-small;
   }
 
   &__state {
@@ -180,10 +212,11 @@ onMounted(load)
 
   &__layout {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: $gap-large;
 
     @include media-breakpoint-up(md) {
-      grid-template-columns: 1fr px-to-rem(320);
+      grid-template-columns: minmax(0, 1fr) px-to-rem(320);
       align-items: start;
     }
   }
@@ -198,6 +231,24 @@ onMounted(load)
   &__meta {
     margin: 0;
     color: var(--text-2);
+  }
+
+  &__host {
+    display: flex;
+    align-items: center;
+    gap: $gap-small;
+    margin: $gap-medium 0 0;
+  }
+
+  &__avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: px-to-rem(32);
+    height: px-to-rem(32);
+    border-radius: 50%;
+    background: var(--bg-3);
+    font-size: $font-size-sm;
   }
 
   &__heading {
@@ -218,32 +269,47 @@ onMounted(load)
     line-height: 1.8;
   }
 
+  // Siempre a la vista: barra pegada abajo en móvil, tarjeta pegada bajo el
+  // header (66 px) en escritorio.
   &__aside {
+    position: sticky;
+    bottom: 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     gap: $gap-medium;
-    padding: $gap-extra-medium;
+    padding: $gap-small $gap-medium;
     border: px-to-rem(1) solid var(--border);
-    border-radius: var(--radius);
+    border-radius: var(--radius) var(--radius) 0 0;
     background: var(--bg);
+
+    @include media-breakpoint-up(md) {
+      top: px-to-rem(88);
+      bottom: auto;
+      flex-direction: column;
+      align-items: stretch;
+      padding: $gap-extra-medium;
+      border-radius: var(--radius);
+    }
   }
 
   &__capacity {
     @include font-outfit-semibold;
     margin: 0;
-    font-size: $font-size-lg;
+    font-size: $font-size-md;
   }
 
   // BaseCta en modo enlace es texto subrayado; aquí tiene que leerse como un
   // botón, igual que en el prototipo.
   &__whatsapp {
     @include font-outfit-semibold;
-    padding: $gap-extra-small $gap-extra-medium;
+    padding: $gap-extra-small $gap-medium;
     border-radius: var(--radius-pill);
     background: var(--whatsapp-button-color);
     color: var(--whatsapp-button-text-color);
     text-align: center;
     text-decoration: none;
+    white-space: nowrap;
 
     &:hover,
     &:focus {
@@ -254,7 +320,7 @@ onMounted(load)
   }
 
   &__note {
-    margin: 0;
+    margin: $gap-medium 0 0;
     color: var(--text-2);
     font-size: $font-size-sm;
     line-height: 1.5;
