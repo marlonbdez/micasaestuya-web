@@ -108,9 +108,23 @@ onMounted(load)
             </BaseCta>
           </div>
         </div>
-        <BaseCta v-else variant="ghost" size="sm" @click="ask(listing.id)">
-          {{ t('my_listings.delete') }}
-        </BaseCta>
+        <div v-else class="my-listings__buttons">
+          <BaseCta
+            variant="secondary"
+            size="sm"
+            :to="
+              localePath({
+                name: 'edit-listing-id',
+                params: { id: listing.id }
+              })
+            "
+          >
+            {{ t('my_listings.edit') }}
+          </BaseCta>
+          <BaseCta variant="ghost" size="sm" @click="ask(listing.id)">
+            {{ t('my_listings.delete') }}
+          </BaseCta>
+        </div>
       </li>
     </ul>
   </main>

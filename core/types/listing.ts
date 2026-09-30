@@ -82,5 +82,8 @@ export interface IListingModule {
     photos: IPhotoUploadRequest[]
   ): Promise<IPhotoUpload[]>
   confirmPhotos(listingId: string, photoIds: string[]): Promise<IListing>
+  // Cambia los campos de texto; las fotos tienen sus propias llamadas.
+  update(listingId: string, input: IListingCreateInput): Promise<IListing>
+  removePhoto(listingId: string, photoId: string): Promise<void>
   remove(listingId: string): Promise<void>
 }

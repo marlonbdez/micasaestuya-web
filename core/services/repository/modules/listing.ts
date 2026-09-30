@@ -76,6 +76,27 @@ export default class ListingModule
     )
   }
 
+  async update(
+    listingId: string,
+    input: IListingCreateInput
+  ): Promise<IListing> {
+    return await this.call<IListing>(
+      'PATCH',
+      `${this.resource}/${listingId}`,
+      input,
+      { headers: this.authHeaders }
+    )
+  }
+
+  async removePhoto(listingId: string, photoId: string): Promise<void> {
+    await this.call(
+      'DELETE',
+      `${this.resource}/${listingId}/photos/${photoId}`,
+      {},
+      { headers: this.authHeaders }
+    )
+  }
+
   async remove(listingId: string): Promise<void> {
     await this.call(
       'DELETE',

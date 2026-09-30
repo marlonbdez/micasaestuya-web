@@ -156,7 +156,16 @@
     "delete": "Eliminar",
     "confirm": "¿Eliminar este alojamiento? No se puede deshacer.",
     "cancel": "Cancelar",
-    "delete_error": "No pudimos eliminarlo. Inténtalo de nuevo."
+    "delete_error": "No pudimos eliminarlo. Inténtalo de nuevo.",
+    "edit": "Editar"
+  },
+  "edit_listing": {
+    "title": "Edita tu alojamiento",
+    "back": "Volver a mis alojamientos",
+    "submit": "Guardar cambios",
+    "save_error": "No pudimos guardar los cambios. Inténtalo de nuevo.",
+    "load_error": "No pudimos cargar tu alojamiento.",
+    "not_found": "No encontramos este alojamiento."
   },
   "explore": {
     "title": "Encuentra un lugar, comparte tu tiempo",
