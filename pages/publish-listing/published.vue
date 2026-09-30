@@ -24,6 +24,10 @@ definePageMeta({
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { published, photosFailed } = storeToRefs(useListingDraftStore())
+
+const cover = computed(() =>
+  published.value?.photos.length ? `${published.value.photos[0]}-thumb` : ''
+)
 </script>
 
 <template>
@@ -47,7 +51,13 @@ const { published, photosFailed } = storeToRefs(useListingDraftStore())
 
     <article class="listing-published__card">
       <div class="listing-published__card-image">
-        <BaseIcon icon="house" size="xl" />
+        <img
+          v-if="cover"
+          class="listing-published__card-photo"
+          :src="cover"
+          alt=""
+        />
+        <BaseIcon v-else icon="house" size="xl" />
       </div>
       <div class="listing-published__card-body">
         <h2 class="listing-published__card-title">{{ published.title }}</h2>
@@ -131,6 +141,12 @@ const { published, photosFailed } = storeToRefs(useListingDraftStore())
     justify-content: center;
     height: px-to-rem(140);
     background: var(--bg-3);
+  }
+
+  &__card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__card-body {
