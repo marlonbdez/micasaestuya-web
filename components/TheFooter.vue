@@ -82,9 +82,6 @@ const SOURCE_CODE_URL = 'https://github.com/marlonbdez/micasaestuya-web'
                 {{ t('footer.hosts.publish') }}
               </BaseCta>
             </li>
-            <li class="footer__group-list-item">
-              <BaseCta is-link to="#">{{ t('footer.hosts.share') }}</BaseCta>
-            </li>
           </ul>
         </div>
       </nav>
