@@ -216,8 +216,7 @@
     },
     "hosts": {
       "title": "Hosts",
-      "publish": "List your place for free",
-      "share": "Share on social media"
+      "publish": "List your place for free"
     },
     "github_label": "View the source code on GitHub"
   },

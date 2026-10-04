@@ -216,8 +216,7 @@
     },
     "hosts": {
       "title": "Anfitriones",
-      "publish": "Publica tu alojamiento gratis",
-      "share": "Compartir en redes sociales"
+      "publish": "Publica tu alojamiento gratis"
     },
     "github_label": "Ver el código fuente en GitHub"
   },
