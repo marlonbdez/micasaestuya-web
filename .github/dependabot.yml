@@ -11,6 +11,15 @@ updates:
     ignore:
       - dependency-name: '*'
         update-types: ['version-update:semver-major']
+      # Van juntos y cada uno exige la versión del otro (nuxt 3.21 pide un
+      # test-utils que pide vitest 3; pinia/nuxt 0.5+ pide pinia 3): se
+      # actualizan a mano, con la migración a Nuxt 4.
+      - dependency-name: 'nuxt'
+      - dependency-name: '@nuxt/test-utils'
+      - dependency-name: '@pinia/nuxt'
+      - dependency-name: 'vitest'
+      - dependency-name: '@vitest/coverage-v8'
+      - dependency-name: 'eslint-plugin-vitest'
     groups:
       npm-minor-patch:
         update-types: ['minor', 'patch']
