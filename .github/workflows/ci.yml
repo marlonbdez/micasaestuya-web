@@ -176,7 +176,7 @@ jobs:
         env:
           MANIFEST: ${{ steps.lighthouse.outputs.manifest }}
         run: node .github/scripts/lighthouse-report.mjs | tee report.md >> "$GITHUB_STEP_SUMMARY"
-      - uses: marocchino/sticky-pull-request-comment@v2
+      - uses: marocchino/sticky-pull-request-comment@v3
         if: always()
         with:
           header: lighthouse
