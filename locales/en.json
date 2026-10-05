@@ -1,6 +1,18 @@
 {
   "home": {
-    "title": "Find your space"
+    "title": "Find your space",
+    "publicity": {
+      "title": "A place for those who travel and those who host",
+      "subtitle": "With the same account you can be both.",
+      "seek": {
+        "title": "I'm looking for a place",
+        "text": "Browse the listings and message the host on WhatsApp to agree how you will help in exchange for a bed and meals."
+      },
+      "offer": {
+        "title": "I'm offering a place",
+        "text": "List your home for free with photos and a description, and say what help you need. You close the deal with whoever you choose."
+      }
+    }
   },
   "header": {
     "advertise_property": "Advertise your property for free",

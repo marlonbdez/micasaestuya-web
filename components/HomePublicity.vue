@@ -1,61 +1,52 @@
+<script setup lang="ts">
+import seekImage from '~/assets/images/home_publicity_1.webp'
+import offerImage from '~/assets/images/home_publicity_2.webp'
+
+const { t } = useI18n()
+const localePath = useLocalePath()
+
+const cards = computed(() => [
+  {
+    id: 'seek',
+    image: seekImage,
+    to: localePath('explore'),
+    title: t('home.publicity.seek.title'),
+    text: t('home.publicity.seek.text')
+  },
+  {
+    id: 'offer',
+    image: offerImage,
+    to: localePath('publish-listing'),
+    title: t('home.publicity.offer.title'),
+    text: t('home.publicity.offer.text')
+  }
+])
+</script>
+
 <template>
   <section class="home-publicity">
     <div class="container">
-      <h2 class="home-publicity__title">Lorem Ipsum</h2>
+      <h2 class="home-publicity__title">{{ t('home.publicity.title') }}</h2>
       <h3 class="home-publicity__subtitle">
-        Lorem ipsum dolor sit amet. Et veniam suscipit rem quod voluptatum ea
-        fugit voluptatibus a placeat aspernatur.
+        {{ t('home.publicity.subtitle') }}
       </h3>
       <hr class="home-publicity__divider" />
       <div class="wrapper-cards">
-        <div class="card">
+        <div v-for="card in cards" :key="card.id" class="card">
           <img
             class="card__image"
-            src="~/assets/images/home_publicity_1.webp"
+            :src="card.image"
             width="420"
             height="260"
-            alt="Home 1"
+            alt=""
           />
           <div class="card__body">
             <h4 class="card__title">
-              <BaseCta
-                is-link
-                to="/lorem-ipsum"
-                variant="flat"
-                class="card__cta"
-              >
-                Lorem Ipsum
+              <BaseCta is-link :to="card.to" variant="flat" class="card__cta">
+                {{ card.title }}
               </BaseCta>
             </h4>
-            <p class="card__text">
-              Et veniam suscipit rem quod voluptatum ea fugit voluptatibus a
-              placeat aspernatur.
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <img
-            class="card__image"
-            src="~/assets/images/home_publicity_2.webp"
-            width="420"
-            height="260"
-            alt="Home 2"
-          />
-          <div class="card__body">
-            <h4 class="card__title">
-              <BaseCta
-                is-link
-                to="/lorem-ipsum"
-                variant="flat"
-                class="card__cta"
-              >
-                Lorem Ipsum
-              </BaseCta>
-            </h4>
-            <p class="card__text">
-              Et veniam suscipit rem quod voluptatum ea fugit voluptatibus a
-              placeat aspernatur.
-            </p>
+            <p class="card__text">{{ card.text }}</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,18 @@
 {
   "home": {
-    "title": "Encuentra tu espacio"
+    "title": "Encuentra tu espacio",
+    "publicity": {
+      "title": "Un lugar para quien viaja y para quien acoge",
+      "subtitle": "Con la misma cuenta pueden ser las dos cosas.",
+      "seek": {
+        "title": "Busco alojamiento",
+        "text": "Exploren los alojamientos y escríbanle al anfitrión por WhatsApp para acordar cómo colaborar a cambio de alojamiento y comida."
+      },
+      "offer": {
+        "title": "Ofrezco alojamiento",
+        "text": "Publiquen gratis su casa con fotos y una descripción, y cuenten qué ayuda necesitan. El acuerdo lo cierran con quien elijan."
+      }
+    }
   },
   "header": {
     "advertise_property": "Publica tu propiedad gratis",
